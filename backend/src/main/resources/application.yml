@@ -1,0 +1,53 @@
+spring:
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/peintures}
+    username: ${SPRING_DATASOURCE_USERNAME:peintures}
+    password: ${SPRING_DATASOURCE_PASSWORD:peintures}
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+    baseline-on-migrate: true
+
+  mail:
+    host: ${MAIL_HOST:smtp.gmail.com}
+    port: ${MAIL_PORT:587}
+    username: ${MAIL_USERNAME:}
+    password: ${MAIL_PASSWORD:}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+app:
+  jwt:
+    secret: ${JWT_SECRET:changeme-use-a-long-random-secret-in-production-min-32-chars}
+    access-token-expiry-ms: ${JWT_ACCESS_EXPIRY_MS:28800000}   # 8h
+    refresh-token-expiry-ms: ${JWT_REFRESH_EXPIRY_MS:604800000} # 7j
+
+  mfa:
+    code-length: 6
+    expiry-minutes: 10
+
+  auth:
+    max-failed-attempts: 5
+    lockout-duration-minutes: 15
+
+  password-reset:
+    token-expiry-hours: 1
+    base-url: ${APP_BASE_URL:http://localhost:4200}
+
+server:
+  port: 8080
