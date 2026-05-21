@@ -1,0 +1,85 @@
+{
+  "project_type": "full-stack-web-application",
+  "sdlc_method": "solo",
+  "sdlc_method_commissioned": false,
+  "formation": "full-stack-developer",
+  "installed_plugins": [
+    "sdlc-core@ai-first-sdlc",
+    "sdlc-team-common@ai-first-sdlc",
+    "sdlc-team-fullstack@ai-first-sdlc",
+    "sdlc-lang-javascript@ai-first-sdlc",
+    "sdlc-team-pm@ai-first-sdlc"
+  ],
+  "pending_plugins": [
+    "sdlc-team-docs@ai-first-sdlc",
+    "sdlc-knowledge-base@ai-first-sdlc"
+  ],
+  "technologies_detected": [
+    "java",
+    "spring-boot",
+    "angular",
+    "postgresql",
+    "docker",
+    "minio"
+  ],
+  "discovered_tools": [
+    {
+      "name": "postgres-mcp-pro",
+      "type": "mcp-server",
+      "url": "https://github.com/crystaldba/postgres-mcp",
+      "installed": false,
+      "discovered_at": "2026-05-21"
+    },
+    {
+      "name": "@henkey/postgres-mcp-server",
+      "type": "mcp-server",
+      "url": "https://github.com/HenkDz/postgresql-mcp-server",
+      "installed": false,
+      "discovered_at": "2026-05-21"
+    },
+    {
+      "name": "maven-tools-mcp",
+      "type": "mcp-server",
+      "url": "https://github.com/arvindand/maven-tools-mcp",
+      "installed": false,
+      "discovered_at": "2026-05-21"
+    },
+    {
+      "name": "docker-mcp-toolkit",
+      "type": "claude-plugin",
+      "url": "https://github.com/docker/claude-plugins",
+      "installed": false,
+      "discovered_at": "2026-05-21"
+    },
+    {
+      "name": "angular-mcp-server",
+      "type": "mcp-server",
+      "url": "https://github.com/SAIPRANAY-GANGULA/angular-mcp-server",
+      "installed": false,
+      "discovered_at": "2026-05-21"
+    },
+    {
+      "name": "mcp-server-aistor",
+      "type": "mcp-server",
+      "url": "https://github.com/minio/mcp-server-aistor",
+      "installed": false,
+      "discovered_at": "2026-05-21"
+    }
+  ],
+  "configured_at": "2026-05-21",
+  "configured_by": "sdlc:setup-team",
+  "sdlc_option": "solo",
+  "sdlc_level": "production",
+  "commissioned_at": "2026-05-21T12:47:42.445818+00:00",
+  "commissioned_by": "claude-agent",
+  "option_bundle_version": "0.0.1",
+  "commissioning_history": [
+    {
+      "sdlc_option": "solo",
+      "sdlc_level": "production",
+      "commissioned_at": "2026-05-21T12:47:42.445818+00:00",
+      "commissioned_by": "claude-agent",
+      "option_bundle_version": "0.0.1"
+    }
+  ]
+}

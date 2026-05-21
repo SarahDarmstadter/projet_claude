@@ -1,0 +1,118 @@
+{
+  "version": "1.0",
+  "last_updated": "2026-05-21",
+  "plugins": [
+    {
+      "name": "sdlc-core",
+      "source": "ai-first-sdlc",
+      "type": "sdlc-framework",
+      "installed": true,
+      "added_by": "setup-team",
+      "added_at": "2026-05-21"
+    },
+    {
+      "name": "sdlc-team-common",
+      "source": "ai-first-sdlc",
+      "type": "sdlc-framework",
+      "installed": false,
+      "added_by": "setup-team",
+      "added_at": "2026-05-21",
+      "note": "Required — 3 Section C gaps (java-spring-architect, postgresql-operations-expert, docker-optimization-expert) depend on pipeline-orchestrator"
+    },
+    {
+      "name": "sdlc-team-fullstack",
+      "source": "ai-first-sdlc",
+      "type": "sdlc-framework",
+      "installed": false,
+      "added_by": "setup-team",
+      "added_at": "2026-05-21"
+    },
+    {
+      "name": "sdlc-lang-javascript",
+      "source": "ai-first-sdlc",
+      "type": "sdlc-framework",
+      "installed": false,
+      "added_by": "setup-team",
+      "added_at": "2026-05-21",
+      "note": "Angular uses TypeScript — no sdlc-lang-java available; java-spring-architect custom agent covers Java gaps"
+    },
+    {
+      "name": "sdlc-team-pm",
+      "source": "ai-first-sdlc",
+      "type": "sdlc-framework",
+      "installed": false,
+      "added_by": "setup-team",
+      "added_at": "2026-05-21"
+    },
+    {
+      "name": "sdlc-team-docs",
+      "source": "ai-first-sdlc",
+      "type": "sdlc-framework",
+      "installed": false,
+      "added_by": "setup-team",
+      "added_at": "2026-05-21"
+    },
+    {
+      "name": "sdlc-knowledge-base",
+      "source": "ai-first-sdlc",
+      "type": "sdlc-framework",
+      "installed": false,
+      "added_by": "setup-team",
+      "added_at": "2026-05-21"
+    },
+    {
+      "name": "docker-mcp-toolkit",
+      "source": "https://github.com/docker/claude-plugins",
+      "type": "claude-plugin",
+      "installed": false,
+      "added_by": "setup-team",
+      "added_at": "2026-05-21",
+      "note": "Official Docker plugin — requires Docker Desktop 4.28+. Install via: /plugin marketplace add docker/claude-plugins && /plugin install docker-mcp-toolkit@docker"
+    },
+    {
+      "name": "postgres-mcp-pro",
+      "source": "https://github.com/crystaldba/postgres-mcp",
+      "type": "mcp-server",
+      "installed": false,
+      "added_by": "setup-team",
+      "added_at": "2026-05-21",
+      "note": "Install via: uvx postgres-mcp"
+    },
+    {
+      "name": "@henkey/postgres-mcp-server",
+      "source": "https://github.com/HenkDz/postgresql-mcp-server",
+      "type": "mcp-server",
+      "installed": false,
+      "added_by": "setup-team",
+      "added_at": "2026-05-21",
+      "note": "14 DB management tools. Install via npx in .mcp.json"
+    },
+    {
+      "name": "maven-tools-mcp",
+      "source": "https://github.com/arvindand/maven-tools-mcp",
+      "type": "mcp-server",
+      "installed": false,
+      "added_by": "setup-team",
+      "added_at": "2026-05-21",
+      "note": "Maven Central intelligence — CVE checks, stability filtering. Manual setup required."
+    },
+    {
+      "name": "angular-mcp-server",
+      "source": "https://github.com/SAIPRANAY-GANGULA/angular-mcp-server",
+      "type": "mcp-server",
+      "installed": false,
+      "added_by": "setup-team",
+      "added_at": "2026-05-21",
+      "note": "Angular docs MCP. Community server — manual setup required."
+    },
+    {
+      "name": "mcp-server-aistor",
+      "source": "https://github.com/minio/mcp-server-aistor",
+      "type": "mcp-server",
+      "installed": false,
+      "added_by": "setup-team",
+      "added_at": "2026-05-21",
+      "note": "Official MinIO MCP. Requires Docker/Podman. Env: MINIO_ACCESS_KEY, MINIO_SECRET_KEY, MINIO_ENDPOINT."
+    }
+  ]
+}
