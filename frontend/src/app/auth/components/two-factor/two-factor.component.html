@@ -1,0 +1,18 @@
+<div class="auth-container">
+  <h1>Vérification en deux étapes</h1>
+  <p>Un code a été envoyé à {{ email }}. Il est valable 10 minutes.</p>
+
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <div class="field">
+      <label for="code">Code à 6 chiffres</label>
+      <input id="code" type="text" inputmode="numeric" maxlength="6"
+             formControlName="code" autocomplete="one-time-code" />
+    </div>
+
+    <p *ngIf="error" class="error">{{ error }}</p>
+
+    <button type="submit" [disabled]="loading">
+      {{ loading ? 'Vérification…' : 'Valider' }}
+    </button>
+  </form>
+</div>
