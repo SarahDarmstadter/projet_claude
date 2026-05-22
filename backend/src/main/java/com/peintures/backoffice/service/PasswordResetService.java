@@ -4,6 +4,7 @@ import com.peintures.backoffice.model.AdminUser;
 import com.peintures.backoffice.model.PasswordResetToken;
 import com.peintures.backoffice.repository.AdminUserRepository;
 import com.peintures.backoffice.repository.PasswordResetTokenRepository;
+import com.peintures.backoffice.util.TokenHashUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
@@ -38,7 +39,7 @@ public class PasswordResetService {
             String plainToken = UUID.randomUUID().toString();
             PasswordResetToken token = new PasswordResetToken();
             token.setUser(user);
-            token.setTokenHash(passwordEncoder.encode(plainToken));
+            token.setTokenHash(TokenHashUtil.sha256(plainToken));
             token.setExpiresAt(Instant.now().plus(tokenExpiryHours, ChronoUnit.HOURS));
             tokenRepository.save(token);
             sendResetEmail(email, plainToken);
@@ -47,11 +48,8 @@ public class PasswordResetService {
 
     @Transactional
     public boolean resetPassword(String plainToken, String newPassword) {
-        // Cherche parmi les tokens non expirés et non utilisés
-        return tokenRepository.findAll().stream()
+        return tokenRepository.findByTokenHash(TokenHashUtil.sha256(plainToken))
                 .filter(t -> !t.isUsed() && !t.isExpired())
-                .filter(t -> passwordEncoder.matches(plainToken, t.getTokenHash()))
-                .findFirst()
                 .map(t -> {
                     AdminUser user = t.getUser();
                     user.setPasswordHash(passwordEncoder.encode(newPassword));

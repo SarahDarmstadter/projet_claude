@@ -62,8 +62,9 @@ public class MfaService {
     }
 
     private String generateCode() {
-        int max = (int) Math.pow(10, codeLength);
-        return String.format("%0" + codeLength + "d", random.nextInt(max));
+        long max = (long) Math.pow(10, codeLength);
+        long code = (long) (random.nextDouble() * max);
+        return String.format("%0" + codeLength + "d", code);
     }
 
     private void sendByEmail(String to, String code) {

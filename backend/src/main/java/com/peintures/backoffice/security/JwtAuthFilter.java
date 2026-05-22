@@ -1,5 +1,6 @@
 package com.peintures.backoffice.security;
 
+import com.peintures.backoffice.repository.RevokedAccessTokenRepository;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -21,6 +22,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 
     private final JwtProvider jwtProvider;
     private final UserDetailsService userDetailsService;
+    private final RevokedAccessTokenRepository revokedAccessTokenRepository;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request,
@@ -35,6 +37,12 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 
         String token = header.substring(7);
         if (!jwtProvider.isValid(token)) {
+            chain.doFilter(request, response);
+            return;
+        }
+
+        String jti = jwtProvider.extractJti(token);
+        if (revokedAccessTokenRepository.existsById(jti)) {
             chain.doFilter(request, response);
             return;
         }

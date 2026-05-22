@@ -76,9 +76,14 @@ public class AuthController {
     @PostMapping("/logout")
     public ResponseEntity<Void> logout(
             @AuthenticationPrincipal UserDetails userDetails,
+            HttpServletRequest request,
             HttpServletResponse response) {
 
-        authService.logout(userDetails.getUsername());
+        String authHeader = request.getHeader("Authorization");
+        String accessToken = (authHeader != null && authHeader.startsWith("Bearer "))
+                ? authHeader.substring(7) : null;
+
+        authService.logout(userDetails.getUsername(), accessToken);
 
         Cookie cookie = new Cookie(REFRESH_COOKIE, "");
         cookie.setHttpOnly(true);
