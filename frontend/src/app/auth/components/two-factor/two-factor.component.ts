@@ -22,11 +22,11 @@ export class TwoFactorComponent implements OnInit {
     this.form = this.fb.group({
       code: ['', [Validators.required, Validators.pattern(/^\d{6}$/)]]
     });
+    const nav = this.router.getCurrentNavigation();
+    this.email = nav?.extras?.state?.['email'] ?? '';
   }
 
   ngOnInit(): void {
-    const nav = this.router.getCurrentNavigation();
-    this.email = nav?.extras?.state?.['email'] ?? '';
     if (!this.email) {
       this.router.navigate(['/login']);
     }
