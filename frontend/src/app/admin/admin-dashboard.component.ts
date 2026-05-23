@@ -6,6 +6,9 @@ import { AuthService } from '../auth/services/auth.service';
   template: `
     <div style="padding:2rem">
       <h1>Back Office — Peintures</h1>
+      <nav>
+        <a routerLink="tableaux">Tableaux</a>
+      </nav>
       <p>Vous êtes connecté.</p>
       <button (click)="logout()">Se déconnecter</button>
     </div>

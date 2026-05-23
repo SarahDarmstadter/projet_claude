@@ -1,0 +1,26 @@
+<div class="page-header">
+  <h1>Types de tableaux</h1>
+  <a routerLink=".." class="btn-secondary">← Retour</a>
+</div>
+
+<p *ngIf="error" class="error">{{ error }}</p>
+
+<ul class="type-list">
+  <li *ngFor="let t of types">
+    <ng-container *ngIf="editingId !== t.id">
+      <span>{{ t.nom }}</span>
+      <button (click)="startEdit(t)" class="btn-sm">Renommer</button>
+      <button (click)="deleteType(t)" class="btn-sm btn-danger">Supprimer</button>
+    </ng-container>
+    <ng-container *ngIf="editingId === t.id">
+      <input [(ngModel)]="editNom" (keyup.enter)="saveEdit(t)">
+      <button (click)="saveEdit(t)" class="btn-sm btn-primary">OK</button>
+      <button (click)="cancelEdit()" class="btn-sm">Annuler</button>
+    </ng-container>
+  </li>
+</ul>
+
+<div class="new-type">
+  <input [(ngModel)]="newNom" placeholder="Nouveau type…" (keyup.enter)="createType()">
+  <button (click)="createType()" class="btn-primary">Ajouter</button>
+</div>
