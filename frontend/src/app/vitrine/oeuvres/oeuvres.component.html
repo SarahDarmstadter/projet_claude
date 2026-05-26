@@ -1,0 +1,11 @@
+<app-heading></app-heading>
+<main class="page-content">
+  <h2>Les œuvres</h2>
+  <div class="grid">
+    <div class="card" *ngFor="let t of tableaux">
+      <img [src]="t.imageUrl" [alt]="t.titre" />
+      <p class="card-title">{{ t.titre }}</p>
+    </div>
+  </div>
+</main>
+<app-page-bottom></app-page-bottom>

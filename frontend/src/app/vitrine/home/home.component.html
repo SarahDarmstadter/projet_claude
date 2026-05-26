@@ -1,0 +1,11 @@
+<div id="home">
+  <app-heading></app-heading>
+  <ng-container *ngIf="isDesktop; else mobileSlider">
+    <app-slider [tableaux]="tableaux"></app-slider>
+  </ng-container>
+  <ng-template #mobileSlider>
+    <app-slider-mobile [tableaux]="tableaux"></app-slider-mobile>
+  </ng-template>
+  <app-page-bottom></app-page-bottom>
+  <app-admin-fab></app-admin-fab>
+</div>

@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './auth/guards/auth.guard';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/admin', pathMatch: 'full' },
   {
     path: 'admin',
     canActivate: [AuthGuard],
@@ -13,7 +12,11 @@ const routes: Routes = [
     path: '',
     loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)
   },
-  { path: '**', redirectTo: '/login' }
+  {
+    path: '',
+    loadChildren: () => import('./vitrine/vitrine.module').then(m => m.VitrineModule)
+  },
+  { path: '**', redirectTo: '/' }
 ];
 
 @NgModule({
