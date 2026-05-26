@@ -86,7 +86,6 @@ class AuthServiceTest {
         AdminUser user = makeUser("admin@example.com", passwordEncoder.encode("ValidPass1!"));
         user.setLockedUntil(Instant.now().plusSeconds(900));
         when(adminUserRepository.findByEmail("admin@example.com")).thenReturn(Optional.of(user));
-        when(adminUserRepository.save(any())).thenReturn(user);
 
         AuthService.Step1Result result = authService.initiateLogin("admin@example.com", "ValidPass1!");
 
