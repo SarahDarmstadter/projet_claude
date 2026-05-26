@@ -1,0 +1,74 @@
+<div class="admin-page narrow">
+  <h1>{{ isEdit ? 'Modifier' : 'Nouveau' }} tableau</h1>
+
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <div class="field">
+      <label>Image{{ isEdit ? '' : ' *' }}</label>
+      <input type="file" accept="image/*" (change)="onFileChange($event)" [required]="!isEdit">
+      <img *ngIf="imagePreview" [src]="imagePreview" class="preview">
+      <img *ngIf="!imagePreview && existingImageUrl" [src]="imageBase + existingImageUrl" class="preview">
+    </div>
+
+    <div class="field">
+      <label>Titre *</label>
+      <input type="text" formControlName="titre">
+    </div>
+
+    <div class="field dimensions">
+      <label>Dimensions (cm) *</label>
+      <input type="number" formControlName="largeur" placeholder="Largeur">
+      <span>×</span>
+      <input type="number" formControlName="hauteur" placeholder="Hauteur">
+    </div>
+
+    <div class="field">
+      <label>Type *</label>
+      <select formControlName="typeId">
+        <option [ngValue]="null" disabled>— Sélectionner —</option>
+        <option *ngFor="let t of types" [ngValue]="t.id">{{ t.nom }}</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label>Période *</label>
+      <input type="text" formControlName="periode" placeholder="ex : 2026 ou 2024-2026">
+    </div>
+
+    <div class="field">
+      <label>Prix (€)</label>
+      <input type="text" inputmode="decimal" formControlName="prix" placeholder="ex : 1200 ou 1200.50">
+      <small *ngIf="form.get('prix')?.invalid && form.get('prix')?.dirty">
+        Valeur invalide — entrez un nombre (ex : 1200 ou 1200.50)
+      </small>
+    </div>
+
+    <div class="field">
+      <label>Description</label>
+      <textarea formControlName="description" rows="4"></textarea>
+    </div>
+
+    <div class="field">
+      <label>Statut *</label>
+      <select formControlName="statut">
+        <option value="disponible">Disponible</option>
+        <option value="vendu">Vendu</option>
+        <option value="non_a_vendre">Non à vendre</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label>
+        <input type="checkbox" formControlName="visible"> Visible sur le site public
+      </label>
+    </div>
+
+    <p *ngIf="error" class="error">{{ error }}</p>
+
+    <div class="form-actions">
+      <a [routerLink]="isEdit ? '../..' : '..'" class="btn-secondary">Annuler</a>
+      <button type="submit" [disabled]="loading" class="btn-primary">
+        {{ loading ? 'Enregistrement…' : 'Enregistrer' }}
+      </button>
+    </div>
+  </form>
+</div>

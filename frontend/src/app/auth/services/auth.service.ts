@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { BehaviorSubject, Observable, catchError, lastValueFrom, of, tap } from 'rxjs';
 import { environment } from '../../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
@@ -55,6 +55,13 @@ export class AuthService {
         this.authenticated$.next(true);
       })
     );
+  }
+
+  // Appelé au démarrage de l'app pour restaurer la session depuis le cookie refresh
+  init(): Promise<void> {
+    return lastValueFrom(
+      this.refreshToken().pipe(catchError(() => of(null)))
+    ).then(() => {});
   }
 
   logout(): Observable<void> {

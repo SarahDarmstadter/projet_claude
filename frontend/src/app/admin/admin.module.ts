@@ -8,7 +8,11 @@ import { AdminDashboardComponent } from './admin-dashboard.component';
   imports: [
     CommonModule,
     RouterModule.forChild([
-      { path: '', component: AdminDashboardComponent }
+      { path: '', component: AdminDashboardComponent },
+      {
+        path: 'tableaux',
+        loadChildren: () => import('./tableau/tableau.module').then(m => m.TableauModule)
+      }
     ])
   ]
 })

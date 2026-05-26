@@ -6,6 +6,7 @@ body {
   color: #333;
 }
 
+/* ===== Auth ===== */
 .auth-container {
   max-width: 400px;
   margin: 80px auto;
@@ -15,19 +16,7 @@ body {
   box-shadow: 0 2px 12px rgba(0,0,0,.1);
 }
 
-h1 { font-size: 1.4rem; margin-bottom: 1.5rem; color: #111; }
-
-.field { margin-bottom: 1rem; }
-.field label { display: block; font-size: .85rem; font-weight: 600; margin-bottom: .3rem; }
-.field input {
-  width: 100%; padding: .6rem .8rem;
-  border: 1px solid #ccc; border-radius: 4px;
-  font-size: 1rem; transition: border-color .2s;
-}
-.field input:focus { outline: none; border-color: #4a6cf7; }
-.field small { display: block; margin-top: .3rem; font-size: .78rem; color: #666; }
-
-button[type=submit] {
+.auth-container button[type=submit] {
   width: 100%; padding: .75rem;
   background: #4a6cf7; color: white;
   border: none; border-radius: 4px;
@@ -35,12 +24,118 @@ button[type=submit] {
   cursor: pointer; margin-top: .5rem;
   transition: background .2s;
 }
-button[type=submit]:hover:not(:disabled) { background: #3a5ce6; }
-button[type=submit]:disabled { background: #aaa; cursor: not-allowed; }
+.auth-container button[type=submit]:hover:not(:disabled) { background: #3a5ce6; }
+.auth-container button[type=submit]:disabled { background: #aaa; cursor: not-allowed; }
+
+/* ===== Typographie ===== */
+h1 { font-size: 1.4rem; margin-bottom: 1.5rem; color: #111; }
+p { line-height: 1.5; margin-bottom: 1rem; }
+a { color: #4a6cf7; text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* ===== Champs ===== */
+.field { margin-bottom: 1rem; }
+.field label { display: block; font-size: .85rem; font-weight: 600; margin-bottom: .3rem; }
+.field input, .field select, .field textarea {
+  width: 100%; padding: .6rem .8rem;
+  border: 1px solid #ccc; border-radius: 4px;
+  font-size: 1rem; transition: border-color .2s;
+  background: white;
+}
+.field input:focus, .field select:focus, .field textarea:focus {
+  outline: none; border-color: #4a6cf7;
+}
+.field small { display: block; margin-top: .3rem; font-size: .78rem; color: #666; }
+.field.dimensions { display: flex; align-items: center; gap: .5rem; flex-wrap: wrap; }
+.field.dimensions label { flex: 0 0 100%; }
+.field.dimensions input { flex: 1; min-width: 80px; }
+.field.dimensions span { color: #666; }
+
+.preview { max-width: 200px; max-height: 200px; display: block; margin-top: .5rem; border-radius: 4px; object-fit: cover; }
+
+.form-actions { display: flex; gap: 1rem; margin-top: 1.5rem; align-items: center; }
 
 .error { color: #d32f2f; font-size: .85rem; margin: .5rem 0; }
 
-a { color: #4a6cf7; text-decoration: none; display: inline-block; margin-top: 1rem; font-size: .9rem; }
-a:hover { text-decoration: underline; }
+/* ===== Admin — layout ===== */
+.admin-page {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+.admin-page.narrow { max-width: 640px; }
 
-p { line-height: 1.5; margin-bottom: 1rem; }
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+  gap: 1rem;
+}
+.page-header h1 { margin-bottom: 0; }
+.page-header .actions { display: flex; gap: .75rem; }
+
+/* ===== Boutons ===== */
+.btn-primary, .btn-secondary, .btn-danger {
+  display: inline-block;
+  padding: .5rem 1.2rem;
+  border-radius: 4px;
+  font-size: .9rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  border: none;
+  transition: background .2s;
+  line-height: 1.4;
+}
+.btn-primary { background: #4a6cf7; color: white; }
+.btn-primary:hover { background: #3a5ce6; color: white; }
+.btn-secondary { background: #e0e0e0; color: #333; }
+.btn-secondary:hover { background: #cacaca; color: #333; }
+.btn-danger { background: #d32f2f; color: white; }
+.btn-danger:hover { background: #b71c1c; }
+.btn-sm { padding: .3rem .7rem; font-size: .8rem; }
+button:disabled { opacity: .6; cursor: not-allowed; }
+
+/* ===== Table ===== */
+table {
+  width: 100%; border-collapse: collapse;
+  background: white; border-radius: 8px;
+  box-shadow: 0 1px 4px rgba(0,0,0,.08);
+  overflow: hidden;
+}
+thead tr { background: #f0f0f0; }
+th, td { padding: .75rem 1rem; text-align: left; border-bottom: 1px solid #eee; font-size: .9rem; }
+th { font-weight: 600; font-size: .78rem; text-transform: uppercase; color: #666; }
+tr:last-child td { border-bottom: none; }
+.miniature { width: 48px; height: 48px; object-fit: cover; border-radius: 4px; display: block; }
+.drag-handle { cursor: grab; color: #bbb; width: 24px; font-size: 1.1rem; }
+
+/* ===== Badges statut ===== */
+.badge { display: inline-block; padding: .2rem .6rem; border-radius: 12px; font-size: .75rem; font-weight: 600; }
+.badge-disponible { background: #e8f5e9; color: #2e7d32; }
+.badge-vendu { background: #fce4ec; color: #c62828; }
+.badge-non_a_vendre { background: #f5f5f5; color: #666; }
+
+/* ===== Modal ===== */
+.modal-overlay {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,.45);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 100;
+}
+.modal {
+  background: white; padding: 2rem; border-radius: 8px;
+  min-width: 300px; max-width: 440px;
+  box-shadow: 0 4px 24px rgba(0,0,0,.2);
+}
+.modal p { margin-bottom: 0; }
+.modal-actions { display: flex; gap: 1rem; margin-top: 1.5rem; justify-content: flex-end; }
+
+/* ===== Liste des types ===== */
+.type-list { list-style: none; margin-bottom: 1.5rem; }
+.type-list li { display: flex; align-items: center; gap: .5rem; padding: .6rem 0; border-bottom: 1px solid #eee; }
+.type-list li span { flex: 1; }
+.type-list input { flex: 1; padding: .4rem .6rem; border: 1px solid #ccc; border-radius: 4px; font-size: .95rem; }
+.new-type { display: flex; gap: .5rem; margin-top: 1rem; }
+.new-type input { flex: 1; padding: .6rem .8rem; border: 1px solid #ccc; border-radius: 4px; font-size: 1rem; }
