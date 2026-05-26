@@ -20,4 +20,9 @@ public class GlobalExceptionHandler {
     public ResponseEntity<Map<String, String>> typeInUse(TypeInUseException e) {
         return ResponseEntity.status(409).body(Map.of("error", e.getMessage()));
     }
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<Map<String, String>> badRequest(IllegalArgumentException e) {
+        return ResponseEntity.status(400).body(Map.of("error", e.getMessage()));
+    }
 }
