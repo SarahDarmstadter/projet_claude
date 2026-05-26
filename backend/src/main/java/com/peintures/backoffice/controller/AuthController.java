@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -27,6 +28,9 @@ public class AuthController {
 
     private final AuthService authService;
     private final PasswordResetService passwordResetService;
+
+    @Value("${app.auth.cookie-secure}")
+    private boolean cookieSecure;
 
     @PostMapping("/login")
     public ResponseEntity<Map<String, String>> login(@Valid @RequestBody LoginRequest req) {
@@ -52,7 +56,7 @@ public class AuthController {
 
         Cookie cookie = new Cookie(REFRESH_COOKIE, tokens.refreshToken());
         cookie.setHttpOnly(true);
-        cookie.setSecure(true);
+        cookie.setSecure(cookieSecure);
         cookie.setPath("/api/auth/refresh");
         cookie.setMaxAge(REFRESH_COOKIE_MAX_AGE);
         response.addCookie(cookie);
@@ -87,7 +91,7 @@ public class AuthController {
 
         Cookie cookie = new Cookie(REFRESH_COOKIE, "");
         cookie.setHttpOnly(true);
-        cookie.setSecure(true);
+        cookie.setSecure(cookieSecure);
         cookie.setPath("/api/auth/refresh");
         cookie.setMaxAge(0);
         response.addCookie(cookie);

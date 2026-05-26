@@ -65,6 +65,7 @@ public class SecurityConfig {
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowedOrigins(List.of(
                 "http://localhost:4200",
+                "http://localhost:8000",
                 "http://peintures.local:8000",
                 "http://api.peintures.local:8000"
         ));

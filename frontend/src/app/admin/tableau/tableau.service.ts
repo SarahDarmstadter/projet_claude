@@ -40,7 +40,7 @@ export interface TableauFormData {
 export class TableauService {
   private readonly api = `${environment.apiUrl}/admin/tableaux`;
   private readonly typesApi = `${environment.apiUrl}/admin/types`;
-  readonly imageBase = 'http://api.peintures.local:8000';
+  readonly imageBase = '';
 
   constructor(private http: HttpClient) {}
 

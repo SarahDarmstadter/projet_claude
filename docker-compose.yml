@@ -35,6 +35,7 @@ services:
       SPRING_MAIL_PROPERTIES_MAIL_SMTP_AUTH: "false"
       SPRING_MAIL_PROPERTIES_MAIL_SMTP_STARTTLS_ENABLE: "false"
       APP_BASE_URL: http://peintures.local:8000
+      COOKIE_SECURE: "false"
     depends_on:
       postgres:
         condition: service_healthy
@@ -55,6 +56,7 @@ services:
     image: mailhog/mailhog
     ports:
       - "1025:1025"   # SMTP (interne)
+      - "8025:8025"   # UI web
 
   # Reverse proxy — port 8000 (port 80 occupé par WinRM sur Windows)
   nginx:

@@ -32,9 +32,9 @@ export class TableauFormComponent implements OnInit {
       titre: ['', Validators.required],
       largeur: [null, [Validators.required, Validators.min(1)]],
       hauteur: [null, [Validators.required, Validators.min(1)]],
-      typeId: [null],
+      typeId: [null, Validators.required],
       periode: ['', Validators.required],
-      prix: [null],
+      prix: ['', Validators.pattern(/^[0-9]+([.,][0-9]{1,2})?$/)],
       description: [null],
       statut: ['disponible', Validators.required],
       visible: [true],
@@ -58,7 +58,7 @@ export class TableauFormComponent implements OnInit {
             hauteur: t.hauteur,
             typeId: t.type?.id ?? null,
             periode: t.periode,
-            prix: t.prix,
+            prix: t.prix != null ? String(t.prix) : '',
             description: t.description,
             statut: t.statut,
             visible: t.visible,
@@ -93,13 +93,18 @@ export class TableauFormComponent implements OnInit {
 
     this.loading = true;
     this.error = '';
-    const data = this.form.value;
+    const raw = this.form.value;
+    const prixStr: string = raw.prix?.trim() ?? '';
+    const data = {
+      ...raw,
+      prix: prixStr ? parseFloat(prixStr.replace(',', '.')) : null
+    };
 
     if (this.isEdit && this.editId !== null) {
       this.tableauService.update(this.editId, data, this.selectedFile ?? undefined).subscribe({
         next: () => {
           this.loading = false;
-          this.router.navigate(['../'], { relativeTo: this.route });
+          this.router.navigate(['../../'], { relativeTo: this.route });
         },
         error: () => {
           this.loading = false;

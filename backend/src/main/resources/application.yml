@@ -49,6 +49,7 @@ app:
   auth:
     max-failed-attempts: 5
     lockout-duration-minutes: 15
+    cookie-secure: ${COOKIE_SECURE:true}
 
   password-reset:
     token-expiry-hours: 1
