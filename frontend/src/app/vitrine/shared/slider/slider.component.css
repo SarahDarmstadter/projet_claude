@@ -1,110 +1,89 @@
-.slider {
-  perspective: 1200px;
-  padding-top: 4%;
-  border-bottom: solid black 1px;
-  border-left: solid 1px black;
-  border-right: solid 1px black;
-  width: 100%;
-  height: 450px;
-  display: flex;
-  flex-direction: column;
+.carousel-section {
+  padding: 80px 0 100px;
 }
 
-.contour {
-  border-bottom: solid black 1px;
-  border-left: solid 1px black;
-  border-right: solid 1px black;
-  padding: 3px;
+.section-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+  color: #999; text-align: center; margin-bottom: 52px;
 }
 
-.spinner {
-  transform-style: preserve-3d;
-  width: 100%;
-  transform-origin: 50% 50% -500px;
-  transition: 2s;
-  outline: solid 2px transparent;
+.carousel-track {
+  display: flex; gap: 28px;
+  padding: 0 60px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+.carousel-track::-webkit-scrollbar { display: none; }
+
+.carousel-item {
+  flex: 0 0 calc(40% - 14px);
+  scroll-snap-align: start;
   position: relative;
-  display: flex;
-  justify-content: center;
-  margin: 0;
+  overflow: hidden;
+  cursor: pointer;
 }
 
-.spinner div {
-  width: 400px;
-  height: 300px;
-  transform-origin: 50% 50% -500px;
+.carousel-img {
+  width: 100%; aspect-ratio: 3/4;
   background-size: cover;
-  background-repeat: no-repeat;
   background-position: center;
+  background-repeat: no-repeat;
+  transition: transform .5s cubic-bezier(.25,.46,.45,.94);
 }
+.carousel-item:hover .carousel-img { transform: scale(1.04); }
 
-.arrows {
-  align-self: center;
-  position: relative;
-  top: 80%;
-}
-
-.arrows svg {
-  cursor: pointer;
-}
-
-.image--previous {
-  transform: rotateY(-45deg);
-  position: absolute;
-  left: 35%;
-}
-
-.image--current {
-  transform: rotateY(0deg);
-  position: absolute;
-}
-
-.image--next {
-  transform: rotateY(45deg);
-  position: absolute;
-  right: 35%;
-}
-
-.img:hover {
-  transition: 1s ease-in-out;
-  transform: scale(1.3);
-  border: solid 2px black;
-}
-
-.admin-editable {
-  cursor: pointer;
-  position: relative;
-}
-
-.admin-editable:hover {
-  outline: 2px dashed #666;
-}
-
-.edit-icon {
-  position: absolute;
-  top: 4px;
-  right: 4px;
-  font-size: 1rem;
+.carousel-overlay {
+  position: absolute; inset: 0;
+  background: rgba(17,17,17,0.72);
+  display: flex; flex-direction: column;
+  align-items: flex-start; justify-content: flex-end;
+  padding: 36px 32px;
   opacity: 0;
-  transition: opacity 0.2s;
+  transition: opacity .35s ease;
+}
+.carousel-item:hover .carousel-overlay { opacity: 1; }
+
+.overlay-tag {
+  font-family: 'Inter', sans-serif;
+  font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase;
+  color: rgba(255,255,255,.55); margin-bottom: 10px;
+}
+.overlay-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 26px; font-weight: 400; font-style: italic;
+  color: #fff; line-height: 1.2; margin-bottom: 22px;
+}
+.overlay-btn {
+  font-family: 'Inter', sans-serif;
+  font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+  color: #fff; border-bottom: 1px solid rgba(255,255,255,.4);
+  padding-bottom: 3px; cursor: pointer;
+  transition: border-color .2s;
+}
+.overlay-btn:hover { border-color: #fff; }
+
+.carousel-nav {
+  display: flex; align-items: center; justify-content: center;
+  gap: 10px; margin-top: 36px;
+}
+.carousel-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: #e0e0e0; cursor: pointer;
+  transition: background .2s, transform .2s;
+}
+.carousel-dot.active { background: #111; transform: scale(1.3); }
+
+.admin-editable { position: relative; }
+.admin-editable:hover { outline: 2px dashed #666; }
+.edit-icon {
+  position: absolute; top: 8px; right: 8px;
+  font-size: 1rem; z-index: 5;
 }
 
-.admin-editable:hover .edit-icon {
-  opacity: 1;
-}
-
-@media screen and (max-width: 1399px) {
-  .image--previous { left: 32%; }
-  .image--next { right: 32%; }
-}
-
-@media screen and (max-width: 1200px) and (min-width: 992px) {
-  .image--previous { left: 29%; }
-  .image--next { right: 29%; }
-}
-
-@media screen and (max-width: 991px) and (min-width: 768px) {
-  .spinner div { width: 300px; }
-  .image--previous { left: 40%; }
-  .image--next { right: 40%; }
+@media (max-width: 768px) {
+  .carousel-track { padding: 0 20px; gap: 16px; }
+  .carousel-item { flex: 0 0 80%; }
+  .overlay-title { font-size: 20px; }
 }

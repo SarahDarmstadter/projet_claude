@@ -7,9 +7,13 @@ export interface VitrineTableau {
   id: number;
   imageUrl: string;
   titre: string;
+  largeur: number | null;
+  hauteur: number | null;
   type: { id: number; nom: string } | null;
   periode: string;
   prix: number | null;
+  description: string | null;
+  statut: string;
   visible: boolean;
   ordre: number;
 }

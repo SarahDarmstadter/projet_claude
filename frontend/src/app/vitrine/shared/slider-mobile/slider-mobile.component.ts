@@ -1,7 +1,6 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { VitrineTableau } from '../../services/vitrine-tableau.service';
 import { AdminModeService } from '../../services/admin-mode.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-slider-mobile',
@@ -10,14 +9,12 @@ import { Router } from '@angular/router';
 })
 export class SliderMobileComponent implements OnChanges {
   @Input() tableaux: VitrineTableau[] = [];
+  @Output() editRequested = new EventEmitter<number>();
 
   index = 0;
   private touchStartX = 0;
 
-  constructor(
-    public adminMode: AdminModeService,
-    private router: Router
-  ) {}
+  constructor(public adminMode: AdminModeService) {}
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['tableaux']) {
@@ -44,6 +41,6 @@ export class SliderMobileComponent implements OnChanges {
   }
 
   editTableau(id: number): void {
-    this.router.navigate(['/admin/tableaux', id, 'edit']);
+    this.editRequested.emit(id);
   }
 }

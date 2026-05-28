@@ -1,11 +1,59 @@
-<app-heading></app-heading>
-<main class="page-content">
-  <h2>Les œuvres</h2>
-  <div class="grid">
-    <div class="card" *ngFor="let t of tableaux">
-      <img [src]="t.imageUrl" [alt]="t.titre" />
-      <p class="card-title">{{ t.titre }}</p>
-    </div>
+<div class="galerie-page">
+  <app-heading></app-heading>
+
+  <div class="gallery-header">
+    <h1 class="gallery-title">Galerie</h1>
+    <p class="gallery-sub">Œuvres de Pierre Darmstadter</p>
   </div>
-</main>
-<app-page-bottom></app-page-bottom>
+
+  <div class="gallery-editorial" *ngIf="blocks.length > 0">
+    <ng-container *ngFor="let block of blocks">
+
+      <!-- Rangée éditoriale : 1 grande + 2 empilées -->
+      <div class="editorial-row editorial-row--feature">
+        <div class="gallery-cell cell-featured" [routerLink]="['/oeuvres', block.featured.id]">
+          <div class="work-thumb">
+            <img class="work-img" [src]="block.featured.imageUrl" [alt]="block.featured.titre" />
+            <div class="work-overlay"><span class="overlay-see">Voir</span></div>
+          </div>
+          <h3 class="work-title">{{ block.featured.titre }}</h3>
+          <p class="work-meta" *ngIf="block.featured.type">{{ block.featured.type.nom }} · {{ block.featured.periode }}</p>
+        </div>
+
+        <div class="editorial-stacked" *ngIf="block.stacked.length > 0">
+          <div class="gallery-cell cell-stacked"
+               *ngFor="let t of block.stacked"
+               [routerLink]="['/oeuvres', t.id]">
+            <div class="work-thumb">
+              <img class="work-img" [src]="t.imageUrl" [alt]="t.titre" />
+              <div class="work-overlay"><span class="overlay-see">Voir</span></div>
+            </div>
+            <h3 class="work-title">{{ t.titre }}</h3>
+            <p class="work-meta" *ngIf="t.type">{{ t.type.nom }} · {{ t.periode }}</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Rangée 3 œuvres égales -->
+      <div class="editorial-row editorial-row--small" *ngIf="block.small.length > 0">
+        <div class="gallery-cell cell-small"
+             *ngFor="let t of block.small"
+             [routerLink]="['/oeuvres', t.id]">
+          <div class="work-thumb">
+            <img class="work-img" [src]="t.imageUrl" [alt]="t.titre" />
+            <div class="work-overlay"><span class="overlay-see">Voir</span></div>
+          </div>
+          <h3 class="work-title">{{ t.titre }}</h3>
+          <p class="work-meta" *ngIf="t.type">{{ t.type.nom }} · {{ t.periode }}</p>
+        </div>
+      </div>
+
+    </ng-container>
+  </div>
+
+  <div class="gallery-empty" *ngIf="blocks.length === 0 && tableaux.length === 0">
+    <p>Aucune œuvre disponible pour le moment.</p>
+  </div>
+
+  <app-page-bottom></app-page-bottom>
+</div>

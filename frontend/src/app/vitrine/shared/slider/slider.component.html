@@ -1,36 +1,24 @@
-<div id="slider">
-  <div class="container">
-    <div class="contour">
-      <div class="slider">
-        <figure class="spinner" *ngIf="tableaux.length > 0">
-          <div class="image--previous"
-               [style.background-image]="'url(' + prev?.imageUrl + ')'"
-               [class.admin-editable]="adminMode.isAdminMode"
-               (click)="adminMode.isAdminMode && prev && editTableau(prev.id)">
-            <span class="edit-icon" *ngIf="adminMode.isAdminMode && prev">✏️</span>
-          </div>
-          <div class="image--current img"
-               [style.background-image]="'url(' + current?.imageUrl + ')'"
-               [class.admin-editable]="adminMode.isAdminMode"
-               (click)="adminMode.isAdminMode && current && editTableau(current.id)">
-            <span class="edit-icon" *ngIf="adminMode.isAdminMode && current">✏️</span>
-          </div>
-          <div class="image--next"
-               [style.background-image]="'url(' + next?.imageUrl + ')'"
-               [class.admin-editable]="adminMode.isAdminMode"
-               (click)="adminMode.isAdminMode && next && editTableau(next.id)">
-            <span class="edit-icon" *ngIf="adminMode.isAdminMode && next">✏️</span>
-          </div>
-        </figure>
-        <div class="arrows" *ngIf="tableaux.length > 1">
-          <svg (click)="spinLeft()" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="arr" viewBox="0 0 16 16">
-            <path d="m3.86 8.753 5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z"/>
-          </svg>
-          <svg (click)="spinRight()" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-            <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
-          </svg>
-        </div>
+<section class="carousel-section">
+  <p class="section-label">Œuvres phares</p>
+  <div class="carousel-track" #carouselTrack (scroll)="onScroll()">
+    <div class="carousel-item"
+         *ngFor="let t of tableaux"
+         [class.admin-editable]="adminMode.isAdminMode"
+         (click)="handleClick(t.id)">
+      <div class="carousel-img" [style.background-image]="'url(' + t.imageUrl + ')'"></div>
+      <div class="carousel-overlay">
+        <p class="overlay-tag" *ngIf="t.type">{{ t.type.nom }} · {{ t.periode }}</p>
+        <h3 class="overlay-title">{{ t.titre }}</h3>
+        <span class="overlay-btn">Voir l'œuvre</span>
       </div>
+      <span class="edit-icon" *ngIf="adminMode.isAdminMode">✏️</span>
     </div>
   </div>
-</div>
+  <div class="carousel-nav" *ngIf="tableaux.length > 1">
+    <div class="carousel-dot"
+         *ngFor="let t of tableaux; let i = index"
+         [class.active]="i === activeIndex"
+         (click)="scrollTo(i)">
+    </div>
+  </div>
+</section>

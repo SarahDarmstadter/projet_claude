@@ -1,11 +1,48 @@
-<div id="home">
+<div class="home">
   <app-heading></app-heading>
-  <ng-container *ngIf="isDesktop; else mobileSlider">
-    <app-slider [tableaux]="tableaux"></app-slider>
-  </ng-container>
-  <ng-template #mobileSlider>
-    <app-slider-mobile [tableaux]="tableaux"></app-slider-mobile>
-  </ng-template>
+
+  <section class="hero">
+    <p class="hero-eyebrow">Peinture contemporaine · Paris</p>
+    <h1 class="hero-name">Pierre <em>Darmstadter</em></h1>
+    <p class="hero-tagline">« La lumière ne se montre jamais deux fois de la même façon. »</p>
+    <a class="btn-vitrine" routerLink="/oeuvres">Découvrir les œuvres</a>
+  </section>
+
+  <app-slider [tableaux]="tableaux" (editRequested)="onEditRequested($event)"></app-slider>
+
+  <section class="works-section" *ngIf="tableaux.length > 0">
+    <div class="section-header">
+      <h2 class="section-title">Dernières œuvres</h2>
+      <a class="section-link" routerLink="/oeuvres">Voir toute la galerie →</a>
+    </div>
+    <div class="works-grid">
+      <div class="work-card" *ngFor="let t of tableaux.slice(0, 3)" routerLink="/oeuvres">
+        <div class="work-thumb">
+          <div class="work-thumb-img" [style.background-image]="'url(' + t.imageUrl + ')'"></div>
+          <div class="work-thumb-overlay"><span class="thumb-see">Voir</span></div>
+        </div>
+        <h3 class="work-title">{{ t.titre }}</h3>
+        <p class="work-meta" *ngIf="t.type">{{ t.type.nom }} · {{ t.periode }}</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="about-strip">
+    <div class="about-photo"></div>
+    <div class="about-text">
+      <p class="about-eyebrow">L'artiste</p>
+      <h2 class="about-heading">Pierre Darmstadter</h2>
+      <p class="about-p">Peintre depuis plusieurs décennies, Pierre Darmstadter explore la lumière et la matière dans ses toiles. Son travail, ancré dans la tradition figurative, dialogue avec une sensibilité contemporaine.</p>
+      <a class="btn-vitrine" routerLink="/artiste">Lire la biographie</a>
+    </div>
+  </section>
+
   <app-page-bottom></app-page-bottom>
   <app-admin-fab></app-admin-fab>
+
+  <app-tableau-edit-modal
+    *ngIf="editingTableauId !== null"
+    [tableauId]="editingTableauId"
+    (closed)="onModalClosed($event)">
+  </app-tableau-edit-modal>
 </div>

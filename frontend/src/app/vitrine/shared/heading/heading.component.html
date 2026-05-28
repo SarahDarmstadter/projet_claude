@@ -1,16 +1,12 @@
-<div class="header">
-  <div class="container">
-    <h1>PIERRE DARMSTADTER</h1>
-    <nav>
-      <ul>
-        <span class="span--bord"></span>
-        <li><a class="nav__link" routerLink="/artiste" routerLinkActive="nav__link--active">L'artiste</a></li>
-        <span></span>
-        <li><a class="nav__link" routerLink="/oeuvres" routerLinkActive="nav__link--active">Les œuvres</a></li>
-        <span></span>
-        <li><a class="nav__link" routerLink="/contact" routerLinkActive="nav__link--active">Contact</a></li>
-        <span class="span--bord"></span>
-      </ul>
-    </nav>
+<nav class="site-nav">
+  <a class="nav-logo" routerLink="/">Pierre Darmstadter</a>
+  <div class="nav-links">
+    <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Accueil</a>
+    <div class="nav-sep"></div>
+    <a routerLink="/oeuvres" routerLinkActive="active">Galerie</a>
+    <div class="nav-sep"></div>
+    <a routerLink="/artiste" routerLinkActive="active">Biographie</a>
+    <div class="nav-sep"></div>
+    <a routerLink="/contact" routerLinkActive="active">Contact</a>
   </div>
-</div>
+</nav>

@@ -1,0 +1,96 @@
+<div class="detail-page" *ngIf="!loading && tableau">
+  <app-heading></app-heading>
+
+  <div class="artwork-hero">
+
+    <!-- Colonne image -->
+    <div class="artwork-image-col">
+      <img class="artwork-main-img"
+           [src]="tableau.imageUrl"
+           [alt]="tableau.titre"
+           (click)="openLightbox()" />
+    </div>
+
+    <!-- Colonne infos -->
+    <div class="artwork-info-col">
+      <h1 class="artwork-title">{{ tableau.titre }}</h1>
+
+      <div class="artwork-specs">
+        <div class="spec-item" *ngIf="tableau.type">
+          <p class="spec-label">Type</p>
+          <p class="spec-value">{{ tableau.type.nom }}</p>
+        </div>
+        <div class="spec-item" *ngIf="dimensions">
+          <p class="spec-label">Dimensions</p>
+          <p class="spec-value">{{ dimensions }}</p>
+        </div>
+        <div class="spec-item">
+          <p class="spec-label">Période</p>
+          <p class="spec-value">{{ tableau.periode }}</p>
+        </div>
+        <div class="spec-item">
+          <p class="spec-label">Disponibilité</p>
+          <p class="spec-value">{{ statutLabel }}</p>
+        </div>
+        <div class="spec-item" *ngIf="tableau.prix">
+          <p class="spec-label">Prix</p>
+          <p class="spec-value">{{ tableau.prix | number:'1.0-0' }} €</p>
+        </div>
+      </div>
+
+      <p class="artwork-desc" *ngIf="tableau.description">{{ tableau.description }}</p>
+
+      <div class="artwork-actions">
+        <a class="btn-primary" routerLink="/contact">Renseignements</a>
+        <a class="btn-secondary" routerLink="/oeuvres">Retour à la galerie</a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Navigation prev / next centrée -->
+  <div class="artwork-navigation" *ngIf="prev || next">
+    <a class="nav-arrow-btn nav-arrow-btn--prev"
+       *ngIf="prev"
+       [routerLink]="['/oeuvres', prev.id]">
+      <span class="nav-arrow-icon">←</span>
+      <span class="nav-arrow-title">{{ prev.titre }}</span>
+    </a>
+    <div class="nav-arrow-sep" *ngIf="prev && next"></div>
+    <a class="nav-arrow-btn nav-arrow-btn--next"
+       *ngIf="next"
+       [routerLink]="['/oeuvres', next.id]">
+      <span class="nav-arrow-title">{{ next.titre }}</span>
+      <span class="nav-arrow-icon">→</span>
+    </a>
+  </div>
+
+  <!-- Œuvres liées -->
+  <section class="related-section" *ngIf="related.length > 0">
+    <div class="section-header">
+      <h2 class="section-title">Dans la même série</h2>
+      <a class="section-link" routerLink="/oeuvres">Voir toute la galerie →</a>
+    </div>
+    <div class="related-grid">
+      <div class="related-card" *ngFor="let t of related" [routerLink]="['/oeuvres', t.id]">
+        <div class="related-thumb">
+          <img [src]="t.imageUrl" [alt]="t.titre" class="related-img" />
+          <div class="related-overlay"><span class="overlay-see">Voir</span></div>
+        </div>
+        <h3 class="work-title">{{ t.titre }}</h3>
+        <p class="work-meta" *ngIf="t.type">{{ t.type.nom }} · {{ t.periode }}</p>
+      </div>
+    </div>
+  </section>
+
+  <app-page-bottom></app-page-bottom>
+</div>
+
+<!-- Lightbox -->
+<div class="lightbox-overlay" *ngIf="isLightboxOpen" (click)="closeLightbox()">
+  <img class="lightbox-img"
+       [src]="tableau?.imageUrl"
+       [alt]="tableau?.titre"
+       (click)="$event.stopPropagation()" />
+  <button class="lightbox-close" (click)="closeLightbox()">×</button>
+</div>

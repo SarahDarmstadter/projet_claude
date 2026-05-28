@@ -1,16 +1,28 @@
 import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-contact',
-  template: `
-    <app-heading></app-heading>
-    <main class="page-content">
-      <h2>Contact</h2>
-      <p>Pierre Darmstadter</p>
-      <p><a href="mailto:pierre.darmstadter@gmail.com">pierre.darmstadter&#64;gmail.com</a></p>
-    </main>
-    <app-page-bottom></app-page-bottom>
-  `,
-  styles: ['.page-content { padding: 5% 10%; font-family: "OldStandardTT-Regular", serif; } a { color: black; }']
+  templateUrl: './contact.component.html',
+  styleUrls: ['./contact.component.css']
 })
-export class ContactComponent {}
+export class ContactComponent {
+  form: FormGroup;
+  sent = false;
+
+  constructor(private fb: FormBuilder) {
+    this.form = this.fb.group({
+      prenom: ['', Validators.required],
+      nom: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      sujet: [''],
+      message: ['', Validators.required]
+    });
+  }
+
+  submit(): void {
+    if (this.form.valid) {
+      this.sent = true;
+    }
+  }
+}

@@ -5,4 +5,6 @@ import { Component } from '@angular/core';
   templateUrl: './page-bottom.component.html',
   styleUrls: ['./page-bottom.component.css']
 })
-export class PageBottomComponent {}
+export class PageBottomComponent {
+  year = new Date().getFullYear();
+}

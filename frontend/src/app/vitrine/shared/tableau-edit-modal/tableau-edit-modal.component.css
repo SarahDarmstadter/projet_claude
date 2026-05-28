@@ -1,0 +1,154 @@
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.modal-panel {
+  background: #fff;
+  border-radius: 4px;
+  width: 100%;
+  max-width: 520px;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 2rem;
+  position: relative;
+}
+
+.modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: #555;
+  line-height: 1;
+}
+
+.modal-close:hover {
+  color: #000;
+}
+
+h2 {
+  margin: 0 0 1.5rem;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.4rem;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+}
+
+.field {
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.field label {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #555;
+}
+
+.field input[type="text"],
+.field input[type="number"],
+.field select,
+.field textarea {
+  border: 1px solid #ccc;
+  padding: 0.5rem 0.6rem;
+  font-size: 0.95rem;
+  border-radius: 2px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.field input[type="checkbox"] {
+  margin-right: 0.4rem;
+}
+
+.dimensions {
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.dimensions label {
+  width: 100%;
+}
+
+.dimensions input {
+  width: 100px;
+}
+
+.dimensions span {
+  padding: 0 0.5rem;
+  color: #555;
+}
+
+.preview {
+  max-height: 120px;
+  max-width: 100%;
+  object-fit: contain;
+  margin-top: 0.4rem;
+  border: 1px solid #ddd;
+}
+
+.error {
+  color: #c0392b;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+small {
+  color: #c0392b;
+  font-size: 0.8rem;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.8rem;
+  margin-top: 1.5rem;
+}
+
+.btn-primary {
+  background: #1a1a1a;
+  color: #fff;
+  border: none;
+  padding: 0.6rem 1.4rem;
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-radius: 2px;
+}
+
+.btn-primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-secondary {
+  background: none;
+  color: #555;
+  border: 1px solid #ccc;
+  padding: 0.6rem 1.2rem;
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-radius: 2px;
+}
+
+.btn-secondary:hover {
+  border-color: #999;
+  color: #333;
+}

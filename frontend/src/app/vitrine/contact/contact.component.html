@@ -1,0 +1,57 @@
+<div class="contact-page">
+  <app-heading></app-heading>
+
+  <div class="contact-layout">
+    <div class="contact-left">
+      <p class="contact-eyebrow">Contact</p>
+      <h1 class="contact-title">Entrons en conversation</h1>
+      <p class="contact-desc">Pour toute demande concernant une œuvre ou une exposition, Pierre Darmstadter vous répondra dans les meilleurs délais.</p>
+
+      <div class="contact-info-item">
+        <p class="contact-info-label">Email</p>
+        <p class="contact-info-val">
+          <a href="mailto:pierre.darmstadter@gmail.com">pierre.darmstadter&#64;gmail.com</a>
+        </p>
+      </div>
+      <div class="contact-info-item">
+        <p class="contact-info-label">Atelier</p>
+        <p class="contact-info-val">Paris<br>Sur rendez-vous</p>
+      </div>
+    </div>
+
+    <div class="contact-right">
+      <form [formGroup]="form" (ngSubmit)="submit()" *ngIf="!sent">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Prénom</label>
+            <input type="text" class="form-input" formControlName="prenom" placeholder="Marie">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Nom</label>
+            <input type="text" class="form-input" formControlName="nom" placeholder="Dupont">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email</label>
+          <input type="email" class="form-input" formControlName="email" placeholder="marie@exemple.fr">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Sujet</label>
+          <input type="text" class="form-input" formControlName="sujet" placeholder="Renseignement sur une œuvre">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Message</label>
+          <textarea class="form-textarea" formControlName="message" placeholder="Votre message…"></textarea>
+        </div>
+        <button type="submit" class="btn-send" [disabled]="form.invalid">Envoyer</button>
+      </form>
+
+      <div class="contact-sent" *ngIf="sent">
+        <p class="sent-title">Message envoyé</p>
+        <p class="sent-desc">Merci pour votre message. Pierre Darmstadter vous répondra prochainement.</p>
+      </div>
+    </div>
+  </div>
+
+  <app-page-bottom></app-page-bottom>
+</div>

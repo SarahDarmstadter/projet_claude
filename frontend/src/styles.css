@@ -1,3 +1,17 @@
+/* ===== CSS Variables ===== */
+:root {
+  --font-display: 'Playfair Display', serif;
+  --font-body: 'Inter', sans-serif;
+  --font-accent: 'Cormorant Garamond', serif;
+  --black: #111;
+  --dark: #1a1a1a;
+  --mid: #555;
+  --light: #999;
+  --border: #e0e0e0;
+  --off: #f7f7f5;
+  --white: #fff;
+}
+
 /* ===== Fonts ===== */
 @font-face {
   font-family: 'Prata-Regular';

@@ -1,60 +1,26 @@
-#bottom-page {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  background: white;
+.site-footer {
+  border-top: 1px solid #e0e0e0;
+  padding: 50px 60px;
+  display: flex; align-items: center; justify-content: space-between;
+  font-family: 'Inter', sans-serif;
+  background: #fff;
 }
-
-.bottom-container {
-  display: flex;
-  padding: 4px 8px;
+.footer-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 16px; color: #111;
 }
-
-.contact {
-  margin-left: 5px;
-  margin-top: 10px;
-  line-height: 0.8em;
+.footer-links { display: flex; gap: 28px; }
+.footer-links a {
+  font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+  color: #999; text-decoration: none;
+  transition: color .2s;
 }
+.footer-links a:hover { color: #111; }
+.footer-copy { font-size: 11px; color: #999; }
 
-.contact p {
-  margin-bottom: 5px;
-}
-
-.contact a {
-  text-decoration: none;
-  color: black;
-}
-
-.contact a:hover {
-  font-weight: bold;
-}
-
-.name {
-  margin-top: 5px;
-}
-
-.copyright {
-  margin-left: 30px;
-  font-weight: bold;
-  display: flex;
-  margin-top: 10px;
-}
-
-.copyright p {
-  margin-right: 8px;
-}
-
-@media screen and (max-width: 767px) {
-  .bottom-container {
-    flex-direction: column;
-  }
-
-  .copyright {
-    flex-direction: column;
-    margin-left: 0;
-  }
-
-  .copyright p {
-    margin-bottom: 2px;
+@media (max-width: 768px) {
+  .site-footer {
+    flex-direction: column; gap: 20px;
+    text-align: center; padding: 40px 24px;
   }
 }

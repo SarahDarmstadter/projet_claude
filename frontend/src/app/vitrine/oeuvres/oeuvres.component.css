@@ -1,0 +1,100 @@
+.galerie-page {
+  min-height: 100vh;
+  background: #fff;
+  font-family: 'Inter', sans-serif;
+}
+
+.gallery-header {
+  padding: 134px 60px 50px;
+  border-bottom: 1px solid #e0e0e0;
+}
+.gallery-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 52px; font-weight: 400; color: #111;
+  margin-bottom: 10px;
+}
+.gallery-sub {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 19px; font-weight: 300; font-style: italic;
+  color: #555;
+}
+
+/* ── Layout éditorial ──────────────────────────────── */
+.gallery-editorial {
+  padding: 48px 60px 80px;
+  display: flex; flex-direction: column; gap: 8px;
+}
+
+.editorial-row { display: grid; gap: 8px; }
+
+.editorial-row--feature { grid-template-columns: 2fr 1fr; align-items: start; }
+
+.editorial-stacked {
+  display: grid; grid-template-rows: 1fr 1fr; gap: 8px;
+  height: 100%;
+}
+
+.editorial-row--small { grid-template-columns: repeat(3, 1fr); }
+
+/* ── Cellules ──────────────────────────────────────── */
+.gallery-cell { cursor: pointer; }
+
+.cell-featured .work-thumb { aspect-ratio: 3/4; }
+.cell-stacked  { display: flex; flex-direction: column; }
+.cell-stacked  .work-thumb { flex: 1; min-height: 180px; aspect-ratio: unset; }
+.cell-small    .work-thumb { aspect-ratio: 4/5; }
+
+/* ── Thumb ─────────────────────────────────────────── */
+.work-thumb {
+  position: relative; overflow: hidden;
+}
+.work-img {
+  width: 100%; height: 100%;
+  object-fit: cover; display: block;
+  transition: transform .45s cubic-bezier(.25,.46,.45,.94);
+}
+.gallery-cell:hover .work-img { transform: scale(1.04); }
+
+.work-overlay {
+  position: absolute; inset: 0;
+  background: rgba(17,17,17,.52);
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; transition: opacity .3s;
+}
+.gallery-cell:hover .work-overlay { opacity: 1; }
+.overlay-see {
+  font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+  color: #fff; border-bottom: 1px solid rgba(255,255,255,.5); padding-bottom: 2px;
+}
+
+/* ── Légende ───────────────────────────────────────── */
+.work-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 15px; font-weight: 400; font-style: italic;
+  color: #111; margin: 12px 0 4px;
+}
+.work-meta { font-size: 11px; color: #999; letter-spacing: 0.04em; }
+
+/* ── Vide ──────────────────────────────────────────── */
+.gallery-empty {
+  padding: 80px 60px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px; color: #999; font-style: italic;
+}
+
+/* ── Responsive ────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .editorial-row--feature { grid-template-columns: 3fr 2fr; }
+}
+@media (max-width: 768px) {
+  .gallery-header { padding: 100px 24px 40px; }
+  .gallery-title { font-size: 36px; }
+  .gallery-editorial { padding: 24px 16px 60px; gap: 4px; }
+  .editorial-row--feature { grid-template-columns: 1fr; }
+  .editorial-stacked { grid-template-rows: unset; grid-template-columns: 1fr 1fr; height: auto; }
+  .cell-stacked .work-thumb { aspect-ratio: 3/4; min-height: unset; }
+  .editorial-row--small { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 480px) {
+  .editorial-row--small { grid-template-columns: 1fr; }
+}

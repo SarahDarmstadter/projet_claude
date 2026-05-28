@@ -1,24 +1,42 @@
 import { Component, OnInit } from '@angular/core';
 import { VitrineTableau, VitrineTableauService } from '../services/vitrine-tableau.service';
 
+export interface GalleryBlock {
+  featured: VitrineTableau;
+  stacked: VitrineTableau[];
+  small: VitrineTableau[];
+}
+
 @Component({
   selector: 'app-oeuvres',
   templateUrl: './oeuvres.component.html',
-  styles: [`
-    .page-content { padding: 5% 5%; font-family: 'OldStandardTT-Regular', serif; }
-    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 24px; margin-top: 2%; }
-    .card img { width: 100%; aspect-ratio: 4/3; object-fit: cover; }
-    .card-title { font-size: 0.9em; margin-top: 6px; }
-  `]
+  styleUrls: ['./oeuvres.component.css']
 })
 export class OeuvresComponent implements OnInit {
   tableaux: VitrineTableau[] = [];
+  blocks: GalleryBlock[] = [];
 
   constructor(private vitrineService: VitrineTableauService) {}
 
   ngOnInit(): void {
     this.vitrineService.getVisible().subscribe({
-      next: (data) => { this.tableaux = data; }
+      next: (data) => {
+        this.tableaux = data;
+        this.blocks = this.buildBlocks(data);
+      }
     });
+  }
+
+  private buildBlocks(tableaux: VitrineTableau[]): GalleryBlock[] {
+    const result: GalleryBlock[] = [];
+    let i = 0;
+    while (i < tableaux.length) {
+      const featured = tableaux[i];
+      const stacked = tableaux.slice(i + 1, i + 3);
+      const small = tableaux.slice(i + 3, i + 6);
+      result.push({ featured, stacked, small });
+      i += 1 + stacked.length + small.length;
+    }
+    return result;
   }
 }
