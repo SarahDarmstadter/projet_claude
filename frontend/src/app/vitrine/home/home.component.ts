@@ -8,28 +8,16 @@ import { VitrineTableau, VitrineTableauService } from '../services/vitrine-table
 })
 export class HomeComponent implements OnInit {
   tableaux: VitrineTableau[] = [];
-  editingTableauId: number | null = null;
 
   constructor(private vitrineService: VitrineTableauService) {}
 
   ngOnInit(): void {
-    this.loadTableaux();
-  }
-
-  loadTableaux(): void {
     this.vitrineService.getVisible().subscribe({
       next: (data) => { this.tableaux = data; }
     });
   }
 
-  onEditRequested(id: number): void {
-    this.editingTableauId = id;
-  }
-
-  onModalClosed(saved: boolean): void {
-    this.editingTableauId = null;
-    if (saved) {
-      this.loadTableaux();
-    }
+  get latestTableaux(): VitrineTableau[] {
+    return [...this.tableaux].sort((a, b) => b.id - a.id).slice(0, 3);
   }
 }

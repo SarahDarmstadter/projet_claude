@@ -1,5 +1,4 @@
 .detail-page {
-  min-height: 100vh;
   background: #fff;
   font-family: 'Inter', sans-serif;
 }
@@ -7,136 +6,158 @@
 /* ── Hero ────────────────────────────────────────────── */
 .artwork-hero {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 3fr 2fr;
   align-items: start;
   padding-top: 64px;
   min-height: calc(100vh - 64px);
 }
 
-/* Colonne image — aucun fond, image bord à bord */
+/* Colonne image — sticky pendant le scroll */
 .artwork-image-col {
   position: sticky;
   top: 64px;
+  height: calc(100vh - 64px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   overflow: hidden;
+  background: #fff;
 }
+
 .artwork-main-img {
-  width: 100%;
+  max-width: 92%;
+  max-height: 88%;
+  width: auto;
   height: auto;
   display: block;
+  object-fit: contain;
   cursor: zoom-in;
-  transition: opacity .2s;
+  transition: opacity .3s;
 }
-.artwork-main-img:hover { opacity: .92; }
+.artwork-main-img:hover { opacity: .93; }
 
 /* Colonne infos */
 .artwork-info-col {
-  padding: 80px 70px 80px 60px;
-  border-left: 1px solid #e0e0e0;
+  padding: 64px 68px 80px 56px;
+  border-left: 1px solid #ebebeb;
 }
 
+/* Breadcrumb */
+.back-link {
+  display: inline-block;
+  font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+  color: #bbb; text-decoration: none;
+  margin-bottom: 52px;
+  transition: color .2s;
+}
+.back-link:hover { color: #111; text-decoration: none; }
+
+/* Titre */
 .artwork-title {
   font-family: 'Playfair Display', serif;
-  font-size: 44px; font-weight: 400; font-style: italic;
-  color: #111; line-height: 1.12; margin-bottom: 40px;
+  font-size: 40px; font-weight: 300; font-style: normal;
+  color: #111; line-height: 1.1; margin-bottom: 44px;
+  letter-spacing: -0.01em;
 }
 
 /* ── Specs ───────────────────────────────────────────── */
 .artwork-specs {
   display: grid; grid-template-columns: 1fr 1fr;
-  gap: 24px 32px;
+  gap: 28px 32px;
   padding: 36px 0;
-  border-top: 1px solid #e0e0e0;
-  border-bottom: 1px solid #e0e0e0;
-  margin-bottom: 36px;
+  border-top: 1px solid #ebebeb;
+  border-bottom: 1px solid #ebebeb;
+  margin-bottom: 40px;
 }
 .spec-label {
-  font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase;
-  color: #999; margin-bottom: 5px;
+  font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+  color: #aaa; margin-bottom: 6px;
 }
 .spec-value {
   font-family: 'Playfair Display', serif;
-  font-size: 15px; color: #111;
+  font-size: 15px; color: #111; font-weight: 300;
 }
 
 /* ── Description ─────────────────────────────────────── */
 .artwork-desc {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 18px; font-weight: 300; font-style: italic;
-  color: #555; line-height: 1.75; margin-bottom: 40px;
+  font-size: 19px; font-weight: 300; font-style: italic;
+  color: #555; line-height: 1.8; margin-bottom: 44px;
 }
 
 /* ── Actions ─────────────────────────────────────────── */
-.artwork-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+.artwork-actions { margin-bottom: 40px; }
 
 .btn-primary {
   display: inline-block;
-  padding: 12px 28px;
+  padding: 13px 34px;
   border: 1px solid #111; background: none;
   font-family: 'Inter', sans-serif;
-  font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase;
+  font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
   color: #111; text-decoration: none; cursor: pointer;
   transition: background .25s, color .25s;
 }
 .btn-primary:hover { background: #111; color: #fff; text-decoration: none; }
 
-.btn-secondary {
+/* Admin edit */
+.btn-admin-edit {
   display: inline-block;
-  padding: 12px 28px;
-  border: 1px solid #e0e0e0; background: none;
   font-family: 'Inter', sans-serif;
-  font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase;
-  color: #999; text-decoration: none; cursor: pointer;
-  transition: border-color .2s, color .2s;
+  font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
+  color: rgba(180,120,40,.65); text-decoration: none;
+  border-bottom: 1px solid rgba(180,120,40,.25);
+  padding-bottom: 2px;
+  transition: color .2s, border-color .2s;
 }
-.btn-secondary:hover { border-color: #111; color: #111; text-decoration: none; }
+.btn-admin-edit:hover { color: rgba(180,120,40,1); border-color: rgba(180,120,40,.6); text-decoration: none; }
 
 /* ── Navigation prev / next ──────────────────────────── */
-.artwork-navigation {
+.artwork-nav {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 48px;
-  padding: 56px 60px;
-  border-top: 1px solid #e0e0e0;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 24px;
+  margin-top: 60px;
+  padding-top: 32px;
+  border-top: 1px solid #ebebeb;
 }
 
-.nav-arrow-btn {
-  display: flex; align-items: center; gap: 20px;
-  text-decoration: none; color: #111;
+.artwork-nav-link {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  text-decoration: none;
+  max-width: 46%;
   transition: opacity .2s;
 }
-.nav-arrow-btn:hover { opacity: .45; text-decoration: none; }
+.artwork-nav-link--next { align-items: flex-end; text-align: right; margin-left: auto; }
+.artwork-nav-link:hover { opacity: .5; text-decoration: none; }
 
-.nav-arrow-icon {
-  font-size: 22px; font-weight: 300; color: #999;
-  line-height: 1;
+.nav-dir {
+  font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+  color: #bbb;
 }
-
-.nav-arrow-title {
+.nav-title {
   font-family: 'Playfair Display', serif;
-  font-size: 15px; font-style: italic; color: #111;
-  max-width: 240px;
+  font-size: 13px; font-style: italic; font-weight: 300;
+  color: #111;
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-}
-
-.nav-arrow-sep {
-  width: 1px; height: 36px;
-  background: #e0e0e0;
+  max-width: 200px;
 }
 
 /* ── Œuvres liées ────────────────────────────────────── */
-.related-section { padding: 80px 60px 100px; }
+.related-section { padding: 80px 60px 100px; border-top: 1px solid #ebebeb; }
 .section-header {
   display: flex; align-items: baseline; justify-content: space-between;
   margin-bottom: 52px;
 }
 .section-title {
   font-family: 'Playfair Display', serif;
-  font-size: 34px; font-weight: 400; color: #111;
+  font-size: 32px; font-weight: 300; color: #111;
 }
 .section-link {
   font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
-  color: #555; text-decoration: none; border-bottom: 1px solid #e0e0e0;
+  color: #aaa; text-decoration: none; border-bottom: 1px solid #e0e0e0;
   padding-bottom: 2px; transition: color .2s, border-color .2s;
 }
 .section-link:hover { color: #111; border-color: #111; text-decoration: none; }
@@ -151,47 +172,68 @@
   width: 100%; height: 100%; object-fit: cover;
   transition: transform .45s cubic-bezier(.25,.46,.45,.94);
 }
-.related-card:hover .related-img { transform: scale(1.05); }
+.related-card:hover .related-img { transform: scale(1.04); }
 .related-overlay {
   position: absolute; inset: 0;
-  background: rgba(17,17,17,.5);
+  background: rgba(17,17,17,.45);
   display: flex; align-items: center; justify-content: center;
   opacity: 0; transition: opacity .3s;
 }
 .related-card:hover .related-overlay { opacity: 1; }
 .overlay-see {
   font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
-  color: #fff; border-bottom: 1px solid rgba(255,255,255,.5); padding-bottom: 2px;
+  color: #fff; border-bottom: 1px solid rgba(255,255,255,.45); padding-bottom: 2px;
 }
 .work-title {
   font-family: 'Playfair Display', serif;
-  font-size: 16px; font-weight: 400; font-style: italic;
+  font-size: 15px; font-weight: 300; font-style: italic;
   color: #111; margin-bottom: 5px;
 }
-.work-meta { font-size: 11px; color: #999; letter-spacing: 0.04em; }
+.work-meta { font-size: 11px; color: #aaa; letter-spacing: 0.04em; }
 
 /* ── Lightbox ────────────────────────────────────────── */
 .lightbox-overlay {
   position: fixed; inset: 0; z-index: 500;
-  background: rgba(0,0,0,.88);
+  background: rgba(8,8,8,.94);
   display: flex; align-items: center; justify-content: center;
   cursor: zoom-out;
-  animation: lightboxIn .2s ease;
+  animation: lightboxIn .25s ease;
 }
-.lightbox-img {
-  max-width: 78vw; max-height: 84vh;
-  object-fit: contain;
-  box-shadow: 0 24px 80px rgba(0,0,0,.5);
-  cursor: default;
-}
+
 .lightbox-close {
-  position: fixed; top: 24px; right: 32px;
-  font-size: 36px; font-weight: 300;
-  color: rgba(255,255,255,.55); background: none; border: none;
-  cursor: pointer; line-height: 1;
+  position: fixed; top: 28px; right: 36px;
+  background: none; border: none; cursor: pointer;
+  color: rgba(255,255,255,.4);
   transition: color .2s;
+  padding: 0; line-height: 1;
 }
-.lightbox-close:hover { color: #fff; }
+.lightbox-close:hover { color: rgba(255,255,255,.9); }
+
+.lightbox-content {
+  display: flex; flex-direction: column;
+  align-items: center; gap: 20px;
+  cursor: default;
+  max-width: 80vw;
+}
+
+.lightbox-img {
+  max-width: 100%; max-height: 78vh;
+  object-fit: contain;
+  display: block;
+}
+
+.lightbox-caption {
+  display: flex; gap: 20px; align-items: baseline;
+}
+.lightbox-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 15px; font-weight: 300; font-style: italic;
+  color: rgba(255,255,255,.65);
+}
+.lightbox-meta {
+  font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase;
+  color: rgba(255,255,255,.28);
+}
 
 @keyframes lightboxIn {
   from { opacity: 0; }
@@ -201,16 +243,16 @@
 /* ── Responsive ──────────────────────────────────────── */
 @media (max-width: 1024px) {
   .artwork-hero { grid-template-columns: 1fr; }
-  .artwork-image-col { position: static; }
-  .artwork-info-col { border-left: none; border-top: 1px solid #e0e0e0; padding: 60px 40px; }
-  .artwork-navigation { gap: 32px; padding: 40px; }
-  .related-section { padding: 60px 40px; }
+  .artwork-image-col {
+    position: relative; top: 0;
+    height: 55vw; min-height: 300px;
+  }
+  .artwork-info-col { border-left: none; border-top: 1px solid #ebebeb; padding: 48px 40px 64px; }
 }
 @media (max-width: 768px) {
-  .artwork-title { font-size: 32px; }
+  .artwork-title { font-size: 30px; }
   .artwork-specs { grid-template-columns: 1fr; }
-  .artwork-navigation { flex-direction: column; gap: 24px; padding: 40px 24px; }
-  .nav-arrow-sep { width: 40px; height: 1px; }
+  .artwork-image-col { height: 70vw; }
   .related-grid { grid-template-columns: 1fr; }
-  .related-section { padding: 40px 24px; }
+  .related-section { padding: 48px 24px; }
 }

@@ -3,7 +3,7 @@
 
   <div class="artwork-hero">
 
-    <!-- Colonne image -->
+    <!-- Colonne image — sticky -->
     <div class="artwork-image-col">
       <img class="artwork-main-img"
            [src]="tableau.imageUrl"
@@ -13,11 +13,14 @@
 
     <!-- Colonne infos -->
     <div class="artwork-info-col">
+
+      <a class="back-link" routerLink="/oeuvres">← Galerie</a>
+
       <h1 class="artwork-title">{{ tableau.titre }}</h1>
 
       <div class="artwork-specs">
         <div class="spec-item" *ngIf="tableau.type">
-          <p class="spec-label">Type</p>
+          <p class="spec-label">Technique</p>
           <p class="spec-value">{{ tableau.type.nom }}</p>
         </div>
         <div class="spec-item" *ngIf="dimensions">
@@ -41,28 +44,33 @@
       <p class="artwork-desc" *ngIf="tableau.description">{{ tableau.description }}</p>
 
       <div class="artwork-actions">
-        <a class="btn-primary" routerLink="/contact">Renseignements</a>
-        <a class="btn-secondary" routerLink="/oeuvres">Retour à la galerie</a>
+        <a class="btn-primary" routerLink="/contact">Contacter la galerie</a>
       </div>
+
+      <a *ngIf="auth.isAuthenticated && tableau"
+         class="btn-admin-edit"
+         [routerLink]="['/admin/tableaux', tableau.id, 'edit']">
+        ✏ Modifier ce tableau
+      </a>
+
+      <!-- Navigation prev / next typographique -->
+      <nav class="artwork-nav" *ngIf="prev || next">
+        <a class="artwork-nav-link artwork-nav-link--prev"
+           *ngIf="prev"
+           [routerLink]="['/oeuvres', prev.id]">
+          <span class="nav-dir">← Précédent</span>
+          <span class="nav-title">{{ prev.titre }}</span>
+        </a>
+        <a class="artwork-nav-link artwork-nav-link--next"
+           *ngIf="next"
+           [routerLink]="['/oeuvres', next.id]">
+          <span class="nav-dir">Suivant →</span>
+          <span class="nav-title">{{ next.titre }}</span>
+        </a>
+      </nav>
+
     </div>
 
-  </div>
-
-  <!-- Navigation prev / next centrée -->
-  <div class="artwork-navigation" *ngIf="prev || next">
-    <a class="nav-arrow-btn nav-arrow-btn--prev"
-       *ngIf="prev"
-       [routerLink]="['/oeuvres', prev.id]">
-      <span class="nav-arrow-icon">←</span>
-      <span class="nav-arrow-title">{{ prev.titre }}</span>
-    </a>
-    <div class="nav-arrow-sep" *ngIf="prev && next"></div>
-    <a class="nav-arrow-btn nav-arrow-btn--next"
-       *ngIf="next"
-       [routerLink]="['/oeuvres', next.id]">
-      <span class="nav-arrow-title">{{ next.titre }}</span>
-      <span class="nav-arrow-icon">→</span>
-    </a>
   </div>
 
   <!-- Œuvres liées -->
@@ -88,9 +96,19 @@
 
 <!-- Lightbox -->
 <div class="lightbox-overlay" *ngIf="isLightboxOpen" (click)="closeLightbox()">
-  <img class="lightbox-img"
-       [src]="tableau?.imageUrl"
-       [alt]="tableau?.titre"
-       (click)="$event.stopPropagation()" />
-  <button class="lightbox-close" (click)="closeLightbox()">×</button>
+  <button class="lightbox-close" (click)="closeLightbox()">
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+      <line x1="1" y1="1" x2="15" y2="15" stroke="currentColor" stroke-width="1.5"/>
+      <line x1="15" y1="1" x2="1" y2="15" stroke="currentColor" stroke-width="1.5"/>
+    </svg>
+  </button>
+  <div class="lightbox-content" (click)="$event.stopPropagation()">
+    <img class="lightbox-img"
+         [src]="tableau?.imageUrl"
+         [alt]="tableau?.titre" />
+    <div class="lightbox-caption">
+      <span class="lightbox-title">{{ tableau?.titre }}</span>
+      <span class="lightbox-meta" *ngIf="dimensions">{{ dimensions }}</span>
+    </div>
+  </div>
 </div>

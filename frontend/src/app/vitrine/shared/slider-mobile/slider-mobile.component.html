@@ -8,8 +8,7 @@
       [class.active]="i === index"
       [src]="t.imageUrl"
       [alt]="t.titre"
-      [class.admin-editable]="adminMode.isAdminMode"
-      (click)="adminMode.isAdminMode && editTableau(t.id)"
+      (click)="navigate(t.id)"
     />
   </div>
   <div class="cercles" *ngIf="tableaux.length > 1">

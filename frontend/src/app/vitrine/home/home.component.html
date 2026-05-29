@@ -8,7 +8,7 @@
     <a class="btn-vitrine" routerLink="/oeuvres">Découvrir les œuvres</a>
   </section>
 
-  <app-slider [tableaux]="tableaux" (editRequested)="onEditRequested($event)"></app-slider>
+  <app-slider [tableaux]="tableaux"></app-slider>
 
   <section class="works-section" *ngIf="tableaux.length > 0">
     <div class="section-header">
@@ -16,7 +16,7 @@
       <a class="section-link" routerLink="/oeuvres">Voir toute la galerie →</a>
     </div>
     <div class="works-grid">
-      <div class="work-card" *ngFor="let t of tableaux.slice(0, 3)" routerLink="/oeuvres">
+      <div class="work-card" *ngFor="let t of latestTableaux" routerLink="/oeuvres">
         <div class="work-thumb">
           <div class="work-thumb-img" [style.background-image]="'url(' + t.imageUrl + ')'"></div>
           <div class="work-thumb-overlay"><span class="thumb-see">Voir</span></div>
@@ -38,11 +38,4 @@
   </section>
 
   <app-page-bottom></app-page-bottom>
-  <app-admin-fab></app-admin-fab>
-
-  <app-tableau-edit-modal
-    *ngIf="editingTableauId !== null"
-    [tableauId]="editingTableauId"
-    (closed)="onModalClosed($event)">
-  </app-tableau-edit-modal>
 </div>

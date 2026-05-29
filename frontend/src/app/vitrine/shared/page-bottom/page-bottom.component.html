@@ -1,9 +1,24 @@
 <footer class="site-footer">
-  <div class="footer-logo">Pierre Darmstadter</div>
-  <div class="footer-links">
-    <a routerLink="/oeuvres">Galerie</a>
-    <a routerLink="/artiste">Biographie</a>
-    <a routerLink="/contact">Contact</a>
+  <div class="footer-inner">
+
+    <div class="footer-col footer-brand">
+      <span class="footer-artist">Pierre Darmstadter</span>
+      <span class="footer-tagline">Peintures contemporaines — Paris</span>
+    </div>
+
+    <nav class="footer-col footer-nav" aria-label="Navigation">
+      <a routerLink="/oeuvres">Galerie</a>
+      <a routerLink="/artiste">Biographie</a>
+      <a routerLink="/contact">Contact</a>
+    </nav>
+
+    <div class="footer-col footer-contact">
+      <a routerLink="/contact" class="footer-email">Contacter l'artiste</a>
+    </div>
+
   </div>
-  <div class="footer-copy">© {{ year }} Pierre Darmstadter</div>
+
+  <div class="footer-bottom">
+    <small>© {{ year }} Pierre Darmstadter — Tous droits réservés</small>
+  </div>
 </footer>

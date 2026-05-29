@@ -9,4 +9,13 @@
     <div class="nav-sep"></div>
     <a routerLink="/contact" routerLinkActive="active">Contact</a>
   </div>
+
+  <div class="user-menu" *ngIf="auth.isAuthenticated">
+    <button class="user-avatar" (click)="toggleMenu()" [class.open]="menuOpen">PD</button>
+    <div class="user-dropdown" *ngIf="menuOpen">
+      <a class="dropdown-item" routerLink="/admin/tableaux" (click)="closeMenu()">Mes tableaux</a>
+      <div class="dropdown-sep"></div>
+      <button class="dropdown-item dropdown-item--logout" (click)="logout()">Se déconnecter</button>
+    </div>
+  </div>
 </nav>

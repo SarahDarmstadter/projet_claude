@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from '../../../auth/services/auth.service';
 import { VitrineTableau, VitrineTableauService } from '../../services/vitrine-tableau.service';
 
 @Component({
@@ -19,7 +20,8 @@ export class OeuvreDetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private vitrineService: VitrineTableauService
+    private vitrineService: VitrineTableauService,
+    public auth: AuthService
   ) {}
 
   ngOnInit(): void {

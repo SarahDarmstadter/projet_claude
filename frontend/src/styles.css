@@ -115,7 +115,7 @@ a:hover { text-decoration: underline; }
 .page-header .actions { display: flex; gap: .75rem; }
 
 /* ===== Boutons ===== */
-.btn-primary, .btn-secondary, .btn-danger {
+.btn-primary, .btn-secondary, .btn-danger, .btn-site {
   display: inline-block;
   padding: .5rem 1.2rem;
   border-radius: 4px;
@@ -133,6 +133,8 @@ a:hover { text-decoration: underline; }
 .btn-secondary:hover { background: #cacaca; color: #333; }
 .btn-danger { background: #d32f2f; color: white; }
 .btn-danger:hover { background: #b71c1c; }
+.btn-site { background: none; color: #666; border: 1px solid #ccc; }
+.btn-site:hover { color: #333; border-color: #999; background: none; }
 .btn-sm { padding: .3rem .7rem; font-size: .8rem; }
 button:disabled { opacity: .6; cursor: not-allowed; }
 

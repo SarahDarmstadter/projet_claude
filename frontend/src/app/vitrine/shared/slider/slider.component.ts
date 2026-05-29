@@ -1,7 +1,6 @@
-import { Component, ElementRef, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnChanges, SimpleChanges, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { VitrineTableau } from '../../services/vitrine-tableau.service';
-import { AdminModeService } from '../../services/admin-mode.service';
 
 @Component({
   selector: 'app-slider',
@@ -10,12 +9,11 @@ import { AdminModeService } from '../../services/admin-mode.service';
 })
 export class SliderComponent implements OnChanges {
   @Input() tableaux: VitrineTableau[] = [];
-  @Output() editRequested = new EventEmitter<number>();
   @ViewChild('carouselTrack') trackRef!: ElementRef<HTMLElement>;
 
   activeIndex = 0;
 
-  constructor(public adminMode: AdminModeService, private router: Router) {}
+  constructor(private router: Router) {}
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['tableaux']) {
@@ -38,11 +36,7 @@ export class SliderComponent implements OnChanges {
     this.activeIndex = i;
   }
 
-  handleClick(id: number): void {
-    if (this.adminMode.isAdminMode) {
-      this.editRequested.emit(id);
-    } else {
-      this.router.navigate(['/oeuvres', id]);
-    }
+  navigate(id: number): void {
+    this.router.navigate(['/oeuvres', id]);
   }
 }

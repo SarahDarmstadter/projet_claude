@@ -1,26 +1,83 @@
 .site-footer {
-  border-top: 1px solid #e0e0e0;
-  padding: 50px 60px;
-  display: flex; align-items: center; justify-content: space-between;
+  background: #111;
   font-family: 'Inter', sans-serif;
-  background: #fff;
 }
-.footer-logo {
-  font-family: 'Playfair Display', serif;
-  font-size: 16px; color: #111;
-}
-.footer-links { display: flex; gap: 28px; }
-.footer-links a {
-  font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
-  color: #999; text-decoration: none;
-  transition: color .2s;
-}
-.footer-links a:hover { color: #111; }
-.footer-copy { font-size: 11px; color: #999; }
 
+.footer-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 48px;
+  padding: 64px 60px 52px;
+  border-bottom: 1px solid #2a2a2a;
+}
+
+/* Colonne identité */
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.footer-artist {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px; font-weight: 300;
+  color: #f0f0f0;
+  letter-spacing: 0.01em;
+}
+.footer-tagline {
+  font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+  color: #666;
+}
+
+/* Navigation */
+.footer-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding-top: 4px;
+}
+.footer-nav a {
+  font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase;
+  color: #888; text-decoration: none;
+  transition: color .2s;
+  width: fit-content;
+}
+.footer-nav a:hover { color: #f0f0f0; }
+
+/* Contact */
+.footer-contact {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  align-items: flex-end;
+  padding-top: 4px;
+}
+.footer-email {
+  font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase;
+  color: #888; text-decoration: none;
+  border-bottom: 1px solid #333;
+  padding-bottom: 2px;
+  transition: color .2s, border-color .2s;
+}
+.footer-email:hover { color: #f0f0f0; border-color: #888; }
+
+/* Bande copyright */
+.footer-bottom {
+  padding: 20px 60px;
+  text-align: center;
+}
+.footer-bottom small {
+  font-size: 10px; letter-spacing: 0.1em;
+  color: #444;
+}
+
+/* ── Responsive ──────────────────────────────────────── */
 @media (max-width: 768px) {
-  .site-footer {
-    flex-direction: column; gap: 20px;
-    text-align: center; padding: 40px 24px;
+  .footer-inner {
+    grid-template-columns: 1fr;
+    gap: 36px;
+    padding: 48px 24px 40px;
+    text-align: center;
   }
+  .footer-contact { align-items: center; }
+  .footer-bottom { padding: 16px 24px; }
 }

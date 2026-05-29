@@ -10,18 +10,11 @@ import com.peintures.backoffice.model.Type;
 import com.peintures.backoffice.repository.TableauRepository;
 import com.peintures.backoffice.repository.TypeRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
-import java.io.UncheckedIOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
-import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -29,9 +22,7 @@ public class TableauService {
 
     private final TableauRepository tableauRepository;
     private final TypeRepository typeRepository;
-
-    @Value("${app.upload-dir:/uploads}")
-    private String uploadDir;
+    private final MinioService minioService;
 
     public List<TableauResponse> findAll() {
         return tableauRepository.findAllByOrderByOrdreAsc().stream()
@@ -53,8 +44,8 @@ public class TableauService {
 
     @Transactional
     public TableauResponse create(MultipartFile image, TableauCreateRequest req) {
-        String imagePath = saveImage(image);
-        Tableau tableau = buildTableau(new Tableau(), req, imagePath);
+        String imageUrl = minioService.upload(image);
+        Tableau tableau = buildTableau(new Tableau(), req, imageUrl);
         return toResponse(tableauRepository.save(tableau));
     }
 
@@ -63,15 +54,15 @@ public class TableauService {
         Tableau tableau = tableauRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Tableau not found: " + id));
 
-        String imagePath;
+        String imageUrl;
         if (image != null && !image.isEmpty()) {
-            deleteImageFile(tableau.getImagePath());
-            imagePath = saveImage(image);
+            minioService.delete(tableau.getImagePath());
+            imageUrl = minioService.upload(image);
         } else {
-            imagePath = tableau.getImagePath();
+            imageUrl = tableau.getImagePath();
         }
 
-        buildTableau(tableau, req, imagePath);
+        buildTableau(tableau, req, imageUrl);
         return toResponse(tableauRepository.save(tableau));
     }
 
@@ -79,7 +70,7 @@ public class TableauService {
     public void delete(Long id) {
         Tableau tableau = tableauRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Tableau not found: " + id));
-        deleteImageFile(tableau.getImagePath());
+        minioService.delete(tableau.getImagePath());
         tableauRepository.delete(tableau);
     }
 
@@ -95,38 +86,6 @@ public class TableauService {
     }
 
     // --- helpers ---
-
-    private String saveImage(MultipartFile image) {
-        try {
-            Path dir = Paths.get(uploadDir);
-            Files.createDirectories(dir);
-
-            String originalFilename = image.getOriginalFilename();
-            String extension = "";
-            if (originalFilename != null && originalFilename.contains(".")) {
-                extension = originalFilename.substring(originalFilename.lastIndexOf('.'));
-            }
-            String filename = UUID.randomUUID() + extension;
-            Files.copy(image.getInputStream(), dir.resolve(filename));
-            return "/uploads/" + filename;
-        } catch (IOException e) {
-            throw new UncheckedIOException("Failed to store image", e);
-        }
-    }
-
-    private void deleteImageFile(String imagePath) {
-        if (imagePath == null || imagePath.isBlank()) {
-            return;
-        }
-        try {
-            // imagePath is e.g. "/uploads/uuid.jpg" — strip the leading "/uploads/"
-            String filename = imagePath.replaceFirst("^/uploads/", "");
-            Path file = Paths.get(uploadDir, filename);
-            Files.deleteIfExists(file);
-        } catch (IOException e) {
-            // log but do not abort the transaction
-        }
-    }
 
     private Tableau buildTableau(Tableau tableau, TableauCreateRequest req, String imagePath) {
         tableau.setImagePath(imagePath);
