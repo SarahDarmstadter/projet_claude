@@ -1,0 +1,49 @@
+<div class="galerie-page">
+  <app-heading></app-heading>
+
+  <header class="gallery-header">
+    <h1 class="gallery-title">{{ textes.get('galerie.titre', 'Galerie') }}</h1>
+    <p class="gallery-sub">{{ textes.get('galerie.sous_titre', 'Œuvres de Pierre Darmstadter') }}</p>
+  </header>
+
+  <main class="gallery-grid" *ngIf="tableaux.length > 0">
+    <article
+      class="gallery-item"
+      *ngFor="let t of tableaux"
+      [routerLink]="['/oeuvres', t.id]"
+      [attr.aria-label]="t.titre">
+
+      <div class="item-frame">
+        <img
+          class="item-img"
+          [src]="t.imageUrl"
+          [alt]="t.titre"
+          loading="lazy" />
+        <div class="item-status" *ngIf="t.statut !== 'disponible'">
+          <span class="status-badge" [class.sold]="t.statut === 'vendu'">
+            {{ t.statut === 'vendu' ? 'Vendu' : 'Collection privée' }}
+          </span>
+        </div>
+      </div>
+
+      <div class="item-caption">
+        <h2 class="item-title">{{ t.titre }}</h2>
+        <p class="item-meta">
+          <span *ngIf="t.type">{{ t.type.nom }}</span>
+          <span class="meta-sep" *ngIf="t.type && t.periode"> · </span>
+          <span *ngIf="t.periode">{{ t.periode }}</span>
+        </p>
+        <p class="item-dims" *ngIf="t.largeur && t.hauteur">
+          {{ t.hauteur }} × {{ t.largeur }} cm
+        </p>
+      </div>
+
+    </article>
+  </main>
+
+  <div class="gallery-empty" *ngIf="tableaux.length === 0">
+    <p>Aucune œuvre disponible pour le moment.</p>
+  </div>
+
+  <app-page-bottom></app-page-bottom>
+</div>

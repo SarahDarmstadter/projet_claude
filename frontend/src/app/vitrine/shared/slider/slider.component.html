@@ -1,0 +1,22 @@
+<section class="carousel-section">
+  <p class="section-label">Œuvres phares</p>
+  <div class="carousel-track" #carouselTrack (scroll)="onScroll()">
+    <div class="carousel-item"
+         *ngFor="let t of tableaux"
+         (click)="navigate(t.id)">
+      <div class="carousel-img" [style.background-image]="'url(' + t.imageUrl + ')'"></div>
+      <div class="carousel-overlay">
+        <p class="overlay-tag" *ngIf="t.type">{{ t.type.nom }} · {{ t.periode }}</p>
+        <h3 class="overlay-title">{{ t.titre }}</h3>
+        <span class="overlay-btn">Voir l'œuvre</span>
+      </div>
+    </div>
+  </div>
+  <div class="carousel-nav" *ngIf="tableaux.length > 1">
+    <div class="carousel-dot"
+         *ngFor="let t of tableaux; let i = index"
+         [class.active]="i === activeIndex"
+         (click)="scrollTo(i)">
+    </div>
+  </div>
+</section>

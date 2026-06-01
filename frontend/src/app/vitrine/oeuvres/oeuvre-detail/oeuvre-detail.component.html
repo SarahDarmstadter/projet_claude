@@ -1,0 +1,114 @@
+<div class="detail-page" *ngIf="!loading && tableau">
+  <app-heading></app-heading>
+
+  <div class="artwork-hero">
+
+    <!-- Colonne image — sticky -->
+    <div class="artwork-image-col">
+      <img class="artwork-main-img"
+           [src]="tableau.imageUrl"
+           [alt]="tableau.titre"
+           (click)="openLightbox()" />
+    </div>
+
+    <!-- Colonne infos -->
+    <div class="artwork-info-col">
+
+      <a class="back-link" routerLink="/oeuvres">← Galerie</a>
+
+      <h1 class="artwork-title">{{ tableau.titre }}</h1>
+
+      <div class="artwork-specs">
+        <div class="spec-item" *ngIf="tableau.type">
+          <p class="spec-label">Technique</p>
+          <p class="spec-value">{{ tableau.type.nom }}</p>
+        </div>
+        <div class="spec-item" *ngIf="dimensions">
+          <p class="spec-label">Dimensions</p>
+          <p class="spec-value">{{ dimensions }}</p>
+        </div>
+        <div class="spec-item">
+          <p class="spec-label">Période</p>
+          <p class="spec-value">{{ tableau.periode }}</p>
+        </div>
+        <div class="spec-item">
+          <p class="spec-label">Disponibilité</p>
+          <p class="spec-value">{{ statutLabel }}</p>
+        </div>
+        <div class="spec-item" *ngIf="tableau.prix">
+          <p class="spec-label">Prix</p>
+          <p class="spec-value">{{ tableau.prix | number:'1.0-0' }} €</p>
+        </div>
+      </div>
+
+      <p class="artwork-desc" *ngIf="tableau.description">{{ tableau.description }}</p>
+
+      <div class="artwork-actions">
+        <a class="btn-primary" routerLink="/contact">Contacter la galerie</a>
+      </div>
+
+      <a *ngIf="auth.isAuthenticated && tableau"
+         class="btn-admin-edit"
+         [routerLink]="['/admin/tableaux', tableau.id, 'edit']">
+        ✏ Modifier ce tableau
+      </a>
+
+      <!-- Navigation prev / next typographique -->
+      <nav class="artwork-nav" *ngIf="prev || next">
+        <a class="artwork-nav-link artwork-nav-link--prev"
+           *ngIf="prev"
+           [routerLink]="['/oeuvres', prev.id]">
+          <span class="nav-dir">← Précédent</span>
+          <span class="nav-title">{{ prev.titre }}</span>
+        </a>
+        <a class="artwork-nav-link artwork-nav-link--next"
+           *ngIf="next"
+           [routerLink]="['/oeuvres', next.id]">
+          <span class="nav-dir">Suivant →</span>
+          <span class="nav-title">{{ next.titre }}</span>
+        </a>
+      </nav>
+
+    </div>
+
+  </div>
+
+  <!-- Œuvres liées -->
+  <section class="related-section" *ngIf="related.length > 0">
+    <div class="section-header">
+      <h2 class="section-title">Dans la même série</h2>
+      <a class="section-link" routerLink="/oeuvres">Voir toute la galerie →</a>
+    </div>
+    <div class="related-grid">
+      <div class="related-card" *ngFor="let t of related" [routerLink]="['/oeuvres', t.id]">
+        <div class="related-thumb">
+          <img [src]="t.imageUrl" [alt]="t.titre" class="related-img" />
+          <div class="related-overlay"><span class="overlay-see">Voir</span></div>
+        </div>
+        <h3 class="work-title">{{ t.titre }}</h3>
+        <p class="work-meta" *ngIf="t.type">{{ t.type.nom }} · {{ t.periode }}</p>
+      </div>
+    </div>
+  </section>
+
+  <app-page-bottom></app-page-bottom>
+</div>
+
+<!-- Lightbox -->
+<div class="lightbox-overlay" *ngIf="isLightboxOpen" (click)="closeLightbox()">
+  <button class="lightbox-close" (click)="closeLightbox()">
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+      <line x1="1" y1="1" x2="15" y2="15" stroke="currentColor" stroke-width="1.5"/>
+      <line x1="15" y1="1" x2="1" y2="15" stroke="currentColor" stroke-width="1.5"/>
+    </svg>
+  </button>
+  <div class="lightbox-content" (click)="$event.stopPropagation()">
+    <img class="lightbox-img"
+         [src]="tableau?.imageUrl"
+         [alt]="tableau?.titre" />
+    <div class="lightbox-caption">
+      <span class="lightbox-title">{{ tableau?.titre }}</span>
+      <span class="lightbox-meta" *ngIf="dimensions">{{ dimensions }}</span>
+    </div>
+  </div>
+</div>

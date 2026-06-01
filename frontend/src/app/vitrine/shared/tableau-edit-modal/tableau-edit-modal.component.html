@@ -1,0 +1,77 @@
+<div class="modal-overlay" (click)="cancel()">
+  <div class="modal-panel" (click)="$event.stopPropagation()">
+
+    <button class="modal-close" type="button" (click)="cancel()">✕</button>
+    <h2>Modifier le tableau</h2>
+
+    <p *ngIf="error" class="error">{{ error }}</p>
+
+    <form [formGroup]="form" (ngSubmit)="submit()">
+      <div class="field">
+        <label>Image</label>
+        <input type="file" accept="image/*" (change)="onFileChange($event)">
+        <img *ngIf="imagePreview" [src]="imagePreview" class="preview">
+        <img *ngIf="!imagePreview && existingImageUrl" [src]="existingImageUrl" class="preview">
+      </div>
+
+      <div class="field">
+        <label>Titre *</label>
+        <input type="text" formControlName="titre">
+      </div>
+
+      <div class="field dimensions">
+        <label>Dimensions (cm) *</label>
+        <input type="number" formControlName="largeur" placeholder="Largeur">
+        <span>×</span>
+        <input type="number" formControlName="hauteur" placeholder="Hauteur">
+      </div>
+
+      <div class="field">
+        <label>Type *</label>
+        <select formControlName="typeId">
+          <option [ngValue]="null" disabled>— Sélectionner —</option>
+          <option *ngFor="let t of types" [ngValue]="t.id">{{ t.nom }}</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>Période *</label>
+        <input type="text" formControlName="periode" placeholder="ex : 2026">
+      </div>
+
+      <div class="field">
+        <label>Prix (€)</label>
+        <input type="text" inputmode="decimal" formControlName="prix" placeholder="ex : 1200">
+        <small *ngIf="form.get('prix')?.invalid && form.get('prix')?.dirty">Valeur invalide</small>
+      </div>
+
+      <div class="field">
+        <label>Description</label>
+        <textarea formControlName="description" rows="3"></textarea>
+      </div>
+
+      <div class="field">
+        <label>Statut *</label>
+        <select formControlName="statut">
+          <option value="disponible">Disponible</option>
+          <option value="vendu">Vendu</option>
+          <option value="non_a_vendre">Non à vendre</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>
+          <input type="checkbox" formControlName="visible"> Visible sur le site public
+        </label>
+      </div>
+
+      <div class="form-actions">
+        <button type="button" class="btn-secondary" (click)="cancel()">Annuler</button>
+        <button type="submit" [disabled]="loading" class="btn-primary">
+          {{ loading ? 'Enregistrement…' : 'Enregistrer' }}
+        </button>
+      </div>
+    </form>
+
+  </div>
+</div>

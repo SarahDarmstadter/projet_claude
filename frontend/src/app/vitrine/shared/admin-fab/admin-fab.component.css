@@ -1,0 +1,29 @@
+.admin-fab {
+  position: fixed;
+  bottom: 80px;
+  right: 20px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 2px solid black;
+  background: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  transition: background 0.2s, color 0.2s;
+}
+
+.admin-fab:hover {
+  background: #f0f0f0;
+}
+
+.admin-fab--active {
+  background: black;
+  color: white;
+}
+
+.admin-fab--active:hover {
+  background: #333;
+}

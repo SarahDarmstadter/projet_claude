@@ -1,0 +1,22 @@
+<nav class="site-nav">
+  <a class="nav-logo" routerLink="/">{{ textes.get('site.artiste.nom', 'Pierre Darmstadter') }}</a>
+  <div class="nav-links">
+    <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Accueil</a>
+    <div class="nav-sep"></div>
+    <a routerLink="/oeuvres" routerLinkActive="active">Galerie</a>
+    <div class="nav-sep"></div>
+    <a routerLink="/artiste" routerLinkActive="active">Biographie</a>
+    <div class="nav-sep"></div>
+    <a routerLink="/contact" routerLinkActive="active">Contact</a>
+  </div>
+
+  <div class="user-menu" *ngIf="auth.isAuthenticated$ | async">
+    <button class="user-avatar" (click)="toggleMenu()" [class.open]="menuOpen">PD</button>
+    <div class="user-dropdown" *ngIf="menuOpen">
+      <a class="dropdown-item" routerLink="/admin/tableaux" (click)="closeMenu()">Mes tableaux</a>
+      <a class="dropdown-item" routerLink="/admin/textes" (click)="closeMenu()">Textes du site</a>
+      <div class="dropdown-sep"></div>
+      <button class="dropdown-item dropdown-item--logout" (click)="logout()">Se déconnecter</button>
+    </div>
+  </div>
+</nav>

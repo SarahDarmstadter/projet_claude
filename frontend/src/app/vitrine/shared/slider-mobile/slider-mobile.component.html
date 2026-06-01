@@ -1,0 +1,22 @@
+<div id="slider-mobile" class="slider-mobile-container"
+     (touchstart)="onTouchStart($event)"
+     (touchend)="onTouchEnd($event)">
+  <div class="slides" *ngIf="tableaux.length > 0">
+    <img
+      *ngFor="let t of tableaux; let i = index"
+      class="slide"
+      [class.active]="i === index"
+      [src]="t.imageUrl"
+      [alt]="t.titre"
+      (click)="navigate(t.id)"
+    />
+  </div>
+  <div class="cercles" *ngIf="tableaux.length > 1">
+    <div
+      *ngFor="let t of tableaux; let i = index"
+      class="cercle"
+      [class.actif]="i === index"
+      (click)="index = i"
+    ></div>
+  </div>
+</div>

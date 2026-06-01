@@ -1,0 +1,139 @@
+.textes-sections {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  max-width: 860px;
+}
+
+.texte-section {
+  background: #fff;
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.section-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid #e5e5e5;
+  background: #fafafa;
+}
+
+.section-head h2 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #111;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+}
+
+.section-saved {
+  font-size: 0.82rem;
+  color: #2e7d32;
+  font-weight: 500;
+}
+
+.champs-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding: 1.5rem;
+}
+
+.champ {
+  display: flex;
+  flex-direction: column;
+  gap: .35rem;
+}
+
+.champ-label {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #333;
+}
+
+.champ-key {
+  font-size: 0.72rem;
+  color: #aaa;
+  font-family: monospace;
+}
+
+.champ-input,
+.champ-textarea {
+  width: 100%;
+  padding: .55rem .75rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  font-family: inherit;
+  color: #111;
+  background: #fff;
+  transition: border-color .15s;
+  resize: vertical;
+}
+
+.champ-input:focus,
+.champ-textarea:focus {
+  outline: none;
+  border-color: #111;
+}
+
+.section-footer {
+  padding: .75rem 1.5rem;
+  border-top: 1px solid #e5e5e5;
+  background: #fafafa;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.btn-save {
+  padding: .5rem 1.4rem;
+  background: #111;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 0.88rem;
+  cursor: pointer;
+  transition: background .15s;
+}
+
+.btn-save:hover:not(:disabled) {
+  background: #333;
+}
+
+.btn-save:disabled {
+  opacity: .5;
+  cursor: not-allowed;
+}
+
+.toast {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+  padding: .75rem 1.4rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  background: #1a1a1a;
+  color: #fff;
+  box-shadow: 0 4px 20px rgba(0,0,0,.3);
+  pointer-events: none;
+  white-space: nowrap;
+  z-index: 1000;
+  animation: toast-appear .2s ease;
+}
+
+@keyframes toast-appear {
+  from { opacity: 0; transform: translateX(-50%) translateY(8px); }
+  to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
+.toast--error {
+  background: #b71c1c;
+}

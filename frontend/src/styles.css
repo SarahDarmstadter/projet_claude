@@ -1,9 +1,60 @@
+/* ===== CSS Variables ===== */
+:root {
+  --font-display: 'Playfair Display', serif;
+  --font-body: 'Inter', sans-serif;
+  --font-accent: 'Cormorant Garamond', serif;
+  --black: #111;
+  --dark: #1a1a1a;
+  --mid: #555;
+  --light: #999;
+  --border: #e0e0e0;
+  --off: #f7f7f5;
+  --white: #fff;
+}
+
+/* ===== Fonts ===== */
+@font-face {
+  font-family: 'Prata-Regular';
+  src: url('assets/fonts/Prata-Regular.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'CormorantGaramond-Regular';
+  src: url('assets/fonts/CormorantGaramond-Regular.ttf') format('truetype');
+  font-weight: 400;
+}
+@font-face {
+  font-family: 'CormorantGaramond-Regular';
+  src: url('assets/fonts/CormorantGaramond-Bold.ttf') format('truetype');
+  font-weight: 700;
+}
+@font-face {
+  font-family: 'CormorantGaramond-Regular';
+  src: url('assets/fonts/CormorantGaramond-Light.ttf') format('truetype');
+  font-weight: 300;
+}
+@font-face {
+  font-family: 'OldStandardTT-Regular';
+  src: url('assets/fonts/OldStandardTT-Regular.ttf') format('truetype');
+}
+
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   background: #f5f5f5;
   color: #333;
+  cursor: default;
+}
+
+/* Évite le curseur texte sur les éléments non-interactifs */
+p, h1, h2, h3, h4, h5, h6, span, li, div, section, article, header, footer, nav {
+  user-select: none;
+}
+
+/* Rétablit la sélection pour les zones de contenu textuel */
+input, textarea, [contenteditable] {
+  user-select: text;
+  cursor: text;
 }
 
 /* ===== Auth ===== */
@@ -76,7 +127,7 @@ a:hover { text-decoration: underline; }
 .page-header .actions { display: flex; gap: .75rem; }
 
 /* ===== Boutons ===== */
-.btn-primary, .btn-secondary, .btn-danger {
+.btn-primary, .btn-secondary, .btn-danger, .btn-site {
   display: inline-block;
   padding: .5rem 1.2rem;
   border-radius: 4px;
@@ -94,6 +145,8 @@ a:hover { text-decoration: underline; }
 .btn-secondary:hover { background: #cacaca; color: #333; }
 .btn-danger { background: #d32f2f; color: white; }
 .btn-danger:hover { background: #b71c1c; }
+.btn-site { background: none; color: #666; border: 1px solid #ccc; }
+.btn-site:hover { color: #333; border-color: #999; background: none; }
 .btn-sm { padding: .3rem .7rem; font-size: .8rem; }
 button:disabled { opacity: .6; cursor: not-allowed; }
 

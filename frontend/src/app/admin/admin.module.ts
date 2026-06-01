@@ -12,6 +12,10 @@ import { AdminDashboardComponent } from './admin-dashboard.component';
       {
         path: 'tableaux',
         loadChildren: () => import('./tableau/tableau.module').then(m => m.TableauModule)
+      },
+      {
+        path: 'textes',
+        loadChildren: () => import('./textes/textes.module').then(m => m.TextesModule)
       }
     ])
   ]
