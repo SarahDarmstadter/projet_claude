@@ -42,9 +42,10 @@ export class OeuvreDetailComponent implements OnInit {
         this.tableau = tableaux[idx];
         this.prev = idx > 0 ? tableaux[idx - 1] : null;
         this.next = idx < tableaux.length - 1 ? tableaux[idx + 1] : null;
-        this.related = tableaux.filter(
-          t => t.id !== id && t.type?.id === this.tableau!.type?.id
-        ).slice(0, 3);
+        const typeId = this.tableau!.type?.id;
+        this.related = typeId != null
+          ? tableaux.filter(t => t.id !== id && t.type?.id === typeId).slice(0, 3)
+          : [];
         this.loading = false;
       },
       error: () => this.router.navigate(['/oeuvres'])
