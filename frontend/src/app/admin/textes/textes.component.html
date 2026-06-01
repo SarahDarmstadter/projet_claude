@@ -1,0 +1,49 @@
+<div class="admin-page">
+  <div class="page-header">
+    <h1>Textes du site</h1>
+    <div class="actions">
+      <a routerLink="/" class="btn-site">← Retour au site</a>
+    </div>
+  </div>
+
+  <div class="textes-sections">
+    <div class="texte-section" *ngFor="let section of sections">
+      <div class="section-head">
+        <h2>{{ section.titre }}</h2>
+      </div>
+
+      <div class="champs-grid">
+        <div class="champ" *ngFor="let champ of section.champs">
+          <label class="champ-label">{{ champ.label }}</label>
+          <textarea
+            *ngIf="champ.multiline"
+            class="champ-textarea"
+            [(ngModel)]="valeurs[champ.cle]"
+            rows="3"
+          ></textarea>
+          <input
+            *ngIf="!champ.multiline"
+            type="text"
+            class="champ-input"
+            [(ngModel)]="valeurs[champ.cle]"
+          />
+        </div>
+      </div>
+
+      <div class="section-footer">
+        <button
+          class="btn-save"
+          (click)="saveSection(section)"
+          [disabled]="saving"
+        >
+          Sauvegarder
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" [class.toast--error]="toast?.error" *ngIf="toast">
+  <span>{{ toast.error ? '✕' : '✓' }}</span>
+  <span>{{ toast.message }}</span>
+</div>

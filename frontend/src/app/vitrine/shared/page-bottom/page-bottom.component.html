@@ -2,8 +2,8 @@
   <div class="footer-inner">
 
     <div class="footer-col footer-brand">
-      <span class="footer-artist">Pierre Darmstadter</span>
-      <span class="footer-tagline">Peintures contemporaines — Paris</span>
+      <span class="footer-artist">{{ textes.get('site.artiste.nom', 'Pierre Darmstadter') }}</span>
+      <span class="footer-tagline">{{ textes.get('site.tagline', 'Peintures contemporaines — Paris') }}</span>
     </div>
 
     <nav class="footer-col footer-nav" aria-label="Navigation">
@@ -19,6 +19,6 @@
   </div>
 
   <div class="footer-bottom">
-    <small>© {{ year }} Pierre Darmstadter — Tous droits réservés</small>
+    <small>© {{ year }} {{ textes.get('site.artiste.nom', 'Pierre Darmstadter') }} — Tous droits réservés</small>
   </div>
 </footer>

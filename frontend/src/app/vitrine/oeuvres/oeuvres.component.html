@@ -2,8 +2,8 @@
   <app-heading></app-heading>
 
   <header class="gallery-header">
-    <h1 class="gallery-title">Galerie</h1>
-    <p class="gallery-sub">Œuvres de Pierre Darmstadter</p>
+    <h1 class="gallery-title">{{ textes.get('galerie.titre', 'Galerie') }}</h1>
+    <p class="gallery-sub">{{ textes.get('galerie.sous_titre', 'Œuvres de Pierre Darmstadter') }}</p>
   </header>
 
   <main class="gallery-grid" *ngIf="tableaux.length > 0">

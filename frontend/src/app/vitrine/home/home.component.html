@@ -2,18 +2,18 @@
   <app-heading></app-heading>
 
   <section class="hero">
-    <p class="hero-eyebrow">Peinture contemporaine · Paris</p>
-    <h1 class="hero-name">Pierre <em>Darmstadter</em></h1>
-    <p class="hero-tagline">« La lumière ne se montre jamais deux fois de la même façon. »</p>
-    <a class="btn-vitrine" routerLink="/oeuvres">Découvrir les œuvres</a>
+    <p class="hero-eyebrow">{{ textes.get('accueil.hero.eyebrow', 'Peinture contemporaine · Paris') }}</p>
+    <h1 class="hero-name">{{ textes.get('site.artiste.nom', 'Pierre Darmstadter') }}</h1>
+    <p class="hero-tagline">{{ textes.get('accueil.hero.tagline', '« La lumière ne se montre jamais deux fois de la même façon. »') }}</p>
+    <a class="btn-vitrine" routerLink="/oeuvres">{{ textes.get('accueil.hero.cta', 'Découvrir les œuvres') }}</a>
   </section>
 
   <app-slider [tableaux]="tableaux"></app-slider>
 
   <section class="works-section" *ngIf="tableaux.length > 0">
     <div class="section-header">
-      <h2 class="section-title">Dernières œuvres</h2>
-      <a class="section-link" routerLink="/oeuvres">Voir toute la galerie →</a>
+      <h2 class="section-title">{{ textes.get('accueil.galerie.titre', 'Dernières œuvres') }}</h2>
+      <a class="section-link" routerLink="/oeuvres">{{ textes.get('accueil.galerie.lien', 'Voir toute la galerie →') }}</a>
     </div>
     <div class="works-grid">
       <div class="work-card" *ngFor="let t of latestTableaux" routerLink="/oeuvres">
@@ -30,10 +30,10 @@
   <section class="about-strip">
     <div class="about-photo"></div>
     <div class="about-text">
-      <p class="about-eyebrow">L'artiste</p>
-      <h2 class="about-heading">Pierre Darmstadter</h2>
-      <p class="about-p">Peintre depuis plusieurs décennies, Pierre Darmstadter explore la lumière et la matière dans ses toiles. Son travail, ancré dans la tradition figurative, dialogue avec une sensibilité contemporaine.</p>
-      <a class="btn-vitrine" routerLink="/artiste">Lire la biographie</a>
+      <p class="about-eyebrow">{{ textes.get('accueil.about.eyebrow', "L'artiste") }}</p>
+      <h2 class="about-heading">{{ textes.get('site.artiste.nom', 'Pierre Darmstadter') }}</h2>
+      <p class="about-p">{{ textes.get('accueil.about.texte', 'Peintre depuis plusieurs décennies, Pierre Darmstadter explore la lumière et la matière dans ses toiles. Son travail, ancré dans la tradition figurative, dialogue avec une sensibilité contemporaine.') }}</p>
+      <a class="btn-vitrine" routerLink="/artiste">{{ textes.get('accueil.about.cta', 'Lire la biographie') }}</a>
     </div>
   </section>
 

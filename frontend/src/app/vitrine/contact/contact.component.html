@@ -3,19 +3,21 @@
 
   <div class="contact-layout">
     <div class="contact-left">
-      <p class="contact-eyebrow">Contact</p>
-      <h1 class="contact-title">Entrons en conversation</h1>
-      <p class="contact-desc">Pour toute demande concernant une œuvre ou une exposition, Pierre Darmstadter vous répondra dans les meilleurs délais.</p>
+      <p class="contact-eyebrow">{{ textes.get('contact.eyebrow', 'Contact') }}</p>
+      <h1 class="contact-title">{{ textes.get('contact.titre', 'Entrons en conversation') }}</h1>
+      <p class="contact-desc">{{ textes.get('contact.description', 'Pour toute demande concernant une œuvre ou une exposition, Pierre Darmstadter vous répondra dans les meilleurs délais.') }}</p>
 
       <div class="contact-info-item">
         <p class="contact-info-label">Email</p>
         <p class="contact-info-val">
-          <a href="mailto:pierre.darmstadter@gmail.com">pierre.darmstadter&#64;gmail.com</a>
+          <a [href]="'mailto:' + textes.get('contact.email', 'pierre.darmstadter@gmail.com')">{{ textes.get('contact.email', 'pierre.darmstadter@gmail.com') }}</a>
         </p>
       </div>
       <div class="contact-info-item">
         <p class="contact-info-label">Atelier</p>
-        <p class="contact-info-val">Paris<br>Sur rendez-vous</p>
+        <p class="contact-info-val">
+          {{ textes.get('contact.atelier.lieu', 'Paris') }}<br>{{ textes.get('contact.atelier.horaires', 'Sur rendez-vous') }}
+        </p>
       </div>
     </div>
 
@@ -48,7 +50,7 @@
 
       <div class="contact-sent" *ngIf="sent">
         <p class="sent-title">Message envoyé</p>
-        <p class="sent-desc">Merci pour votre message. Pierre Darmstadter vous répondra prochainement.</p>
+        <p class="sent-desc">Merci pour votre message. {{ textes.get('site.artiste.nom', 'Pierre Darmstadter') }} vous répondra prochainement.</p>
       </div>
     </div>
   </div>

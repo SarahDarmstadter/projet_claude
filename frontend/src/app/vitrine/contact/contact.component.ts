@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { TexteService } from '../services/texte.service';
 
 @Component({
   selector: 'app-contact',
@@ -10,7 +11,7 @@ export class ContactComponent {
   form: FormGroup;
   sent = false;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, public textes: TexteService) {
     this.form = this.fb.group({
       prenom: ['', Validators.required],
       nom: ['', Validators.required],

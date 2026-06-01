@@ -1,6 +1,7 @@
 import { Component, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../auth/services/auth.service';
+import { TexteService } from '../../services/texte.service';
 
 @Component({
   selector: 'app-heading',
@@ -10,7 +11,7 @@ import { AuthService } from '../../../auth/services/auth.service';
 export class HeadingComponent {
   menuOpen = false;
 
-  constructor(public auth: AuthService, private router: Router) {}
+  constructor(public auth: AuthService, private router: Router, public textes: TexteService) {}
 
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: MouseEvent): void {

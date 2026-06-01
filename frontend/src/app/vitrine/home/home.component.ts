@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { VitrineTableau, VitrineTableauService } from '../services/vitrine-tableau.service';
+import { TexteService } from '../services/texte.service';
 
 @Component({
   selector: 'app-home',
@@ -9,7 +10,7 @@ import { VitrineTableau, VitrineTableauService } from '../services/vitrine-table
 export class HomeComponent implements OnInit {
   tableaux: VitrineTableau[] = [];
 
-  constructor(private vitrineService: VitrineTableauService) {}
+  constructor(private vitrineService: VitrineTableauService, public textes: TexteService) {}
 
   ngOnInit(): void {
     this.vitrineService.getVisible().subscribe({

@@ -6,6 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthService } from './auth/services/auth.service';
 import { JwtInterceptor } from './auth/interceptors/jwt.interceptor';
+import { TexteService } from './vitrine/services/texte.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -20,6 +21,12 @@ import { JwtInterceptor } from './auth/interceptors/jwt.interceptor';
       provide: APP_INITIALIZER,
       useFactory: (auth: AuthService) => () => auth.init(),
       deps: [AuthService],
+      multi: true
+    },
+    {
+      provide: APP_INITIALIZER,
+      useFactory: (textes: TexteService) => () => textes.load(),
+      deps: [TexteService],
       multi: true
     }
   ],

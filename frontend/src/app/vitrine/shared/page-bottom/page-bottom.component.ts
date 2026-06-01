@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { TexteService } from '../../services/texte.service';
 
 @Component({
   selector: 'app-page-bottom',
@@ -7,4 +8,5 @@ import { Component } from '@angular/core';
 })
 export class PageBottomComponent {
   year = new Date().getFullYear();
+  constructor(public textes: TexteService) {}
 }
