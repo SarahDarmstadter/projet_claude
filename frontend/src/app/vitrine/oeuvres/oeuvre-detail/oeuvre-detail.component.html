@@ -76,7 +76,7 @@
   <!-- Œuvres liées -->
   <section class="related-section" *ngIf="related.length > 0">
     <div class="section-header">
-      <h2 class="section-title">Autres œuvres — {{ tableau.type?.nom }}</h2>
+      <h2 class="section-title">Autres œuvres — {{ tableau.type?.nom || 'même type' }}</h2>
       <a class="section-link" routerLink="/oeuvres">Voir toute la galerie →</a>
     </div>
     <div class="related-grid">

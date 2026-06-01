@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { switchMap } from 'rxjs';
 import { AuthService } from '../../../auth/services/auth.service';
 import { VitrineTableau, VitrineTableauService } from '../../services/vitrine-tableau.service';
 
@@ -25,24 +26,25 @@ export class OeuvreDetailComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe(params => {
-      const id = Number(params.get('id'));
-      this.load(id);
-    });
-  }
-
-  private load(id: number): void {
-    this.loading = true;
-    this.isLightboxOpen = false;
-    this.vitrineService.getVisible().subscribe({
-      next: (tableaux) => {
+    this.route.paramMap.pipe(
+      switchMap(params => {
+        this.loading = true;
+        this.isLightboxOpen = false;
+        const id = Number(params.get('id'));
+        return this.vitrineService.getVisible().pipe(
+          // Transporte l'id avec le résultat pour éviter la closure
+          switchMap(tableaux => [{ id, tableaux }])
+        );
+      })
+    ).subscribe({
+      next: ({ id, tableaux }) => {
         this.total = tableaux.length;
         const idx = tableaux.findIndex(t => t.id === id);
         if (idx === -1) { this.router.navigate(['/oeuvres']); return; }
         this.tableau = tableaux[idx];
         this.prev = idx > 0 ? tableaux[idx - 1] : null;
         this.next = idx < tableaux.length - 1 ? tableaux[idx + 1] : null;
-        const typeId = this.tableau!.type?.id;
+        const typeId = this.tableau.type?.id;
         this.related = typeId != null
           ? tableaux.filter(t => t.id !== id && t.type?.id === typeId).slice(0, 3)
           : [];
