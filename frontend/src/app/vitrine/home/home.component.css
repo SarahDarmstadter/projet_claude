@@ -133,7 +133,12 @@
 @media (max-width: 768px) {
   .hero { padding: 120px 24px 60px; }
   .works-section { padding: 60px 24px 60px; }
-  .works-grid { grid-template-columns: 1fr; gap: 24px; }
+  .works-grid { grid-template-columns: 1fr 1fr; gap: 20px 12px; }
   .about-strip { grid-template-columns: 1fr; }
+  .about-photo { aspect-ratio: 3/2; max-height: 280px; }
   .about-text { padding: 40px 24px; }
+}
+
+@media (max-width: 480px) {
+  .works-grid { grid-template-columns: 1fr; }
 }

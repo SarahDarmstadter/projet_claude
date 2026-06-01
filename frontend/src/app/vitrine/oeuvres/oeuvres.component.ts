@@ -9,12 +9,20 @@ import { TexteService } from '../services/texte.service';
 })
 export class OeuvresComponent implements OnInit {
   tableaux: VitrineTableau[] = [];
+  loadingImages: Record<number, boolean> = {};
 
   constructor(private vitrineService: VitrineTableauService, public textes: TexteService) {}
 
   ngOnInit(): void {
     this.vitrineService.getVisible().subscribe({
-      next: (data) => { this.tableaux = data; }
+      next: (data) => {
+        this.tableaux = data;
+        data.forEach(t => { this.loadingImages[t.id] = true; });
+      }
     });
+  }
+
+  onImageLoad(id: number): void {
+    this.loadingImages[id] = false;
   }
 }

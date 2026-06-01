@@ -6,17 +6,20 @@
       *ngFor="let t of tableaux; let i = index"
       class="slide"
       [class.active]="i === index"
+      [class.dir-left]="i === index && slideDirection === 'left'"
+      [class.dir-right]="i === index && slideDirection === 'right'"
       [src]="t.imageUrl"
       [alt]="t.titre"
       (click)="navigate(t.id)"
     />
   </div>
   <div class="cercles" *ngIf="tableaux.length > 1">
-    <div
+    <button
       *ngFor="let t of tableaux; let i = index"
       class="cercle"
       [class.actif]="i === index"
-      (click)="index = i"
-    ></div>
+      (click)="goTo(i)"
+      [attr.aria-label]="'Tableau ' + (i + 1)"
+    ></button>
   </div>
 </div>

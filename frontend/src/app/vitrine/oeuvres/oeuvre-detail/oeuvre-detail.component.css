@@ -250,9 +250,28 @@
   .artwork-info-col { border-left: none; border-top: 1px solid #ebebeb; padding: 48px 40px 64px; }
 }
 @media (max-width: 768px) {
-  .artwork-title { font-size: 30px; }
-  .artwork-specs { grid-template-columns: 1fr; }
-  .artwork-image-col { height: 70vw; }
-  .related-grid { grid-template-columns: 1fr; }
-  .related-section { padding: 48px 24px; }
+  .artwork-title { font-size: 28px; }
+  .artwork-specs { grid-template-columns: 1fr 1fr; gap: 20px 16px; }
+  .artwork-info-col { padding: 32px 20px 48px; }
+  .artwork-image-col { height: auto; min-height: 56vw; max-height: 80vw; }
+  .artwork-main-img { max-height: 75vw; }
+  .related-grid { grid-template-columns: 1fr 1fr; gap: 20px 12px; }
+  .related-section { padding: 40px 16px 60px; }
+  /* Zone tactile bouton admin */
+  .btn-admin-edit {
+    padding: 12px 0;
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    border-bottom: none;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  /* Bouton contact pleine largeur */
+  .btn-primary {
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding: 16px 36px;
+  }
 }

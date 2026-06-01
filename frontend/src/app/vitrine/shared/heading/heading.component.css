@@ -11,6 +11,7 @@
   font-size: 18px; font-weight: 400; letter-spacing: 0.04em;
   color: #fff; text-decoration: none;
   transition: opacity .2s;
+  flex-shrink: 0;
 }
 .nav-logo:hover { opacity: .65; }
 
@@ -27,6 +28,29 @@
 }
 .nav-links a:hover { color: rgba(255,255,255,.8); }
 .nav-links a.active { color: #fff; }
+
+/* Hamburger — masqué sur desktop */
+.nav-hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  margin-left: auto;
+}
+.nav-hamburger span {
+  display: block;
+  width: 22px;
+  height: 1.5px;
+  background: rgba(255,255,255,.75);
+  transition: transform .22s ease, opacity .22s ease;
+}
+.nav-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.nav-hamburger.open span:nth-child(2) { opacity: 0; }
+.nav-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
 
 .user-menu {
   position: relative;
@@ -80,12 +104,36 @@
   flex-shrink: 0;
 }
 
+/* ── Mobile ──────────────────────────────────────────── */
 @media (max-width: 768px) {
   .site-nav { padding: 0 20px; }
-  .nav-links a { padding: 0 14px; font-size: 9px; letter-spacing: 0.1em; }
-}
 
-@media (max-width: 480px) {
-  .nav-logo { font-size: 14px; }
-  .nav-links a { padding: 0 8px; font-size: 8px; }
+  .nav-hamburger { display: flex; }
+
+  .nav-links {
+    display: none;
+    position: fixed;
+    top: 64px; left: 0; right: 0;
+    background: #111;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 8px 0 20px;
+    border-top: 1px solid rgba(255,255,255,.08);
+    box-shadow: 0 8px 24px rgba(0,0,0,.4);
+  }
+  .nav-links--open { display: flex; }
+
+  .nav-links .nav-sep { display: none; }
+
+  .nav-links a {
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    padding: 16px 24px;
+    color: rgba(255,255,255,.55);
+    border-bottom: 1px solid rgba(255,255,255,.05);
+  }
+  .nav-links a:last-of-type { border-bottom: none; }
+  .nav-links a.active { color: #fff; }
+
+  .user-menu { margin-left: 16px; }
 }

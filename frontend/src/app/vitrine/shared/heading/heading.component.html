@@ -1,13 +1,19 @@
 <nav class="site-nav">
-  <a class="nav-logo" routerLink="/">{{ textes.get('site.artiste.nom', 'Pierre Darmstadter') }}</a>
-  <div class="nav-links">
-    <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Accueil</a>
+  <a class="nav-logo" routerLink="/" (click)="closeNav()">{{ textes.get('site.artiste.nom', 'Pierre Darmstadter') }}</a>
+
+  <button class="nav-hamburger" (click)="toggleNav()" [class.open]="navOpen"
+          aria-label="Menu" [attr.aria-expanded]="navOpen">
+    <span></span><span></span><span></span>
+  </button>
+
+  <div class="nav-links" [class.nav-links--open]="navOpen">
+    <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" (click)="closeNav()">Accueil</a>
     <div class="nav-sep"></div>
-    <a routerLink="/oeuvres" routerLinkActive="active">Galerie</a>
+    <a routerLink="/oeuvres" routerLinkActive="active" (click)="closeNav()">Galerie</a>
     <div class="nav-sep"></div>
-    <a routerLink="/artiste" routerLinkActive="active">Biographie</a>
+    <a routerLink="/artiste" routerLinkActive="active" (click)="closeNav()">Biographie</a>
     <div class="nav-sep"></div>
-    <a routerLink="/contact" routerLinkActive="active">Contact</a>
+    <a routerLink="/contact" routerLinkActive="active" (click)="closeNav()">Contact</a>
   </div>
 
   <div class="user-menu" *ngIf="auth.isAuthenticated$ | async">

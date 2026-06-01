@@ -1,5 +1,5 @@
 .slider-mobile-container {
-  margin-top: 10%;
+  margin-top: 40px;
 }
 
 .slides {
@@ -15,38 +15,64 @@
   height: 100%;
   object-fit: cover;
   opacity: 0;
-  transition: opacity 0.5s ease-in-out;
+  transition: opacity 0.4s ease-in-out;
 }
 
 .slide.active {
   opacity: 1;
 }
 
-.admin-editable {
-  cursor: pointer;
+/* Sensation de direction au swipe */
+.slide.active.dir-left {
+  animation: slideInLeft 0.4s ease-out;
+}
+.slide.active.dir-right {
+  animation: slideInRight 0.4s ease-out;
 }
 
-.admin-editable:hover {
-  outline: 2px dashed #666;
+@keyframes slideInLeft {
+  from { transform: translateX(24px); opacity: 0; }
+  to   { transform: translateX(0);    opacity: 1; }
 }
+@keyframes slideInRight {
+  from { transform: translateX(-24px); opacity: 0; }
+  to   { transform: translateX(0);     opacity: 1; }
+}
+
+.admin-editable { cursor: pointer; }
+.admin-editable:hover { outline: 2px dashed #666; }
 
 .cercles {
   display: flex;
   justify-content: center;
-  position: relative;
-  margin-top: 10px;
+  margin-top: 16px;
   width: 100%;
+  gap: 4px;
 }
 
+/* Zone tactile 44×44px, point visible 10×10px */
 .cercle {
-  border: solid 1.5px black;
-  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.cercle::after {
+  content: '';
+  display: block;
   width: 10px;
   height: 10px;
-  margin: 3px;
-  cursor: pointer;
+  border: 1.5px solid #111;
+  border-radius: 50%;
+  transition: background .2s;
 }
 
-.actif {
-  background: black;
+.cercle.actif::after {
+  background: #111;
 }

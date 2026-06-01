@@ -10,27 +10,25 @@ import { TexteService } from '../../services/texte.service';
 })
 export class HeadingComponent {
   menuOpen = false;
+  navOpen = false;
 
   constructor(public auth: AuthService, private router: Router, public textes: TexteService) {}
 
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: MouseEvent): void {
     const target = event.target as HTMLElement;
-    if (!target.closest('.user-menu')) {
-      this.menuOpen = false;
-    }
+    if (!target.closest('.user-menu')) this.menuOpen = false;
+    if (!target.closest('.site-nav')) this.navOpen = false;
   }
 
-  toggleMenu(): void {
-    this.menuOpen = !this.menuOpen;
-  }
-
-  closeMenu(): void {
-    this.menuOpen = false;
-  }
+  toggleNav(): void  { this.navOpen = !this.navOpen; }
+  closeNav(): void   { this.navOpen = false; }
+  toggleMenu(): void { this.menuOpen = !this.menuOpen; if (this.menuOpen) this.navOpen = false; }
+  closeMenu(): void  { this.menuOpen = false; }
 
   logout(): void {
     this.auth.logout().subscribe({ complete: () => this.router.navigate(['/']) });
     this.menuOpen = false;
+    this.navOpen = false;
   }
 }

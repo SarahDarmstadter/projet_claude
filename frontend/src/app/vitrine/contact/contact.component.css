@@ -57,7 +57,11 @@
   font-size: 14px; color: #1a1a1a; background: transparent;
   outline: none; transition: border-color .2s;
 }
-.form-input:focus, .form-textarea:focus { border-color: #111; }
+.form-input:focus, .form-textarea:focus {
+  border-color: #111;
+  outline: 2px solid rgba(17,17,17,.12);
+  outline-offset: 3px;
+}
 .form-textarea { resize: none; height: 100px; }
 
 .btn-send {

@@ -91,6 +91,19 @@
   color: #ccc; margin: 0;
 }
 
+/* ── Skeleton loading ────────────────────────────────── */
+.item-frame.loading {
+  background: linear-gradient(90deg, #f0efed 25%, #e5e4e1 50%, #f0efed 75%);
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.4s infinite;
+}
+.item-frame.loading .item-img { opacity: 0; }
+
+@keyframes skeleton-shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
 /* ── Vide ────────────────────────────────────────────── */
 .gallery-empty {
   padding: 100px 60px;

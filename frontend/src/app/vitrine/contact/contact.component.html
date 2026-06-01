@@ -25,25 +25,25 @@
       <form [formGroup]="form" (ngSubmit)="submit()" *ngIf="!sent">
         <div class="form-row">
           <div class="form-group">
-            <label class="form-label">Prénom</label>
-            <input type="text" class="form-input" formControlName="prenom" placeholder="Marie">
+            <label class="form-label" for="prenom">Prénom</label>
+            <input type="text" id="prenom" class="form-input" formControlName="prenom" placeholder="Marie">
           </div>
           <div class="form-group">
-            <label class="form-label">Nom</label>
-            <input type="text" class="form-input" formControlName="nom" placeholder="Dupont">
+            <label class="form-label" for="nom">Nom</label>
+            <input type="text" id="nom" class="form-input" formControlName="nom" placeholder="Dupont">
           </div>
         </div>
         <div class="form-group">
-          <label class="form-label">Email</label>
-          <input type="email" class="form-input" formControlName="email" placeholder="marie@exemple.fr">
+          <label class="form-label" for="email">Email</label>
+          <input type="email" id="email" class="form-input" formControlName="email" placeholder="marie@exemple.fr">
         </div>
         <div class="form-group">
-          <label class="form-label">Sujet</label>
-          <input type="text" class="form-input" formControlName="sujet" placeholder="Renseignement sur une œuvre">
+          <label class="form-label" for="sujet">Sujet</label>
+          <input type="text" id="sujet" class="form-input" formControlName="sujet" placeholder="Renseignement sur une œuvre">
         </div>
         <div class="form-group">
-          <label class="form-label">Message</label>
-          <textarea class="form-textarea" formControlName="message" placeholder="Votre message…"></textarea>
+          <label class="form-label" for="message">Message</label>
+          <textarea id="message" class="form-textarea" formControlName="message" placeholder="Votre message…"></textarea>
         </div>
         <button type="submit" class="btn-send" [disabled]="form.invalid">Envoyer</button>
       </form>

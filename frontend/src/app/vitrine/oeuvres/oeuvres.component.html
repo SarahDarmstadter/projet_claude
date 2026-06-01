@@ -13,12 +13,14 @@
       [routerLink]="['/oeuvres', t.id]"
       [attr.aria-label]="t.titre">
 
-      <div class="item-frame">
+      <div class="item-frame" [class.loading]="loadingImages[t.id]">
         <img
           class="item-img"
           [src]="t.imageUrl"
           [alt]="t.titre"
-          loading="lazy" />
+          (load)="onImageLoad(t.id)"
+          (error)="onImageLoad(t.id)"
+        />
         <div class="item-status" *ngIf="t.statut !== 'disponible'">
           <span class="status-badge" [class.sold]="t.statut === 'vendu'">
             {{ t.statut === 'vendu' ? 'Vendu' : 'Collection privée' }}
