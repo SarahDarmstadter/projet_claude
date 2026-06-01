@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { TableauService, TypeDto } from '../tableau.service';
+import { ToastService } from '../../shared/toast.service';
 
 @Component({
   selector: 'app-type-list',
@@ -13,7 +14,10 @@ export class TypeListComponent implements OnInit {
   editNom = '';
   error = '';
 
-  constructor(private tableauService: TableauService) {}
+  constructor(
+    private tableauService: TableauService,
+    private toastService: ToastService
+  ) {}
 
   ngOnInit(): void {
     this.load();
@@ -33,9 +37,13 @@ export class TypeListComponent implements OnInit {
     this.tableauService.createType(nom).subscribe({
       next: () => {
         this.newNom = '';
+        this.toastService.success(`Type « ${nom} » créé`);
         this.load();
       },
-      error: () => (this.error = 'Erreur lors de la création du type.')
+      error: () => {
+        this.error = 'Erreur lors de la création du type.';
+        this.toastService.error('Erreur lors de la création du type');
+      }
     });
   }
 
@@ -52,9 +60,13 @@ export class TypeListComponent implements OnInit {
     this.tableauService.updateType(t.id, nom).subscribe({
       next: () => {
         this.editingId = null;
+        this.toastService.success(`Type renommé en « ${nom} »`);
         this.load();
       },
-      error: () => (this.error = 'Erreur lors de la mise à jour du type.')
+      error: () => {
+        this.error = 'Erreur lors de la mise à jour du type.';
+        this.toastService.error('Erreur lors de la mise à jour du type');
+      }
     });
   }
 
@@ -67,12 +79,16 @@ export class TypeListComponent implements OnInit {
   deleteType(t: TypeDto): void {
     this.error = '';
     this.tableauService.deleteType(t.id).subscribe({
-      next: () => this.load(),
+      next: () => {
+        this.toastService.success(`Type « ${t.nom} » supprimé`);
+        this.load();
+      },
       error: (err: HttpErrorResponse) => {
         if (err.status === 409) {
           this.error = `Le type « ${t.nom} » est utilisé par un ou plusieurs tableaux et ne peut pas être supprimé.`;
         } else {
           this.error = 'Erreur lors de la suppression du type.';
+          this.toastService.error('Erreur lors de la suppression du type');
         }
       }
     });

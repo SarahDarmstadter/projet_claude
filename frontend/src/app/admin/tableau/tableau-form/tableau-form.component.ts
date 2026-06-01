@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TableauService, TypeDto, TableauResponse } from '../tableau.service';
+import { ToastService } from '../../shared/toast.service';
 
 @Component({
   selector: 'app-tableau-form',
@@ -24,7 +25,8 @@ export class TableauFormComponent implements OnInit {
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private tableauService: TableauService
+    private tableauService: TableauService,
+    private toastService: ToastService
   ) {}
 
   ngOnInit(): void {
@@ -65,9 +67,7 @@ export class TableauFormComponent implements OnInit {
             ordre: t.ordre
           });
         },
-        error: () => {
-          this.error = 'Impossible de charger le tableau.';
-        }
+        error: () => { this.error = 'Impossible de charger le tableau.'; }
       });
     }
   }
@@ -77,9 +77,7 @@ export class TableauFormComponent implements OnInit {
     if (input.files && input.files.length > 0) {
       this.selectedFile = input.files[0];
       const reader = new FileReader();
-      reader.onload = () => {
-        this.imagePreview = reader.result as string;
-      };
+      reader.onload = () => { this.imagePreview = reader.result as string; };
       reader.readAsDataURL(this.selectedFile);
     }
   }
@@ -95,31 +93,32 @@ export class TableauFormComponent implements OnInit {
     this.error = '';
     const raw = this.form.value;
     const prixStr: string = raw.prix?.trim() ?? '';
-    const data = {
-      ...raw,
-      prix: prixStr ? parseFloat(prixStr.replace(',', '.')) : null
-    };
+    const data = { ...raw, prix: prixStr ? parseFloat(prixStr.replace(',', '.')) : null };
 
     if (this.isEdit && this.editId !== null) {
       this.tableauService.update(this.editId, data, this.selectedFile ?? undefined).subscribe({
         next: () => {
           this.loading = false;
+          this.toastService.success('Tableau modifié avec succès');
           this.router.navigate(['../../'], { relativeTo: this.route });
         },
         error: () => {
           this.loading = false;
           this.error = "Une erreur est survenue lors de la mise à jour.";
+          this.toastService.error('Erreur lors de la mise à jour');
         }
       });
     } else {
       this.tableauService.create(this.selectedFile!, data).subscribe({
         next: () => {
           this.loading = false;
+          this.toastService.success('Tableau créé avec succès');
           this.router.navigate(['../'], { relativeTo: this.route });
         },
         error: () => {
           this.loading = false;
           this.error = "Une erreur est survenue lors de la création.";
+          this.toastService.error('Erreur lors de la création');
         }
       });
     }

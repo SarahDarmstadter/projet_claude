@@ -7,12 +7,14 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { TableauListComponent } from './tableau-list/tableau-list.component';
 import { TableauFormComponent } from './tableau-form/tableau-form.component';
 import { TypeListComponent } from './type-list/type-list.component';
+import { AdminToastComponent } from '../shared/toast.component';
 
 @NgModule({
   declarations: [
     TableauListComponent,
     TableauFormComponent,
-    TypeListComponent
+    TypeListComponent,
+    AdminToastComponent
   ],
   imports: [
     CommonModule,
