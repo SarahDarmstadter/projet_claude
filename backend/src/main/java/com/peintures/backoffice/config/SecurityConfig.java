@@ -40,8 +40,7 @@ public class SecurityConfig {
                                 "/api/auth/refresh",
                                 "/api/auth/forgot-password",
                                 "/api/auth/reset-password",
-                                "/api/public/**",
-                                "/uploads/**"
+                                "/api/public/**"
                         ).permitAll()
                         .anyRequest().authenticated()
                 )

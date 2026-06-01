@@ -56,8 +56,10 @@ public class TableauService {
 
         String imageUrl;
         if (image != null && !image.isEmpty()) {
+            // Upload d'abord : si ça échoue, l'ancien fichier est préservé
+            String newImageUrl = minioService.upload(image);
             minioService.delete(tableau.getImagePath());
-            imageUrl = minioService.upload(image);
+            imageUrl = newImageUrl;
         } else {
             imageUrl = tableau.getImagePath();
         }
