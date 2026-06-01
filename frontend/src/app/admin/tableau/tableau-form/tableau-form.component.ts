@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TableauService, TypeDto, TableauResponse } from '../tableau.service';
 import { ToastService } from '../../shared/toast.service';
+import { VitrineTableauService } from '../../../vitrine/services/vitrine-tableau.service';
 
 @Component({
   selector: 'app-tableau-form',
@@ -26,7 +27,8 @@ export class TableauFormComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private tableauService: TableauService,
-    private toastService: ToastService
+    private toastService: ToastService,
+    private vitrineTableauService: VitrineTableauService
   ) {}
 
   ngOnInit(): void {
@@ -99,6 +101,7 @@ export class TableauFormComponent implements OnInit {
       this.tableauService.update(this.editId, data, this.selectedFile ?? undefined).subscribe({
         next: () => {
           this.loading = false;
+          this.vitrineTableauService.invalidateCache();
           this.toastService.success('Tableau modifié avec succès');
           this.router.navigate(['../../'], { relativeTo: this.route });
         },
@@ -112,6 +115,7 @@ export class TableauFormComponent implements OnInit {
       this.tableauService.create(this.selectedFile!, data).subscribe({
         next: () => {
           this.loading = false;
+          this.vitrineTableauService.invalidateCache();
           this.toastService.success('Tableau créé avec succès');
           this.router.navigate(['../'], { relativeTo: this.route });
         },

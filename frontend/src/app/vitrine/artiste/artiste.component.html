@@ -2,7 +2,11 @@
   <app-heading></app-heading>
 
   <div class="bio-hero">
-    <div class="bio-photo">
+    <div class="bio-photo"
+         [style.background-image]="textes.get('site.artiste.photo') ? 'url(' + textes.get('site.artiste.photo') + ')' : null"
+         [class.bio-photo--has-image]="textes.get('site.artiste.photo')"
+         [style.background-size]="'cover'"
+         [style.background-position]="'center'">
       <p class="bio-photo-caption">{{ textes.get('artiste.photo.legende', 'Pierre Darmstadter, atelier') }}</p>
     </div>
     <div class="bio-intro">

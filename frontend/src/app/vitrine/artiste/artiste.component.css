@@ -11,7 +11,12 @@
 }
 .bio-photo {
   background: linear-gradient(160deg, #c8b89a, #8a7060);
+  background-size: cover;
+  background-position: center;
   position: relative;
+}
+.bio-photo--has-image {
+  background-color: #111;
 }
 .bio-photo-caption {
   position: absolute; bottom: 28px; left: 28px;

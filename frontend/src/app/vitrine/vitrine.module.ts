@@ -14,8 +14,7 @@ import { HeadingComponent } from './shared/heading/heading.component';
 import { SliderComponent } from './shared/slider/slider.component';
 import { SliderMobileComponent } from './shared/slider-mobile/slider-mobile.component';
 import { PageBottomComponent } from './shared/page-bottom/page-bottom.component';
-import { AdminFabComponent } from './shared/admin-fab/admin-fab.component';
-import { TableauEditModalComponent } from './shared/tableau-edit-modal/tableau-edit-modal.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -28,8 +27,7 @@ import { TableauEditModalComponent } from './shared/tableau-edit-modal/tableau-e
     SliderComponent,
     SliderMobileComponent,
     PageBottomComponent,
-    AdminFabComponent,
-    TableauEditModalComponent,
+    NotFoundComponent,
   ],
   imports: [
     CommonModule,

@@ -5,6 +5,7 @@ import { ArtisteComponent } from './artiste/artiste.component';
 import { OeuvresComponent } from './oeuvres/oeuvres.component';
 import { OeuvreDetailComponent } from './oeuvres/oeuvre-detail/oeuvre-detail.component';
 import { ContactComponent } from './contact/contact.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -12,6 +13,7 @@ const routes: Routes = [
   { path: 'oeuvres', component: OeuvresComponent },
   { path: 'oeuvres/:id', component: OeuvreDetailComponent },
   { path: 'contact', component: ContactComponent },
+  { path: '**', component: NotFoundComponent },
 ];
 
 @NgModule({

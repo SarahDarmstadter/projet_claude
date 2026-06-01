@@ -108,6 +108,53 @@
   cursor: not-allowed;
 }
 
+/* ── Photo section ── */
+.photo-section {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.photo-current,
+.photo-preview-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: .4rem;
+}
+
+.photo-current-img,
+.photo-preview-img {
+  max-width: 280px;
+  max-height: 220px;
+  object-fit: cover;
+  border-radius: 4px;
+  border: 1px solid #e0e0e0;
+}
+
+.photo-current-label {
+  font-size: 0.75rem;
+  color: #aaa;
+}
+
+.photo-placeholder {
+  font-size: 0.85rem;
+  color: #bbb;
+  font-style: italic;
+}
+
+.photo-upload-row {
+  display: flex;
+  flex-direction: column;
+  gap: .6rem;
+  align-items: flex-start;
+}
+
+.photo-input {
+  font-size: 0.85rem;
+  color: #555;
+}
+
 .toast {
   position: fixed;
   bottom: 2rem;

@@ -45,8 +45,13 @@ public class TableauService {
     @Transactional
     public TableauResponse create(MultipartFile image, TableauCreateRequest req) {
         String imageUrl = minioService.upload(image);
-        Tableau tableau = buildTableau(new Tableau(), req, imageUrl);
-        return toResponse(tableauRepository.save(tableau));
+        try {
+            Tableau tableau = buildTableau(new Tableau(), req, imageUrl);
+            return toResponse(tableauRepository.save(tableau));
+        } catch (Exception e) {
+            minioService.delete(imageUrl);
+            throw e;
+        }
     }
 
     @Transactional

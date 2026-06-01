@@ -45,7 +45,10 @@
           <label class="form-label" for="message">Message</label>
           <textarea id="message" class="form-textarea" formControlName="message" placeholder="Votre message…"></textarea>
         </div>
-        <button type="submit" class="btn-send" [disabled]="form.invalid">Envoyer</button>
+        <p *ngIf="error" class="form-error">{{ error }}</p>
+        <button type="submit" class="btn-send" [disabled]="form.invalid || sending">
+          {{ sending ? 'Envoi en cours…' : 'Envoyer' }}
+        </button>
       </form>
 
       <div class="contact-sent" *ngIf="sent">

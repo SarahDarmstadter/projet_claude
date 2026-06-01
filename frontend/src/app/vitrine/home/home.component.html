@@ -28,7 +28,10 @@
   </section>
 
   <section class="about-strip">
-    <div class="about-photo"></div>
+    <div class="about-photo"
+         [style.background-image]="textes.get('site.artiste.photo') ? 'url(' + textes.get('site.artiste.photo') + ')' : null"
+         [class.about-photo--has-image]="textes.get('site.artiste.photo')">
+    </div>
     <div class="about-text">
       <p class="about-eyebrow">{{ textes.get('accueil.about.eyebrow', "L'artiste") }}</p>
       <h2 class="about-heading">{{ textes.get('site.artiste.nom', 'Pierre Darmstadter') }}</h2>

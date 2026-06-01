@@ -6,7 +6,39 @@
     </div>
   </div>
 
+  <!-- Section photo de l'artiste -->
   <div class="textes-sections">
+    <div class="texte-section">
+      <div class="section-head">
+        <h2>Photo de l'artiste</h2>
+      </div>
+      <div class="photo-section">
+        <div class="photo-current" *ngIf="valeurs['site.artiste.photo']">
+          <img [src]="valeurs['site.artiste.photo']" alt="Photo actuelle" class="photo-current-img" />
+          <span class="photo-current-label">Photo actuelle</span>
+        </div>
+        <div class="photo-placeholder" *ngIf="!valeurs['site.artiste.photo']">
+          Aucune photo — un dégradé s'affiche à la place
+        </div>
+        <div class="photo-preview-wrap" *ngIf="photoPreview">
+          <img [src]="photoPreview" alt="Aperçu" class="photo-preview-img" />
+          <span class="photo-current-label">Aperçu</span>
+        </div>
+        <div class="photo-upload-row">
+          <label class="champ-label">Choisir une nouvelle photo</label>
+          <input type="file" accept="image/jpeg,image/png,image/webp" (change)="onPhotoChange($event)" class="photo-input" />
+          <button
+            class="btn-save"
+            (click)="uploadPhoto()"
+            [disabled]="!photoFile || uploadingPhoto"
+          >
+            {{ uploadingPhoto ? 'Envoi…' : 'Envoyer la photo' }}
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sections textes -->
     <div class="texte-section" *ngFor="let section of sections">
       <div class="section-head">
         <h2>{{ section.titre }}</h2>

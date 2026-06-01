@@ -3,6 +3,7 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Subject, Subscription, switchMap, catchError, EMPTY } from 'rxjs';
 import { TableauService, TableauResponse } from '../tableau.service';
 import { ToastService } from '../../shared/toast.service';
+import { VitrineTableauService } from '../../../vitrine/services/vitrine-tableau.service';
 @Component({
   selector: 'app-tableau-list',
   templateUrl: './tableau-list.component.html'
@@ -19,7 +20,8 @@ export class TableauListComponent implements OnInit, OnDestroy {
 
   constructor(
     private tableauService: TableauService,
-    private toastService: ToastService
+    private toastService: ToastService,
+    private vitrineTableauService: VitrineTableauService
   ) {}
 
   ngOnInit(): void {
@@ -68,6 +70,7 @@ export class TableauListComponent implements OnInit, OnDestroy {
     this.deleteTarget = null;
     this.tableauService.delete(id).subscribe({
       next: () => {
+        this.vitrineTableauService.invalidateCache();
         this.toastService.success(`« ${titre} » supprimé`);
         this.load();
       },

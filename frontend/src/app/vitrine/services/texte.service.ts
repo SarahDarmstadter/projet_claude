@@ -31,4 +31,12 @@ export class TexteService {
       tap(t => this.cache.next({ ...this.cache.value, ...t }))
     );
   }
+
+  uploadPhoto(file: File): Observable<{ url: string }> {
+    const fd = new FormData();
+    fd.append('image', file);
+    return this.http.post<{ url: string }>(`${this.url}/admin/photo-artiste`, fd).pipe(
+      tap(res => this.cache.next({ ...this.cache.value, 'site.artiste.photo': res.url }))
+    );
+  }
 }
