@@ -2,11 +2,15 @@
   <a class="nav-logo" routerLink="/" (click)="closeNav()">{{ textes.get('site.artiste.nom', 'Pierre Darmstadter') }}</a>
 
   <button class="nav-hamburger" (click)="toggleNav()" [class.open]="navOpen"
-          aria-label="Menu" [attr.aria-expanded]="navOpen">
+          aria-label="Menu" [attr.aria-expanded]="navOpen"
+          aria-controls="site-nav-menu">
     <span></span><span></span><span></span>
   </button>
 
-  <div class="nav-links" [class.nav-links--open]="navOpen">
+  <div class="nav-links" [class.nav-links--open]="navOpen"
+       [attr.aria-hidden]="!navOpen || null"
+       [attr.inert]="!navOpen ? '' : null"
+       id="site-nav-menu">
     <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" (click)="closeNav()">Accueil</a>
     <div class="nav-sep"></div>
     <a routerLink="/oeuvres" routerLinkActive="active" (click)="closeNav()">Galerie</a>

@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { Title, Meta } from '@angular/platform-browser';
 import { VitrineTableau, VitrineTableauService } from '../services/vitrine-tableau.service';
 import { TexteService } from '../services/texte.service';
@@ -8,10 +8,11 @@ import { TexteService } from '../services/texte.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
   tableaux: VitrineTableau[] = [];
   loading = true;
   isMobile = false;
+  private resizeTimer: any;
 
   constructor(
     private vitrineService: VitrineTableauService,
@@ -33,9 +34,16 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  ngOnDestroy(): void {
+    clearTimeout(this.resizeTimer);
+  }
+
   @HostListener('window:resize')
   onResize(): void {
-    this.isMobile = window.innerWidth < 768;
+    clearTimeout(this.resizeTimer);
+    this.resizeTimer = setTimeout(() => {
+      this.isMobile = window.innerWidth < 768;
+    }, 150);
   }
 
   get latestTableaux(): VitrineTableau[] {
