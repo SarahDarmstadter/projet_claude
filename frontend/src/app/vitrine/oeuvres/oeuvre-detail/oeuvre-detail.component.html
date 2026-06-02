@@ -3,7 +3,6 @@
 
   <div class="artwork-hero">
 
-    <!-- Colonne image — sticky -->
     <div class="artwork-image-col">
       <img class="artwork-main-img"
            [src]="tableau.imageUrl"
@@ -11,7 +10,6 @@
            (click)="openLightbox()" />
     </div>
 
-    <!-- Colonne infos -->
     <div class="artwork-info-col">
 
       <a class="back-link" routerLink="/oeuvres">← Galerie</a>
@@ -53,7 +51,6 @@
         ✏ Modifier ce tableau
       </a>
 
-      <!-- Navigation prev / next typographique -->
       <nav class="artwork-nav" *ngIf="prev || next">
         <a class="artwork-nav-link artwork-nav-link--prev"
            *ngIf="prev"
@@ -73,7 +70,6 @@
 
   </div>
 
-  <!-- Œuvres liées -->
   <section class="related-section" *ngIf="related.length > 0">
     <div class="section-header">
       <h2 class="section-title">Autres œuvres — {{ tableau.type?.nom || 'même type' }}</h2>
@@ -102,6 +98,13 @@
       <line x1="15" y1="1" x2="1" y2="15" stroke="currentColor" stroke-width="1.5"/>
     </svg>
   </button>
+
+  <button class="lightbox-prev" *ngIf="prev" (click)="$event.stopPropagation(); navigateLightbox(prev!.id)">
+    <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+      <polyline points="14,4 8,11 14,18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </button>
+
   <div class="lightbox-content" (click)="$event.stopPropagation()">
     <img class="lightbox-img"
          [src]="tableau?.imageUrl"
@@ -111,4 +114,10 @@
       <span class="lightbox-meta" *ngIf="dimensions">{{ dimensions }}</span>
     </div>
   </div>
+
+  <button class="lightbox-next" *ngIf="next" (click)="$event.stopPropagation(); navigateLightbox(next!.id)">
+    <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+      <polyline points="8,4 14,11 8,18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </button>
 </div>

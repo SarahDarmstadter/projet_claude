@@ -58,6 +58,39 @@
   font-size: 20px; font-weight: 300; line-height: 1.8;
   color: #1a1a1a; margin-bottom: 18px;
 }
+/* ── Expositions ─────────────────────────────────────── */
+.expo-list {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 18px;
+}
+.expo-item {
+  display: flex;
+  gap: 28px;
+  align-items: baseline;
+  padding: 16px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+.expo-item:last-child { border-bottom: none; }
+.expo-annee {
+  font-family: 'Playfair Display', serif;
+  font-size: 13px; font-weight: 400;
+  color: #bbb; min-width: 36px; flex-shrink: 0;
+}
+.expo-content {
+  display: flex; flex-direction: column; gap: 3px;
+}
+.expo-titre {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px; font-weight: 300; font-style: italic;
+  color: #1a1a1a;
+}
+.expo-lieu {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px; letter-spacing: 0.06em;
+  color: #999;
+}
+
 .bio-link {
   font-family: 'Inter', sans-serif;
   font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase;

@@ -10,7 +10,7 @@ export class AdminModeService {
     return this._isAdminMode.value;
   }
 
-  toggle(): void {
-    this._isAdminMode.next(!this._isAdminMode.value);
-  }
+  enable(): void  { this._isAdminMode.next(true); }
+  disable(): void { this._isAdminMode.next(false); }
+  toggle(): void  { this._isAdminMode.next(!this._isAdminMode.value); }
 }

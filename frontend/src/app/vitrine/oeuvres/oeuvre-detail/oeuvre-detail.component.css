@@ -240,6 +240,21 @@
   to   { opacity: 1; }
 }
 
+.lightbox-prev,
+.lightbox-next {
+  position: fixed;
+  top: 50%; transform: translateY(-50%);
+  background: none; border: none; cursor: pointer;
+  color: rgba(255,255,255,.3);
+  padding: 20px;
+  transition: color .2s;
+  z-index: 501;
+}
+.lightbox-prev { left: 24px; }
+.lightbox-next { right: 24px; }
+.lightbox-prev:hover,
+.lightbox-next:hover { color: rgba(255,255,255,.85); }
+
 /* ── Responsive ──────────────────────────────────────── */
 @media (max-width: 1024px) {
   .artwork-hero { grid-template-columns: 1fr; }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { AdminModeService } from '../../../vitrine/services/admin-mode.service';
 
 @Component({
   selector: 'app-two-factor',
@@ -17,7 +18,8 @@ export class TwoFactorComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private adminMode: AdminModeService
   ) {
     this.form = this.fb.group({
       code: ['', [Validators.required, Validators.pattern(/^\d{6}$/)]]
@@ -38,7 +40,7 @@ export class TwoFactorComponent implements OnInit {
     this.error = '';
 
     this.authService.verifyTwoFactor(this.email, this.form.value.code).subscribe({
-      next: () => this.router.navigate(['/admin']),
+      next: () => { this.adminMode.enable(); this.router.navigate(['/']); },
       error: () => {
         this.error = 'Code invalide ou expiré';
         this.loading = false;

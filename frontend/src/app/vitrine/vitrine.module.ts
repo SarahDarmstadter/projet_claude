@@ -15,6 +15,7 @@ import { SliderComponent } from './shared/slider/slider.component';
 import { SliderMobileComponent } from './shared/slider-mobile/slider-mobile.component';
 import { PageBottomComponent } from './shared/page-bottom/page-bottom.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { AdminFabComponent } from './shared/admin-fab/admin-fab.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
     SliderMobileComponent,
     PageBottomComponent,
     NotFoundComponent,
+    AdminFabComponent,
   ],
   imports: [
     CommonModule,

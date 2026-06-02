@@ -17,14 +17,33 @@
   </div>
 
   <div class="bio-body">
+
     <p class="bio-section-title">{{ textes.get('artiste.parcours.titre', 'Parcours') }}</p>
     <p class="bio-p">{{ textes.get('artiste.parcours.p1', "Pierre Darmstadter développe une œuvre singulière, ancrée dans la tradition de la peinture à l'huile mais traversée par une sensibilité contemporaine.") }}</p>
     <p class="bio-p">{{ textes.get('artiste.parcours.p2', "Son travail interroge la lumière dans ses manifestations les plus fugaces : l'aurore sur l'eau, la pénombre d'un intérieur, le dernier éclat du jour avant la nuit.") }}</p>
+
+    <p class="bio-section-title">{{ textes.get('artiste.expositions.titre', 'Expositions sélectives') }}</p>
+    <ul class="expo-list">
+      <li class="expo-item" *ngFor="let expo of expositions">
+        <span class="expo-annee">{{ expo.annee }}</span>
+        <div class="expo-content">
+          <span class="expo-titre">{{ expo.titre }}</span>
+          <span class="expo-lieu">{{ expo.lieu }}</span>
+        </div>
+      </li>
+    </ul>
+
+    <p class="bio-section-title">{{ textes.get('artiste.collections.titre', 'Collections') }}</p>
+    <p class="bio-p">{{ textes.get('artiste.collections.texte', "Ses œuvres figurent dans plusieurs collections privées françaises et européennes, ainsi que dans des collections institutionnelles.") }}</p>
+
+    <p class="bio-section-title">{{ textes.get('artiste.distinctions.titre', 'Distinctions') }}</p>
+    <p class="bio-p">{{ textes.get('artiste.distinctions.texte', "Prix de la Fondation Taylor (2018). Mention spéciale au Prix Hélène et Édouard Leclerc pour l'art contemporain (2016).") }}</p>
 
     <p class="bio-section-title">Contact</p>
     <p class="bio-p">
       <a routerLink="/contact" class="bio-link">Prendre contact</a>
     </p>
+
   </div>
 
   <app-page-bottom></app-page-bottom>

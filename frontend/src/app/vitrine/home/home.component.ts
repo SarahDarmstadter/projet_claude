@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title, Meta } from '@angular/platform-browser';
 import { VitrineTableau, VitrineTableauService } from '../services/vitrine-tableau.service';
 import { TexteService } from '../services/texte.service';
 
@@ -9,12 +10,24 @@ import { TexteService } from '../services/texte.service';
 })
 export class HomeComponent implements OnInit {
   tableaux: VitrineTableau[] = [];
+  loading = true;
 
-  constructor(private vitrineService: VitrineTableauService, public textes: TexteService) {}
+  constructor(
+    private vitrineService: VitrineTableauService,
+    public textes: TexteService,
+    private titleService: Title,
+    private meta: Meta
+  ) {}
 
   ngOnInit(): void {
+    this.titleService.setTitle('Pierre Darmstadter — Peintures');
+    this.meta.updateTag({ name: 'description', content: 'Peintre contemporain parisien, Pierre Darmstadter explore la lumière et la matière dans ses toiles.' });
+    this.meta.updateTag({ property: 'og:title', content: 'Pierre Darmstadter — Peintures' });
+    this.meta.updateTag({ property: 'og:description', content: 'Peintre contemporain parisien, Pierre Darmstadter explore la lumière et la matière dans ses toiles.' });
+
     this.vitrineService.getVisible().subscribe({
-      next: (data) => { this.tableaux = data; }
+      next: (data) => { this.tableaux = data; this.loading = false; },
+      error: () => { this.loading = false; }
     });
   }
 

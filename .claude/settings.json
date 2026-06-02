@@ -1,0 +1,23 @@
+{
+  "enabledPlugins": {
+    "sdlc-team-common@ai-first-sdlc": true,
+    "sdlc-team-fullstack@ai-first-sdlc": true,
+    "sdlc-team-docs@ai-first-sdlc": true,
+    "sdlc-knowledge-base@ai-first-sdlc": true,
+    "mcp-toolkit@docker": true,
+    "frontend-design@claude-plugins-official": true
+  },
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo '{\"systemMessage\": \"Checklist vitrine — lancez /verify avant de clore :\\n• Carte home : cliquer une oeuvre → navigue vers /oeuvres/:id ?\\n• Titre de page correct dans onglet navigateur ?\\n• Lightbox + navigation prev/next ?\\n• Formulaire contact : soumission ok ?\"}'",
+            "statusMessage": "Rappel vérification vitrine"
+          }
+        ]
+      }
+    ]
+  }
+}

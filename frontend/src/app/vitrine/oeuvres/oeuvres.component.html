@@ -6,10 +6,20 @@
     <p class="gallery-sub">{{ textes.get('galerie.sous_titre', 'Œuvres de Pierre Darmstadter') }}</p>
   </header>
 
-  <main class="gallery-grid" *ngIf="tableaux.length > 0">
+  <div class="gallery-filters" *ngIf="types.length > 1">
+    <button class="filter-btn" [class.active]="!selectedTypeId" (click)="setFilter(null)">Tous</button>
+    <button class="filter-btn"
+      *ngFor="let t of types"
+      [class.active]="selectedTypeId === t.id"
+      (click)="setFilter(t.id)">
+      {{ t.nom }}
+    </button>
+  </div>
+
+  <main class="gallery-grid" *ngIf="filteredTableaux.length > 0">
     <article
       class="gallery-item"
-      *ngFor="let t of tableaux"
+      *ngFor="let t of filteredTableaux"
       [routerLink]="['/oeuvres', t.id]"
       [attr.aria-label]="t.titre">
 
@@ -44,6 +54,9 @@
     </article>
   </main>
 
+  <div class="gallery-empty" *ngIf="filteredTableaux.length === 0 && tableaux.length > 0">
+    <p>Aucune œuvre dans cette catégorie.</p>
+  </div>
   <div class="gallery-empty" *ngIf="tableaux.length === 0">
     <p>Aucune œuvre disponible pour le moment.</p>
   </div>

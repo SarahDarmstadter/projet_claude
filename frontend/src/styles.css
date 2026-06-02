@@ -12,30 +12,6 @@
   --white: #fff;
 }
 
-/* ===== Fonts ===== */
-@font-face {
-  font-family: 'Prata-Regular';
-  src: url('assets/fonts/Prata-Regular.ttf') format('truetype');
-}
-@font-face {
-  font-family: 'CormorantGaramond-Regular';
-  src: url('assets/fonts/CormorantGaramond-Regular.ttf') format('truetype');
-  font-weight: 400;
-}
-@font-face {
-  font-family: 'CormorantGaramond-Regular';
-  src: url('assets/fonts/CormorantGaramond-Bold.ttf') format('truetype');
-  font-weight: 700;
-}
-@font-face {
-  font-family: 'CormorantGaramond-Regular';
-  src: url('assets/fonts/CormorantGaramond-Light.ttf') format('truetype');
-  font-weight: 300;
-}
-@font-face {
-  font-family: 'OldStandardTT-Regular';
-  src: url('assets/fonts/OldStandardTT-Regular.ttf') format('truetype');
-}
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 

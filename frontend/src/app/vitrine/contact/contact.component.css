@@ -75,6 +75,15 @@
 .btn-send:hover:not(:disabled) { background: #111; color: #fff; }
 .btn-send:disabled { opacity: .4; cursor: not-allowed; }
 
+.form-honeypot {
+  position: absolute;
+  left: -9999px;
+  top: auto;
+  width: 1px; height: 1px;
+  overflow: hidden;
+  opacity: 0;
+}
+
 .form-error {
   font-size: 13px; color: #c0392b;
   margin-bottom: 16px; line-height: 1.5;
