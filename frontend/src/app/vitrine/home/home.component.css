@@ -137,6 +137,12 @@
 
 @media (max-width: 768px) {
   .hero { padding: 120px 24px 60px; }
+  .btn-vitrine {
+    display: block;
+    text-align: center;
+    padding: 16px 36px;
+    min-height: 44px;
+  }
   .works-section { padding: 60px 24px 60px; }
   .works-grid { grid-template-columns: 1fr 1fr; gap: 20px 12px; }
   .about-strip { grid-template-columns: 1fr; }
@@ -145,6 +151,12 @@
 }
 
 @media (max-width: 480px) {
+  .hero { padding: 96px 20px 48px; }
+  .hero-tagline { font-size: 17px; }
+  .works-grid { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 360px) {
   .works-grid { grid-template-columns: 1fr; }
 }
 

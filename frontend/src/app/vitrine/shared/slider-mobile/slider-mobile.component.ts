@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnDestroy, SimpleChanges } from '@angular/core';
+import { Component, Input, ViewChild, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { VitrineTableau } from '../../services/vitrine-tableau.service';
 
@@ -7,61 +7,42 @@ import { VitrineTableau } from '../../services/vitrine-tableau.service';
   templateUrl: './slider-mobile.component.html',
   styleUrls: ['./slider-mobile.component.css']
 })
-export class SliderMobileComponent implements OnChanges, OnDestroy {
+export class SliderMobileComponent {
   @Input() tableaux: VitrineTableau[] = [];
+  @ViewChild('track') trackRef!: ElementRef<HTMLElement>;
 
-  index = 0;
-  slideDirection: 'left' | 'right' | null = null;
+  currentIndex = 0;
   private touchStartX = 0;
-  private dirTimer: any;
 
   constructor(private router: Router) {}
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes['tableaux']) this.index = 0;
+  get visibleTableaux(): VitrineTableau[] {
+    return this.tableaux.slice(0, 5);
   }
 
-  ngOnDestroy(): void {
-    clearTimeout(this.dirTimer);
+  get slideIndices(): number[] {
+    return Array.from({ length: this.visibleTableaux.length + 1 });
   }
 
-  onTouchStart(event: TouchEvent): void {
-    this.touchStartX = event.touches[0].clientX;
+  get currentTableau(): VitrineTableau | null {
+    return this.visibleTableaux[this.currentIndex] ?? null;
   }
 
-  onTouchEnd(event: TouchEvent): void {
-    const delta = event.changedTouches[0].clientX - this.touchStartX;
-    if (delta < -50) this.swipeLeft();
-    else if (delta > 50) this.swipeRight();
+  onScroll(): void {
+    const el = this.trackRef?.nativeElement;
+    if (!el || !el.clientWidth) return;
+    this.currentIndex = Math.round(el.scrollLeft / el.clientWidth);
   }
 
-  swipeLeft(): void {
-    this.setDirection('left');
-    this.index = (this.index + 1) % this.tableaux.length;
+  onTouchStart(e: TouchEvent): void {
+    this.touchStartX = e.touches[0]?.clientX ?? 0;
   }
 
-  swipeRight(): void {
-    this.setDirection('right');
-    this.index = (this.index - 1 + this.tableaux.length) % this.tableaux.length;
-  }
-
-  goTo(i: number): void {
-    if (i === this.index) return;
-    // Détermine la direction en tenant compte du wrap circulaire
-    const total = this.tableaux.length;
-    const forward = i > this.index;
-    const isWrap = Math.abs(i - this.index) > total / 2;
-    this.setDirection(forward !== isWrap ? 'left' : 'right');
-    this.index = i;
-  }
-
-  private setDirection(dir: 'left' | 'right'): void {
-    clearTimeout(this.dirTimer);
-    this.slideDirection = dir;
-    this.dirTimer = setTimeout(() => { this.slideDirection = null; }, 500);
-  }
-
-  navigate(id: number): void {
-    this.router.navigate(['/oeuvres', id]);
+  onTouchEnd(e: TouchEvent, id: number): void {
+    if (!e.changedTouches.length) return;
+    const dx = Math.abs(e.changedTouches[0].clientX - this.touchStartX);
+    if (dx < 10) {
+      this.router.navigate(['/oeuvres', id]);
+    }
   }
 }

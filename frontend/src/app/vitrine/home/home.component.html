@@ -8,7 +8,8 @@
     <a class="btn-vitrine" routerLink="/oeuvres">{{ textes.get('accueil.hero.cta', 'Découvrir les œuvres') }}</a>
   </section>
 
-  <app-slider [tableaux]="tableaux"></app-slider>
+  <app-slider *ngIf="!isMobile" [tableaux]="tableaux"></app-slider>
+  <app-slider-mobile *ngIf="isMobile" [tableaux]="tableaux"></app-slider-mobile>
 
   <section class="works-section" *ngIf="loading || tableaux.length > 0">
     <div class="section-header">

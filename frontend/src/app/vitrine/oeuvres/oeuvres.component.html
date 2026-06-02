@@ -63,3 +63,9 @@
 
   <app-page-bottom></app-page-bottom>
 </div>
+
+<button class="scroll-top" *ngIf="showScrollTop" (click)="scrollToTop()" aria-label="Retour en haut">
+  <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+    <path d="M8 13V3M3 8l5-5 5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+</button>

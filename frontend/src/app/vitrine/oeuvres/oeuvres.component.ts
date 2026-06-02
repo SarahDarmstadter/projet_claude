@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { Title, Meta } from '@angular/platform-browser';
 import { VitrineTableau, VitrineTableauService } from '../services/vitrine-tableau.service';
 import { TexteService } from '../services/texte.service';
@@ -13,6 +13,7 @@ export class OeuvresComponent implements OnInit {
   types: { id: number; nom: string }[] = [];
   selectedTypeId: number | null = null;
   loadingImages: Record<number, boolean> = {};
+  showScrollTop = false;
 
   constructor(
     private vitrineService: VitrineTableauService,
@@ -37,6 +38,15 @@ export class OeuvresComponent implements OnInit {
         data.forEach(t => { this.loadingImages[t.id] = true; });
       }
     });
+  }
+
+  @HostListener('window:scroll')
+  onScroll(): void {
+    this.showScrollTop = window.scrollY > 600;
+  }
+
+  scrollToTop(): void {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
   setFilter(id: number | null): void {

@@ -79,5 +79,8 @@
     text-align: center;
   }
   .footer-contact { align-items: center; }
-  .footer-bottom { padding: 16px 24px; }
+  .footer-bottom {
+    padding: 16px 24px;
+    padding-bottom: max(16px, env(safe-area-inset-bottom, 16px));
+  }
 }

@@ -1,78 +1,115 @@
-.slider-mobile-container {
-  margin-top: 40px;
+.insta-carousel {
+  width: 100%;
+  background: #fff;
 }
 
-.slides {
+/* Wrapper : contient le track + les dots superposés */
+.carousel-wrapper {
   position: relative;
-  width: 100%;
-  height: 60vw;
-  max-height: 400px;
 }
 
-.slide {
-  position: absolute;
+/* Piste horizontale scroll snap */
+.carousel-track {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.carousel-track::-webkit-scrollbar { display: none; }
+
+/* Chaque slide = 100% largeur */
+.carousel-slide {
+  flex: 0 0 100%;
+  scroll-snap-align: start;
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+/* Image pleine largeur, ratio carré comme Instagram */
+.carousel-img {
   width: 100%;
-  height: 100%;
+  aspect-ratio: 1 / 1;
   object-fit: cover;
-  opacity: 0;
-  transition: opacity 0.4s ease-in-out;
+  object-position: center;
+  display: block;
 }
 
-.slide.active {
-  opacity: 1;
-}
-
-/* Sensation de direction au swipe */
-.slide.active.dir-left {
-  animation: slideInLeft 0.4s ease-out;
-}
-.slide.active.dir-right {
-  animation: slideInRight 0.4s ease-out;
-}
-
-@keyframes slideInLeft {
-  from { transform: translateX(24px); opacity: 0; }
-  to   { transform: translateX(0);    opacity: 1; }
-}
-@keyframes slideInRight {
-  from { transform: translateX(-24px); opacity: 0; }
-  to   { transform: translateX(0);     opacity: 1; }
-}
-
-.admin-editable { cursor: pointer; }
-.admin-editable:hover { outline: 2px dashed #666; }
-
-.cercles {
+/* Slide CTA galerie */
+.carousel-slide--cta {
+  background: #111;
+  aspect-ratio: 1 / 1;
   display: flex;
-  justify-content: center;
-  margin-top: 16px;
-  width: 100%;
-  gap: 4px;
-}
-
-/* Zone tactile 44×44px, point visible 10×10px */
-.cercle {
-  display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 44px;
-  height: 44px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 0;
+  gap: 12px;
 }
 
-.cercle::after {
-  content: '';
-  display: block;
-  width: 10px;
-  height: 10px;
-  border: 1.5px solid #111;
+.cta-label {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+  font-weight: 300;
+  font-style: italic;
+  color: rgba(255, 255, 255, .85);
+  text-align: center;
+}
+
+.cta-arrow {
+  font-size: 18px;
+  color: rgba(255, 255, 255, .4);
+}
+
+/* Dots superposés en bas de l'image */
+.carousel-dots {
+  position: absolute;
+  bottom: 10px;
+  left: 0; right: 0;
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+  pointer-events: none;
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
   border-radius: 50%;
+  background: rgba(255, 255, 255, .55);
   transition: background .2s;
 }
 
-.cercle.actif::after {
-  background: #111;
+.dot--active {
+  background: #fff;
+}
+
+/* Légende fixe sous l'image — hors zone de scroll */
+.carousel-caption {
+  padding: 10px 16px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.caption-titre {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 16px;
+  font-weight: 400;
+  font-style: italic;
+  color: #111;
+  line-height: 1.3;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.caption-meta {
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #aaa;
 }
