@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { Title, Meta } from '@angular/platform-browser';
 import { VitrineTableau, VitrineTableauService } from '../services/vitrine-tableau.service';
 import { TexteService } from '../services/texte.service';
@@ -11,6 +11,7 @@ import { TexteService } from '../services/texte.service';
 export class HomeComponent implements OnInit {
   tableaux: VitrineTableau[] = [];
   loading = true;
+  isMobile = false;
 
   constructor(
     private vitrineService: VitrineTableauService,
@@ -20,6 +21,7 @@ export class HomeComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.isMobile = window.innerWidth < 768;
     this.titleService.setTitle('Pierre Darmstadter — Peintures');
     this.meta.updateTag({ name: 'description', content: 'Peintre contemporain parisien, Pierre Darmstadter explore la lumière et la matière dans ses toiles.' });
     this.meta.updateTag({ property: 'og:title', content: 'Pierre Darmstadter — Peintures' });
@@ -29,6 +31,11 @@ export class HomeComponent implements OnInit {
       next: (data) => { this.tableaux = data; this.loading = false; },
       error: () => { this.loading = false; }
     });
+  }
+
+  @HostListener('window:resize')
+  onResize(): void {
+    this.isMobile = window.innerWidth < 768;
   }
 
   get latestTableaux(): VitrineTableau[] {

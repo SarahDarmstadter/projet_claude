@@ -1,4 +1,5 @@
-<div class="detail-page" *ngIf="!loading && tableau">
+<div class="detail-page" *ngIf="!loading && tableau"
+     appSwipe (swipeLeft)="goNext()" (swipeRight)="goPrev()">
   <app-heading></app-heading>
 
   <div class="artwork-hero">

@@ -93,6 +93,9 @@ export class OeuvreDetailComponent implements OnInit, OnDestroy {
   openLightbox(): void  { this.isLightboxOpen = true; }
   closeLightbox(): void { this.isLightboxOpen = false; }
 
+  goNext(): void { if (this.next) this.router.navigate(['/oeuvres', this.next.id]); }
+  goPrev(): void { if (this.prev) this.router.navigate(['/oeuvres', this.prev.id]); }
+
   navigateLightbox(id: number): void {
     this.reopenLightbox = true;
     this.router.navigate(['/oeuvres', id]);

@@ -59,10 +59,10 @@
 }
 .form-input:focus, .form-textarea:focus {
   border-color: #111;
-  outline: 2px solid rgba(17,17,17,.12);
+  outline: 2px solid rgba(17,17,17,.55);
   outline-offset: 3px;
 }
-.form-textarea { resize: none; height: 100px; }
+.form-textarea { resize: vertical; min-height: 100px; }
 
 .btn-send {
   padding: 13px 36px;
@@ -109,4 +109,11 @@
   .contact-title { font-size: 32px; }
   .contact-right { padding: 40px 24px 60px; }
   .form-row { grid-template-columns: 1fr; }
+  .form-group { margin-bottom: 20px; }
+  .btn-send {
+    width: 100%;
+    padding: 16px 36px;
+    min-height: 44px;
+  }
+  .contact-info-val a { display: inline-block; padding: 6px 0; }
 }

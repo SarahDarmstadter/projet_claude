@@ -266,13 +266,13 @@
 }
 @media (max-width: 768px) {
   .artwork-title { font-size: 28px; }
+  .back-link { margin-bottom: 28px; }
   .artwork-specs { grid-template-columns: 1fr 1fr; gap: 20px 16px; }
   .artwork-info-col { padding: 32px 20px 48px; }
   .artwork-image-col { height: auto; min-height: 56vw; max-height: 80vw; }
   .artwork-main-img { max-height: 75vw; }
   .related-grid { grid-template-columns: 1fr 1fr; gap: 20px 12px; }
   .related-section { padding: 40px 16px 60px; }
-  /* Zone tactile bouton admin */
   .btn-admin-edit {
     padding: 12px 0;
     display: inline-flex;
@@ -282,11 +282,48 @@
     text-decoration: underline;
     text-underline-offset: 3px;
   }
-  /* Bouton contact pleine largeur */
   .btn-primary {
     display: block;
     width: 100%;
     text-align: center;
     padding: 16px 36px;
   }
+  /* Lightbox safe area iPhone */
+  .lightbox-close {
+    top: max(28px, env(safe-area-inset-top, 28px));
+    right: max(36px, env(safe-area-inset-right, 36px));
+  }
+  .lightbox-content {
+    max-width: min(80vw, calc(100vw - 100px));
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  .lightbox-prev { left: 8px; }
+  .lightbox-next { right: 8px; }
+}
+@media (max-width: 640px) {
+  /* Navigation prev/next en colonne pleine largeur */
+  .artwork-nav {
+    flex-direction: column;
+    gap: 0;
+  }
+  .artwork-nav-link,
+  .artwork-nav-link--next {
+    width: 100%;
+    max-width: 100%;
+    align-items: flex-start;
+    text-align: left;
+    padding: 16px 0;
+    border-bottom: 1px solid #ebebeb;
+  }
+  .artwork-nav-link--next {
+    align-items: flex-end;
+    text-align: right;
+    border-bottom: none;
+  }
+  .nav-title { max-width: none; white-space: normal; }
+}
+@media (max-width: 480px) {
+  /* Specs en 1 colonne */
+  .artwork-specs { grid-template-columns: 1fr; gap: 16px; }
+  .artwork-title { font-size: 24px; margin-bottom: 28px; }
 }
