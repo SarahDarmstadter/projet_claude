@@ -3,6 +3,7 @@
   <h1>Tableaux</h1>
   <div class="actions">
     <a routerLink="/" class="btn-site">← Retour au site</a>
+    <a routerLink="/admin/textes" class="btn-secondary">Textes du site</a>
     <a routerLink="types" class="btn-secondary">Gérer les types</a>
     <a routerLink="nouveau" class="btn-primary">+ Nouveau tableau</a>
   </div>
@@ -10,33 +11,35 @@
 
 <div *ngIf="loading">Chargement…</div>
 
+<div class="table-responsive">
 <table cdkDropList (cdkDropListDropped)="drop($event)" *ngIf="!loading">
   <thead>
     <tr>
-      <th></th>
+      <th class="col-hide-mobile"></th>
       <th>Image</th>
       <th>Titre</th>
-      <th>Type</th>
-      <th>Statut</th>
-      <th>Visible</th>
+      <th class="col-hide-mobile">Type</th>
+      <th class="col-hide-mobile">Statut</th>
+      <th class="col-hide-mobile">Visible</th>
       <th>Actions</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let t of tableaux" cdkDrag>
-      <td cdkDragHandle class="drag-handle">⠿</td>
+      <td cdkDragHandle class="drag-handle col-hide-mobile">⠿</td>
       <td><img [src]="imageBase + t.imageUrl" [alt]="t.titre" class="miniature"></td>
       <td>{{ t.titre }}</td>
-      <td>{{ t.type?.nom ?? '—' }}</td>
-      <td><span class="badge badge-{{ t.statut }}">{{ t.statut }}</span></td>
-      <td>{{ t.visible ? '✓' : '✗' }}</td>
+      <td class="col-hide-mobile">{{ t.type?.nom ?? '—' }}</td>
+      <td class="col-hide-mobile"><span class="badge badge-{{ t.statut }}">{{ t.statut }}</span></td>
+      <td class="col-hide-mobile">{{ t.visible ? '✓' : '✗' }}</td>
       <td>
-        <a [routerLink]="[t.id, 'edit']" class="btn-sm">Modifier</a>
+        <a [routerLink]="[t.id, 'edit']" class="btn-sm btn-secondary">Modifier</a>
         <button (click)="confirmDelete(t)" class="btn-sm btn-danger">Supprimer</button>
       </td>
     </tr>
   </tbody>
 </table>
+</div>
 
 <!-- Modal de confirmation -->
 <div class="modal-overlay" *ngIf="deleteTarget">
