@@ -76,7 +76,8 @@
 
 .champ-input:focus,
 .champ-textarea:focus {
-  outline: none;
+  outline: 2px solid #111;
+  outline-offset: 1px;
   border-color: #111;
 }
 
@@ -145,9 +146,10 @@
 
 .photo-upload-row {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  flex-wrap: wrap;
   gap: .6rem;
-  align-items: flex-start;
+  align-items: center;
 }
 
 .photo-input {
@@ -155,32 +157,3 @@
   color: #555;
 }
 
-.toast {
-  position: fixed;
-  bottom: 2rem;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  align-items: center;
-  gap: .6rem;
-  padding: .75rem 1.4rem;
-  border-radius: 6px;
-  font-size: 0.9rem;
-  font-weight: 500;
-  background: #1a1a1a;
-  color: #fff;
-  box-shadow: 0 4px 20px rgba(0,0,0,.3);
-  pointer-events: none;
-  white-space: nowrap;
-  z-index: 1000;
-  animation: toast-appear .2s ease;
-}
-
-@keyframes toast-appear {
-  from { opacity: 0; transform: translateX(-50%) translateY(8px); }
-  to   { opacity: 1; transform: translateX(-50%) translateY(0); }
-}
-
-.toast--error {
-  background: #b71c1c;
-}

@@ -9,7 +9,7 @@
   </div>
 </div>
 
-<div *ngIf="loading">Chargement…</div>
+<div *ngIf="loading" class="loading-state">Chargement…</div>
 
 <div class="table-responsive">
 <table cdkDropList (cdkDropListDropped)="drop($event)" *ngIf="!loading">
@@ -31,7 +31,7 @@
       <td>{{ t.titre }}</td>
       <td class="col-hide-mobile">{{ t.type?.nom ?? '—' }}</td>
       <td class="col-hide-mobile"><span class="badge badge-{{ t.statut }}">{{ t.statut }}</span></td>
-      <td class="col-hide-mobile">{{ t.visible ? '✓' : '✗' }}</td>
+      <td class="col-hide-mobile"><span [attr.aria-label]="t.visible ? 'Oui' : 'Non'">{{ t.visible ? '✓' : '✗' }}</span></td>
       <td>
         <a [routerLink]="[t.id, 'edit']" class="btn-sm btn-secondary">Modifier</a>
         <button (click)="confirmDelete(t)" class="btn-sm btn-danger">Supprimer</button>
@@ -42,11 +42,11 @@
 </div>
 
 <!-- Modal de confirmation -->
-<div class="modal-overlay" *ngIf="deleteTarget">
+<div class="modal-overlay" *ngIf="deleteTarget" role="dialog" aria-modal="true" aria-labelledby="modal-title">
   <div class="modal">
-    <p>Supprimer <strong>{{ deleteTarget.titre }}</strong> ?</p>
+    <p id="modal-title">Supprimer <strong>{{ deleteTarget.titre }}</strong> ?</p>
     <div class="modal-actions">
-      <button (click)="cancelDelete()" class="btn-secondary">Annuler</button>
+      <button #cancelBtn (click)="cancelDelete()" class="btn-secondary">Annuler</button>
       <button (click)="executeDelete()" class="btn-danger">Supprimer</button>
     </div>
   </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Subject, Subscription, switchMap, catchError, EMPTY } from 'rxjs';
 import { TableauService, TableauResponse } from '../tableau.service';
@@ -12,6 +12,7 @@ export class TableauListComponent implements OnInit, OnDestroy {
   tableaux: TableauResponse[] = [];
   loading = false;
   deleteTarget: TableauResponse | null = null;
+  @ViewChild('cancelBtn') cancelBtn!: ElementRef;
 
   readonly imageBase = this.tableauService.imageBase;
 
@@ -61,6 +62,7 @@ export class TableauListComponent implements OnInit, OnDestroy {
 
   confirmDelete(t: TableauResponse): void {
     this.deleteTarget = t;
+    setTimeout(() => this.cancelBtn?.nativeElement?.focus(), 0);
   }
 
   executeDelete(): void {

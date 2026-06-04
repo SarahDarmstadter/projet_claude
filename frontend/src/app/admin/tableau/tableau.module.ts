@@ -13,14 +13,14 @@ import { AdminToastComponent } from '../shared/toast.component';
   declarations: [
     TableauListComponent,
     TableauFormComponent,
-    TypeListComponent,
-    AdminToastComponent
+    TypeListComponent
   ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
     FormsModule,
     DragDropModule,
+    AdminToastComponent,
     RouterModule.forChild([
       { path: '', component: TableauListComponent },
       { path: 'nouveau', component: TableauFormComponent },

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TexteService, TexteMap } from '../../vitrine/services/texte.service';
+import { ToastService } from '../shared/toast.service';
 
 interface Champ {
   cle: string;
@@ -84,15 +85,13 @@ export class TextesComponent implements OnInit {
 
   valeurs: TexteMap = {};
   saving = false;
-  toast: { message: string; error: boolean } | null = null;
-  private toastTimer: any;
 
   // Photo upload
   photoFile: File | null = null;
   photoPreview: string | null = null;
   uploadingPhoto = false;
 
-  constructor(private texteService: TexteService) {}
+  constructor(private texteService: TexteService, private toastService: ToastService) {}
 
   ngOnInit(): void {
     this.sections.forEach(s =>
@@ -114,11 +113,11 @@ export class TextesComponent implements OnInit {
     this.texteService.saveAll(updates).subscribe({
       next: () => {
         this.saving = false;
-        this.showToast('Modifications sauvegardées', false);
+        this.toastService.success('Modifications sauvegardées');
       },
       error: () => {
         this.saving = false;
-        this.showToast('Erreur — modifications non sauvegardées', true);
+        this.toastService.error('Erreur — modifications non sauvegardées');
       }
     });
   }
@@ -142,18 +141,13 @@ export class TextesComponent implements OnInit {
         this.valeurs['site.artiste.photo'] = res.url;
         this.photoFile = null;
         this.photoPreview = null;
-        this.showToast('Photo mise à jour', false);
+        this.toastService.success('Photo mise à jour');
       },
       error: () => {
         this.uploadingPhoto = false;
-        this.showToast('Erreur lors de l\'envoi de la photo', true);
+        this.toastService.error("Erreur lors de l'envoi de la photo");
       }
     });
   }
 
-  private showToast(message: string, error: boolean): void {
-    clearTimeout(this.toastTimer);
-    this.toast = { message, error };
-    this.toastTimer = setTimeout(() => { this.toast = null; }, 3000);
-  }
 }

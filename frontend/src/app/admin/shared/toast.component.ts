@@ -1,4 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
 import { ToastService, ToastMessage } from './toast.service';
@@ -7,6 +8,8 @@ const TOAST_TTL = 3000;
 
 @Component({
   selector: 'app-admin-toast',
+  standalone: true,
+  imports: [CommonModule],
   template: `
     <div class="admin-toast" *ngIf="current" [class.admin-toast--error]="current.error">
       <span>{{ current.error ? '✕' : '✓' }}</span>

@@ -76,7 +76,4 @@
   </div>
 </div>
 
-<div class="toast" [class.toast--error]="toast?.error" *ngIf="toast">
-  <span>{{ toast.error ? '✕' : '✓' }}</span>
-  <span>{{ toast.message }}</span>
-</div>
+<app-admin-toast></app-admin-toast>

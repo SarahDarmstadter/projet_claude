@@ -9,53 +9,54 @@
 
   <form [formGroup]="form" (ngSubmit)="submit()">
     <div class="field">
-      <label>Image{{ isEdit ? '' : ' *' }}</label>
-      <input type="file" accept="image/*" (change)="onFileChange($event)" [required]="!isEdit">
+      <label for="image">Image{{ isEdit ? '' : ' *' }}</label>
+      <input id="image" type="file" accept="image/*" (change)="onFileChange($event)" [required]="!isEdit">
       <img *ngIf="imagePreview" [src]="imagePreview" class="preview">
       <img *ngIf="!imagePreview && existingImageUrl" [src]="imageBase + existingImageUrl" class="preview">
     </div>
 
     <div class="field">
-      <label>Titre *</label>
-      <input type="text" formControlName="titre">
+      <label for="titre">Titre *</label>
+      <input id="titre" type="text" formControlName="titre">
     </div>
 
     <div class="field dimensions">
       <label>Dimensions (cm) *</label>
-      <input type="number" formControlName="largeur" placeholder="Largeur">
+      <input type="number" formControlName="largeur" placeholder="Largeur" aria-label="Largeur (cm)">
       <span>×</span>
-      <input type="number" formControlName="hauteur" placeholder="Hauteur">
+      <input type="number" formControlName="hauteur" placeholder="Hauteur" aria-label="Hauteur (cm)">
     </div>
 
     <div class="field">
-      <label>Type *</label>
-      <select formControlName="typeId">
+      <label for="typeId">Type *</label>
+      <select id="typeId" formControlName="typeId">
         <option [ngValue]="null" disabled>— Sélectionner —</option>
         <option *ngFor="let t of types" [ngValue]="t.id">{{ t.nom }}</option>
       </select>
     </div>
 
     <div class="field">
-      <label>Période *</label>
-      <input type="text" formControlName="periode" placeholder="ex : 2026 ou 2024-2026">
+      <label for="periode">Période *</label>
+      <input id="periode" type="text" formControlName="periode" placeholder="ex : 2026 ou 2024-2026">
+      <small>Année de création (ex : 2026 ou 2024-2026)</small>
     </div>
 
     <div class="field">
-      <label>Prix (€)</label>
-      <input type="text" inputmode="decimal" formControlName="prix" placeholder="ex : 1200 ou 1200.50">
+      <label for="prix">Prix (€)</label>
+      <input id="prix" type="text" inputmode="decimal" formControlName="prix" placeholder="ex : 1200 ou 1200.50">
       <small *ngIf="form.get('prix')?.invalid && form.get('prix')?.dirty">
         Valeur invalide — entrez un nombre (ex : 1200 ou 1200.50)
       </small>
     </div>
 
     <div class="field">
-      <label>Description</label>
-      <textarea formControlName="description" rows="4"></textarea>
+      <label for="description">Description</label>
+      <textarea id="description" formControlName="description" rows="4"></textarea>
     </div>
 
     <div class="field">
-      <label>Statut *</label>
-      <select formControlName="statut">
+      <label for="statut">Statut *</label>
+      <select id="statut" formControlName="statut">
         <option value="disponible">Disponible</option>
         <option value="vendu">Vendu</option>
         <option value="non_a_vendre">Non à vendre</option>
@@ -63,7 +64,7 @@
     </div>
 
     <div class="field">
-      <label>
+      <label class="field-checkbox">
         <input type="checkbox" formControlName="visible"> Visible sur le site public
       </label>
     </div>
