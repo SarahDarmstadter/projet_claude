@@ -14,8 +14,10 @@ export class HeadingComponent {
 
   constructor(public auth: AuthService, private router: Router, public textes: TexteService) {}
 
+  private readonly MOBILE_BP = 768;
+
   get isMobileNavInert(): boolean {
-    return !this.navOpen && window.innerWidth <= 768;
+    return !this.navOpen && window.innerWidth <= this.MOBILE_BP;
   }
 
   @HostListener('document:click', ['$event'])

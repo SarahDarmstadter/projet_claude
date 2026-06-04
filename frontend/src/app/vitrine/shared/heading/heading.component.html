@@ -8,7 +8,7 @@
   </button>
 
   <div class="nav-links" [class.nav-links--open]="navOpen"
-       [attr.aria-hidden]="!navOpen || null"
+       [attr.aria-hidden]="isMobileNavInert || null"
        [attr.inert]="isMobileNavInert ? '' : null"
        id="site-nav-menu">
     <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" (click)="closeNav()">Accueil</a>
