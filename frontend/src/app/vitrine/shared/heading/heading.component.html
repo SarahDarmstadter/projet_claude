@@ -9,7 +9,7 @@
 
   <div class="nav-links" [class.nav-links--open]="navOpen"
        [attr.aria-hidden]="!navOpen || null"
-       [attr.inert]="!navOpen ? '' : null"
+       [attr.inert]="isMobileNavInert ? '' : null"
        id="site-nav-menu">
     <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" (click)="closeNav()">Accueil</a>
     <div class="nav-sep"></div>

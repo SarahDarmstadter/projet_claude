@@ -14,6 +14,10 @@ export class HeadingComponent {
 
   constructor(public auth: AuthService, private router: Router, public textes: TexteService) {}
 
+  get isMobileNavInert(): boolean {
+    return !this.navOpen && window.innerWidth <= 768;
+  }
+
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: MouseEvent): void {
     const target = event.target as HTMLElement;
