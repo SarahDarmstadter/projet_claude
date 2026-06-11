@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostListener, NgZone } from '@angular/core';
 import { Title, Meta } from '@angular/platform-browser';
 import { VitrineTableau, VitrineTableauService } from '../services/vitrine-tableau.service';
 import { TexteService } from '../services/texte.service';
@@ -8,18 +8,20 @@ import { TexteService } from '../services/texte.service';
   templateUrl: './oeuvres.component.html',
   styleUrls: ['./oeuvres.component.css']
 })
-export class OeuvresComponent implements OnInit {
+export class OeuvresComponent implements OnInit, OnDestroy {
   tableaux: VitrineTableau[] = [];
   types: { id: number; nom: string }[] = [];
   selectedTypeId: number | null = null;
   loadingImages: Record<number, boolean> = {};
   showScrollTop = false;
+  private revealObserver?: IntersectionObserver;
 
   constructor(
     private vitrineService: VitrineTableauService,
     public textes: TexteService,
     private titleService: Title,
-    private meta: Meta
+    private meta: Meta,
+    private ngZone: NgZone
   ) {}
 
   ngOnInit(): void {
@@ -36,7 +38,27 @@ export class OeuvresComponent implements OnInit {
           .filter(t => t.type !== null && !seen.has(t.type!.id) && seen.add(t.type!.id))
           .map(t => t.type!);
         data.forEach(t => { this.loadingImages[t.id] = true; });
+        setTimeout(() => this.setupRevealObserver(), 50);
       }
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.revealObserver?.disconnect();
+  }
+
+  private setupRevealObserver(): void {
+    this.revealObserver?.disconnect();
+    this.ngZone.runOutsideAngular(() => {
+      this.revealObserver = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            e.target.classList.add('visible');
+            this.revealObserver?.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.12 });
+      document.querySelectorAll('.gallery-item').forEach(el => this.revealObserver!.observe(el));
     });
   }
 
@@ -51,6 +73,7 @@ export class OeuvresComponent implements OnInit {
 
   setFilter(id: number | null): void {
     this.selectedTypeId = id;
+    setTimeout(() => this.setupRevealObserver(), 50);
   }
 
   get filteredTableaux(): VitrineTableau[] {

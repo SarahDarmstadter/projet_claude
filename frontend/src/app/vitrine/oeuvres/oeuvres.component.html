@@ -19,7 +19,8 @@
   <main class="gallery-grid" *ngIf="filteredTableaux.length > 0">
     <article
       class="gallery-item"
-      *ngFor="let t of filteredTableaux"
+      [ngClass]="'grid-pos-' + (i % 6)"
+      *ngFor="let t of filteredTableaux; let i = index"
       [routerLink]="['/oeuvres', t.id]"
       [attr.aria-label]="t.titre">
 
